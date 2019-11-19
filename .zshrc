@@ -1,4 +1,4 @@
-echo -e "Kono Hirschy da!" | lolcat
+cho -e "Kono Hirschy da!" | lolcat
 fortune |cowsay -f dragon| lolcat
 #Customise the Powerlevel9k prompts
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
@@ -8,6 +8,7 @@ vcs
 newline
 status
 )
+plugins=( git-prompt)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 # POWERLEVEL9K_RPROMPT_ON_NEWLINE=true

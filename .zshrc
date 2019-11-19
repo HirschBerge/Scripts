@@ -48,6 +48,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 
+setopt nonomatch
 setopt appendhistory
 setopt hist_ignore_all_dups # remove older duplicate entries from history
 setopt hist_reduce_blanks # remove superfluous blanks from history items
@@ -76,7 +77,7 @@ alias -s {mp4,mkv,mp3}='mpv'
 alias ifc='sudo ifconfig'
 alias htop='htop | lolcat'
 alias speedtest='speedtest-cli-esm'
-#alias watch='mpv '
+alias watch='mpv '
 alias dload='python3 /home/hirschy/downloader-cli/download.py'
 alias youtube-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best" --merge-output-format mp4'
 #alias neofetch='neofetch | lolcat'

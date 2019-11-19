@@ -76,7 +76,7 @@ alias -s {mp4,mkv,mp3}='mpv'
 alias ifc='sudo ifconfig'
 alias htop='htop | lolcat'
 alias speedtest='speedtest-cli-esm'
-alias watch='mpv '
+#alias watch='mpv '
 alias dload='python3 /home/hirschy/downloader-cli/download.py'
 alias youtube-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best" --merge-output-format mp4'
 #alias neofetch='neofetch | lolcat'
@@ -172,6 +172,15 @@ backupToGitHub(){
     cd -
     echo "New .zshrc backed up to Github."
 }
+
+watch(){
+	echo -e $1
+
+
+
+
+
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

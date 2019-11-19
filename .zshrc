@@ -83,7 +83,6 @@ antibody bundle robbyrussell/oh-my-zsh path:plugins/node > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/web-search > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/sudo > ~/.zshrc.log
 # antibody bundle robbyrussell/oh-my-zsh path:plugins/kubectl > ~/.zshrc.log
-antibody bundle robbyrussell/oh-my-zsh path:plugins/npm > ~/.zshrc.log
 antibody bundle JamesKovacs/zsh_completions_mongodb > ~/.zshrc.log
 
 autoload -Uz compinit;compinit -i

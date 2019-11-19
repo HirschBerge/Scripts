@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 echo -e "Kono Hirschy da!" | lolcat
 fortune |cowsay -f dragon| lolcat
 #Customise the Powerlevel9k prompts
@@ -10,22 +17,6 @@ status
 )
 
 
-POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=()
-POWERLEVEL10K_PROMPT_ADD_NEWLINE=true
-# POWERLEVEL10K_RPROMPT_ON_NEWLINE=true
-# POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND='red'
-# POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND='blue'
-
-# Options for setting colors to directories.
-
-# POWERLEVEL9K_DIR_HOME_BACKGROUND=red
-# POWERLEVEL9K_DIR_HOME_FOREGROUND=white
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=red
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND=white
-POWERLEVEL10K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=yellow
-POWERLEVEL10K_DIR_WRITABLE_FORBIDDEN_FOREGROUND=black
-# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=red
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND=white
  [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # Load Nerd Fonts with Powerlevel9k theme for Zsh
@@ -70,23 +61,6 @@ setopt always_to_end # move cursor to end if word had one match
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
-
-autoload -Uz compinit;compinit -i
-
-
-#Plugins setup
-source <(antibody init)
-antibody bundle romkatv/powerlevel10k
-antibody bundle zdharma/fast-syntax-highlighting > ~/.zshrc.log
-antibody bundle zsh-users/zsh-autosuggestions > ~/.zshrc.log
-antibody bundle zsh-users/zsh-history-substring-search > ~/.zshrc.log
-antibody bundle zsh-users/zsh-completions > ~/.zshrc.log
-# antibody bundle robbyrussell/oh-my-zsh path:plugins/heroku > ~/.zshrc.log
-antibody bundle robbyrussell/oh-my-zsh path:plugins/node > ~/.zshrc.log
-antibody bundle robbyrussell/oh-my-zsh path:plugins/web-search > ~/.zshrc.log
-antibody bundle robbyrussell/oh-my-zsh path:plugins/sudo > ~/.zshrc.log
-# antibody bundle robbyrussell/oh-my-zsh path:plugins/kubectl > ~/.zshrc.log
-antibody bundle JamesKovacs/zsh_completions_mongodb > ~/.zshrc.log
 
 autoload -Uz compinit;compinit -i
 
@@ -197,3 +171,6 @@ backupToGitHub(){
     cd -
     echo "New .zshrc backed up to Github."
 }
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

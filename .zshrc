@@ -1,5 +1,13 @@
 echo -e "Kono Hirschy da!" | lolcat
 fortune |cowsay -f dragon| lolcat
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
 #Customise the Powerlevel9k prompts
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
 ssh
@@ -8,33 +16,22 @@ vcs
 newline
 status
 )
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-# POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-# POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND='red'
-# POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND='blue'
 
-# Options for setting colors to directories.
 
-# POWERLEVEL9K_DIR_HOME_BACKGROUND=red
-# POWERLEVEL9K_DIR_HOME_FOREGROUND=white
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=red
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND=white
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=yellow
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND=black
-# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=red
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND=white
  [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # Load Nerd Fonts with Powerlevel9k theme for Zsh
 POWERLEVEL9K_MODE='nerdfont-complete'
-source  ~/powerlevel9k/powerlevel9k.zsh-theme
+#source  ~/powerlevel9k/powerlevel9k.zsh-theme
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 HOMEBREW_FOLDER="/usr/local/share"
 source "/home/hirschy/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "/home/hirschy/zsh-autosuggestions"
 source "/home/linuxbrew/.linuxbrew/Cellar/zsh-history-substring-search/1.0.2"
+source "/home/hirschy/zsh-git-prompt/zshrc.sh"
 
+PROMPT='%B%m%~%b$(git_super_status) %# '
 autoload -Uz compinit;
 typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 if [ $(date +'%j') != $updated_at ]; then
@@ -46,10 +43,13 @@ fi
 zmodload -i zsh/complist
 
 #History setup
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=$HISTSIZ
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
+
+setopt nonomatch
+setopt appendhistory
 setopt hist_ignore_all_dups # remove older duplicate entries from history
 setopt hist_reduce_blanks # remove superfluous blanks from history items
 setopt inc_append_history # save history entries as soon as they are entered
@@ -66,11 +66,12 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate #ena
 
 autoload -Uz compinit;compinit -i
 
+
 # Aliases
 
 
-
-alias -g G='| grep -i'
+alias hdparm='sudo hdparm'
+alias -g G='| grep -i --color'
 alias -s {txt,list,log}=vim
 alias -s {mp4,mkv,mp3}='mpv'
 alias ifc='sudo ifconfig'
@@ -82,7 +83,6 @@ alias youtube-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+be
 #alias neofetch='neofetch | lolcat'
 alias ranger='ranger | lolcat'
 alias manga='cd /home/hirschy/Documents/Manga'
-alias ll='ls -la | lolcat'
 alias pacup='sudo pacman -Syu'
 alias zshrc='editZsh'
 alias dtop='cd ~/Desktop'
@@ -99,7 +99,10 @@ alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 alias 775='chmod -R 775'
 alias dd='dd status=progress'
-alias nmap='nmap --open'
+alias ll='ls -la'
+alias lol='ls -la | lolcat'
+alias nmap='nmap --open -n -v'
+alias intensemap=' nmap --open -n -A -T4 -v'
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
 alias ....='cd ..; cd ..; cd ..'
@@ -125,10 +128,16 @@ alias gpl="git pull"
 alias gst="git stash"
 alias gstl="git stash list"
 alias glg='git log --graph --oneline --decorate --all'
-
+alias nrs='sudo npm run serve'
 # key bindings
 bindkey '\e[OH' beginning-of-line
 bindkey '\e[OF' end-of-line
+
+
+
+
+
+
 ex ()
 {
   if [ -f $1 ] ; then
@@ -153,7 +162,7 @@ ex ()
 
 sourceZsh(){
     source ~/.zshrc
-    backupToGitHub ~/.zshrc
+#    backupToGitHub ~/.zshrc
     echo "New .zshrc sourced."
 }
 
@@ -172,3 +181,12 @@ backupToGitHub(){
     cd -
     echo "New .zshrc backed up to Github."
 }
+
+
+
+
+
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

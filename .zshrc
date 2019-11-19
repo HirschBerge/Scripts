@@ -83,7 +83,7 @@ alias youtube-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+be
 #alias neofetch='neofetch | lolcat'
 alias ranger='ranger | lolcat'
 alias manga='cd /home/hirschy/Documents/Manga'
-alias ll='ls -la | lolcat'
+#alias ll='ls -la | lolcat'
 alias pacup='sudo pacman -Syu'
 alias zshrc='editZsh'
 alias dtop='cd ~/Desktop'

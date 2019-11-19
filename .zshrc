@@ -35,7 +35,7 @@ HOMEBREW_FOLDER="/usr/local/share"
 source "/home/hirschy/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "/home/hirschy/zsh-autosuggestions"
 source "/home/linuxbrew/.linuxbrew/Cellar/zsh-history-substring-search/1.0.2"
-source "/home/hirschy/zsh-git-prompt"
+source "/home/hirschy/zsh-git-prompt/zshrc.sh"
 
 PROMPT='%B%m%~%b$(git_super_status) %# '
 autoload -Uz compinit;

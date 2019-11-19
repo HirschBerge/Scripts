@@ -71,7 +71,7 @@ autoload -Uz compinit;compinit -i
 
 
 alias hdparm='sudo hdparm'
-alias -g G='| grep -i'
+alias -g G='| grep -i --color'
 alias -s {txt,list,log}=vim
 alias -s {mp4,mkv,mp3}='mpv'
 alias ifc='sudo ifconfig'
@@ -131,6 +131,15 @@ alias nrs='sudo npm run serve'
 # key bindings
 bindkey '\e[OH' beginning-of-line
 bindkey '\e[OF' end-of-line
+
+
+
+
+
+ll(){
+	$1 | ls -la | lolcat
+}
+
 ex ()
 {
   if [ -f $1 ] ; then
@@ -155,7 +164,7 @@ ex ()
 
 sourceZsh(){
     source ~/.zshrc
-    backupToGitHub ~/.zshrc
+#    backupToGitHub ~/.zshrc
     echo "New .zshrc sourced."
 }
 

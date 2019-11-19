@@ -76,6 +76,7 @@ autoload -Uz compinit;compinit -i
 
 #Plugins setup
 source <(antibody init)
+antibody bundle romkatv/powerlevel10k
 antibody bundle zdharma/fast-syntax-highlighting > ~/.zshrc.log
 antibody bundle zsh-users/zsh-autosuggestions > ~/.zshrc.log
 antibody bundle zsh-users/zsh-history-substring-search > ~/.zshrc.log

@@ -136,8 +136,14 @@ bindkey '\e[OF' end-of-line
 
 
 ll(){
-	echo -e $1
-	echo -e "`$1 | ls -la | lolcat`"
+	if [ $1 != " " ]
+	then 
+		echo -e "`$1 | ls -la | lolcat`"
+	fi
+	if [ $1 -eq " " ]
+	then
+		pwd | ls -la | lolcat
+	fi
 }
 
 ex ()

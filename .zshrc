@@ -174,9 +174,6 @@ backupToGitHub(){
     echo "New .zshrc backed up to Github."
 }
 
-watch(){
-	mpv \"$1\"
-}
 
 
 

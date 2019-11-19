@@ -136,11 +136,11 @@ bindkey '\e[OF' end-of-line
 
 
 ll(){
-	if [ $1 != " " ]
+	if [[ $1 != " " ]]
 	then 
 		echo -e "`$1 | ls -la | lolcat`"
 	fi
-	if [ $1 == " " ]
+	if [[ $1 == " " ]]
 	then
 		pwd | ls -la | lolcat
 	fi

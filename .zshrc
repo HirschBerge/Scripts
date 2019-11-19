@@ -135,9 +135,9 @@ bindkey '\e[OF' end-of-line
 
 
 
-ll()
-	echo -e $1{
-	$1 | ls -la | lolcat
+ll(){
+	echo -e $1
+	echo -e "`$1 | ls -la | lolcat`"
 }
 
 ex ()

@@ -83,11 +83,9 @@ antibody bundle /Users/manan/Spaces/Editor-Settings/ZSH-Plugins/oh-my-zsh-master
 antibody bundle robbyrussell/oh-my-zsh path:plugins/node > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/web-search > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/sudo > ~/.zshrc.log
-antibody bundle robbyrussell/oh-my-zsh path:plugins/react-native > ~/.zshrc.log
 # antibody bundle robbyrussell/oh-my-zsh path:plugins/kubectl > ~/.zshrc.log
 # antibody bundle robbyrussell/oh-my-zsh path:plugins/npm > ~/.zshrc.log
 antibody bundle JamesKovacs/zsh_completions_mongodb > ~/.zshrc.log
-source /usr/local/aws/bin/aws_zsh_completer.sh
 
 autoload -Uz compinit;compinit -i
 

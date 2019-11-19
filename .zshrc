@@ -164,8 +164,8 @@ editZsh(){
 }
 
 backupToDrive(){
-    echo -e "yes" | cp "$1" /home/hirschy/myzshrc
-    cd /home/hirschy/myzshrc
+    echo -e "yes" | cp "$1" /home/hirschy/my-dotfiles
+    cd /home/hirschy/my-dotfiles
     git commit -am "Updated!"
     sudo git push -u origin master
     cd -

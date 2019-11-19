@@ -35,7 +35,7 @@ HOMEBREW_FOLDER="/usr/local/share"
 source "/home/hirschy/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "/home/hirschy/zsh-autosuggestions"
 source "/home/linuxbrew/.linuxbrew/Cellar/zsh-history-substring-search/1.0.2"
-
+source "/home/hirschy/zsh-git-prompt'
 autoload -Uz compinit;
 typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 if [ $(date +'%j') != $updated_at ]; then

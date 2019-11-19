@@ -174,7 +174,7 @@ backupToGitHub(){
 }
 
 watch(){
-	echo -e $1
+	mpv \"$1\"
 }
 
 

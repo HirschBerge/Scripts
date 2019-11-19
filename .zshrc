@@ -99,6 +99,8 @@ alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 alias 775='chmod -R 775'
 alias dd='dd status=progress'
+alias ll='ls -la'
+alias lol='ls -la | lolcat'
 alias nmap='nmap --open -n -v'
 alias intensemap=' nmap --open -n -A -T4 -v'
 alias ..='cd ..'
@@ -135,16 +137,6 @@ bindkey '\e[OF' end-of-line
 
 
 
-ll(){
-	if [[ $1 != " " ]]
-	then 
-		echo -e "`$1 | ls -la | lolcat`"
-	fi
-	if [[ $1 == " " ]]
-	then
-		echo -e "`pwd | ls -la | lolcat`"
-	fi
-}
 
 ex ()
 {

@@ -142,7 +142,7 @@ ll(){
 	fi
 	if [[ $1 == " " ]]
 	then
-		pwd | ls -la | lolcat
+		echo -e "`pwd | ls -la | lolcat`"
 	fi
 }
 

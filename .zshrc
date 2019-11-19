@@ -152,18 +152,18 @@ ex ()
 
 sourceZsh(){
     source ~/.zshrc
-    backupToDrive ~/.zshrc
+    backupToGitHub ~/.zshrc
     echo "New .zshrc sourced."
 }
 
 editZsh(){
     vim ~/.zshrc
     source ~/.zshrc
-    backupToDrive ~/.zshrc
+    backupToGitHub ~/.zshrc
     echo "New .zshrc sourced."
 }
 
-backupToDrive(){
+backupToGitHub(){
     echo -e "yes" | cp "$1" /home/hirschy/my-dotfiles
     cd /home/hirschy/my-dotfiles
     git commit -am "Updated!"

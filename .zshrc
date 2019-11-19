@@ -127,7 +127,7 @@ alias gpl="git pull"
 alias gst="git stash"
 alias gstl="git stash list"
 alias glg='git log --graph --oneline --decorate --all'
-alias nrs='sudo npm run serve'
+alias nrs='sudo npm run serve&'
 # key bindings
 bindkey '\e[OH' beginning-of-line
 bindkey '\e[OF' end-of-line

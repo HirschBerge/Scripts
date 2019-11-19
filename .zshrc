@@ -1,4 +1,4 @@
-cho -e "Kono Hirschy da!" | lolcat
+echo -e "Kono Hirschy da!" | lolcat
 fortune |cowsay -f dragon| lolcat
 #Customise the Powerlevel9k prompts
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(

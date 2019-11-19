@@ -140,7 +140,7 @@ ll(){
 	then 
 		echo -e "`$1 | ls -la | lolcat`"
 	fi
-	if [ $1 -eq " " ]
+	if [ $1 == " " ]
 	then
 		pwd | ls -la | lolcat
 	fi

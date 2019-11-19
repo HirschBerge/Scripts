@@ -46,10 +46,12 @@ fi
 zmodload -i zsh/complist
 
 #History setup
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=$HISTSIZ
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
+
+setopt appendhistory
 setopt hist_ignore_all_dups # remove older duplicate entries from history
 setopt hist_reduce_blanks # remove superfluous blanks from history items
 setopt inc_append_history # save history entries as soon as they are entered

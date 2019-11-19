@@ -70,7 +70,7 @@ autoload -Uz compinit;compinit -i
 # Aliases
 
 
-
+alias hdparm='sudo hdparm'
 alias -g G='| grep -i'
 alias -s {txt,list,log}=vim
 alias -s {mp4,mkv,mp3}='mpv'
@@ -100,7 +100,8 @@ alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 alias 775='chmod -R 775'
 alias dd='dd status=progress'
-alias nmap='nmap --open'
+alias nmap='nmap --open -n'
+alias intensemap=' nmap --open -n -A -T4'
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
 alias ....='cd ..; cd ..; cd ..'

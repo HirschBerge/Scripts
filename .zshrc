@@ -165,8 +165,8 @@ editZsh(){
 }
 
 backupToGitHub(){
-    echo -e "yes" | cp "$1" /home/hirschy/my-dotfiles
-    cd /home/hirschy/my-dotfiles
+    echo -e "yes" | cp "$1" /home/$USER/my-dotfiles
+    cd /home/$USER/my-dotfiles
     git commit -am "Updated!!"
     sudo git push -u origin master
     cd -

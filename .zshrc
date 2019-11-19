@@ -82,7 +82,7 @@ alias youtube-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+be
 #alias neofetch='neofetch | lolcat'
 alias ranger='ranger | lolcat'
 alias manga='cd /home/hirschy/Documents/Manga'
-alias ll='ls -l | lolcat'
+alias ll='ls -la | lolcat'
 alias pacup='sudo pacman -Syu'
 alias zshrc='vim ~/.zshrc && source ~/.zshrc'
 alias dtop='cd ~/Desktop'
@@ -165,8 +165,8 @@ editZsh(){
 
 backupToDrive(){
     cp "$1" /home/hirschy/myzshrc
-    echo -e "yes"
     cd /home/hirschy/myzshrc
+    git commit -am "Updated!"
     sudo git push -u origin master
     cd -
     echo "New .zshrc backed up to Github."

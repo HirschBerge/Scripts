@@ -175,9 +175,6 @@ backupToGitHub(){
 }
 
 
-watch(){
-	mpv \"$1\"
-}
 
 
 

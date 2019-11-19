@@ -78,13 +78,12 @@ antibody bundle zdharma/fast-syntax-highlighting > ~/.zshrc.log
 antibody bundle zsh-users/zsh-autosuggestions > ~/.zshrc.log
 antibody bundle zsh-users/zsh-history-substring-search > ~/.zshrc.log
 antibody bundle zsh-users/zsh-completions > ~/.zshrc.log
-antibody bundle /Users/manan/Spaces/Editor-Settings/ZSH-Plugins/oh-my-zsh-master/plugins/osx > ~/.zshrc.log
 # antibody bundle robbyrussell/oh-my-zsh path:plugins/heroku > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/node > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/web-search > ~/.zshrc.log
 antibody bundle robbyrussell/oh-my-zsh path:plugins/sudo > ~/.zshrc.log
 # antibody bundle robbyrussell/oh-my-zsh path:plugins/kubectl > ~/.zshrc.log
-# antibody bundle robbyrussell/oh-my-zsh path:plugins/npm > ~/.zshrc.log
+antibody bundle robbyrussell/oh-my-zsh path:plugins/npm > ~/.zshrc.log
 antibody bundle JamesKovacs/zsh_completions_mongodb > ~/.zshrc.log
 
 autoload -Uz compinit;compinit -i

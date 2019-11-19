@@ -175,7 +175,7 @@ backupToGitHub(){
 
 watch(){
 	echo -e $1
-
+}
 
 
 

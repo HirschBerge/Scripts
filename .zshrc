@@ -70,6 +70,9 @@ autoload -Uz compinit;compinit -i
 # Aliases
 
 
+
+
+alias hydra='sudo hydra -e nsr'
 alias hdparm='sudo hdparm'
 alias -g G='| grep -i --color'
 alias -s {txt,list,log}=vim

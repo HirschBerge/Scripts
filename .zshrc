@@ -185,7 +185,9 @@ backupToGitHub(){
     echo "New .zshrc backed up to Github."
 }
 
-
+pingMon(){
+	ping $1 -c $2 G "packet loss" | awk '{ print  $6, $7, $8 }'
+}
 
 
 

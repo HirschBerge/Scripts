@@ -186,7 +186,7 @@ backupToGitHub(){
 }
 
 pingMon(){
-	echo -e " There has been `ping $1 -c $2 G "packet loss" | awk '{ print  $6, $7, $8 }'` packet loss to $1"
+	echo -e " There has been `ping $1 -c $2 G "packet loss" | awk '{ print  $6, $7, $8 }'` to $1"
 }
 
 

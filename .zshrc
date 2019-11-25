@@ -78,6 +78,7 @@ alias -g G='| grep -i --color'
 alias -s {txt,list,log}=vim
 alias -s {mp4,mkv,mp3}=mpv
 alias -s {jpg, png}=feh
+alias -s {doc,docx}=
 alias ifc='sudo ifconfig'
 alias htop='htop | lolcat'
 alias speedtest='speedtest-cli-esm'

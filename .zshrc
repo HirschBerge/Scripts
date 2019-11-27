@@ -119,6 +119,8 @@ alias cp='cp -i'
 alias hi='echo "Hello there $USER"| lolcat'
 alias python="python3"
 alias pip="pip3"
+alias ytplaylist='youtube-dl -i -f mp3 --yes-playlist'
+
 
 # Git aliases
 alias gi="git init"

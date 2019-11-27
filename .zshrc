@@ -75,11 +75,11 @@ autoload -Uz compinit;compinit -i
 alias hydra='sudo hydra -e nsr'
 alias hdparm='sudo hdparm'
 alias -g G='| grep -i --color'
-alias -s {txt,list,log}=vim
-alias -s {mp4,mkv,mp3}=mpv
-alias -s {jpg, png}=feh
-alias -s {pdf}=okular
-alias -s {doc,docx}=wps-office.wps
+alias -s {txt,list,log}='vim'
+alias -s {mp4,mkv,mp3}='mpv'
+alias -s {jpg,png}='feh'
+alias -s {pdf}='okular'
+alias -s {doc,docx}='wps-office.wps'
 alias ifc='sudo ifconfig'
 alias htop='htop | lolcat'
 alias speedtest='speedtest-cli-esm'

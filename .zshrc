@@ -1,5 +1,5 @@
-echo -e "Kono Hirschy da!" | lolcat
-fortune |cowsay -f dragon| lolcat
+#echo -e "Kono Hirschy da!" | lolcat
+#fortune |cowsay -f dragon| lolcat
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -47,7 +47,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-
+alias history='history 50'
 setopt nonomatch
 setopt appendhistory
 setopt hist_ignore_all_dups # remove older duplicate entries from history
@@ -59,7 +59,7 @@ setopt correct_all # autocorrect commands
 setopt auto_list # automatically list choices on ambiguous completion
 setopt auto_menu # automatically use menu completion
 setopt always_to_end # move cursor to end if word had one match
-
+setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
@@ -70,18 +70,24 @@ autoload -Uz compinit;compinit -i
 # Aliases
 
 
+
+
+alias hydra='sudo hydra -e nsr'
 alias hdparm='sudo hdparm'
 alias -g G='| grep -i --color'
-alias -s {txt,list,log}=vim
+alias -s {txt,list,log}='vim'
 alias -s {mp4,mkv,mp3}='mpv'
+alias -s {jpg,png}='feh'
+alias -s {pdf,epub}='okular'
+alias -s {doc,docx}='wps-office.wps'
 alias ifc='sudo ifconfig'
 alias htop='htop | lolcat'
 alias speedtest='speedtest-cli-esm'
 alias watch='mpv '
 alias dload='python3 /home/hirschy/downloader-cli/download.py'
-alias youtube-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best" --merge-output-format mp4'
+alias yt-dl='youtube-dl --format "bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best" --merge-output-format mp4'
 #alias neofetch='neofetch | lolcat'
-alias ranger='ranger | lolcat'
+#alias ranger='ranger | lolcat'
 alias manga='cd /home/hirschy/Documents/Manga'
 alias pacup='sudo pacman -Syu'
 alias zshrc='editZsh'
@@ -99,8 +105,7 @@ alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 alias 775='chmod -R 775'
 alias dd='dd status=progress'
-alias ll='ls -la'
-alias lol='ls -la | lolcat'
+alias ll='exa -la'
 alias nmap='nmap --open -n -v'
 alias intensemap=' nmap --open -n -A -T4 -v'
 alias ..='cd ..'
@@ -109,11 +114,13 @@ alias ....='cd ..; cd ..; cd ..'
 #alias grep='grep --color'
 alias c='clear'
 alias find='time find'
-alias mv='mv -i'
+#alias mv='mv -i'
 alias cp='cp -i'
 alias hi='echo "Hello there $USER"| lolcat'
 alias python="python3"
 alias pip="pip3"
+alias ytplaylist='youtube-dl -i -f mp3 --yes-playlist'
+
 
 # Git aliases
 alias gi="git init"
@@ -182,11 +189,15 @@ backupToGitHub(){
     echo "New .zshrc backed up to Github."
 }
 
+pingMon(){
+	echo -e " There has been `ping $1 -c $2 G "packet loss" | awk '{ print  $6, $7, $8 }'` to $1"
+}
 
 
 
-
-
+mp3convert(){
+	ffmpeg -i $1 -b:a 320k -vn "$2"
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

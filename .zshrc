@@ -7,7 +7,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #Customise the Powerlevel9k prompts
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
 ssh

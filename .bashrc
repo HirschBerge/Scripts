@@ -1,5 +1,5 @@
-echo -e "Kono Hirschy da!" | lolcat
-fortune |cowsay -f dragon| lolcat
+#echo -e "Kono Hirschy da!" | lolcat
+#fortune |cowsay -f dragon| lolcat
 #
 # ~/.bashrc
 #

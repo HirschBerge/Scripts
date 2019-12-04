@@ -89,6 +89,7 @@ alias c='clear'
 alias find='time find'
 alias mv='mv -i'
 alias cp='cp -i'
+alias apt='sudo apt -y'
 alias hi='echo "Hello there $USER"| lolcat'
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database

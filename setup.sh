@@ -1,5 +1,6 @@
 #!/bin/bash
 bin_path='/usr/local/bin'
+chmod +x -R ~/.scripts/
 sudo ln -s $PWD/animewget.py "$bin_path/animewget"
 sudo ln -s $PWD/mangadex.py "$bin_path/mdex"
 sudo ln -s $PWD/mounting "$bin_path/"

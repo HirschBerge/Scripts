@@ -1,7 +1,0 @@
-#!/bin/sh
-## Get current date ##
-_now=$(date '+%m_%d_%Y')
-## Appending a current date from a $_now to a filename stored in $_file ##
-_file="/mnt/Lin_Storage/Backup_Img/$_now"
-drive=`lsblk | awk '/Ex/ { print $1 }' | sed 's/└─//g'`
-sudo dd if=/dev/$drive bs=32M | gzip -c >"$_file.dd.gz"

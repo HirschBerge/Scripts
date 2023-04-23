@@ -1,0 +1,12 @@
+#!/bin/sh
+
+function main {
+	while true
+	do
+		wmctrl -lx | grep "spotify.Spotify" | cut -c 5- | awk -F'yuri ' '{ print $2 }' | sed 's/Spotify Premium/Music Paused/g'|tee ~/.cache/spotplaying
+		sleep 1
+	done
+
+}
+
+main

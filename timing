@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sh /home/hirschy/.scripts/background/cron.sh

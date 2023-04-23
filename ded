@@ -1,0 +1,8 @@
+#!/bin/sh
+state=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | awk '{ print $2 }'`
+if [ $state = "charging" ]
+then
+	upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'to full' | awk '{ print $4 " " $5 " ⏰" }'
+else
+	upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'to empty' | awk '{ print $4 " " $5 " ⏰"}'
+fi

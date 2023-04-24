@@ -38,17 +38,13 @@ def notify_send(title):
     os.system(f"""[ -f {SOUND_FILE} ] && paplay {SOUND_FILE}""")
 
 
-def download_chapters(sorted_chapters: list, manga):
+def download_chapters(sorted_chapters: list, manga, overwrite=False):
     name_manga = f"{manga.title['en']}"
     with alive_bar(len(sorted_chapters), title=name_manga) as bar:
         for chapter in sorted_chapters:
             if chapter.title is None:
                 chapter.title = ""
-            # print(chapter.language)
-            # if (
-            #     chapter.group[0].name == "Evil Genius"
-            #     or chapter.group[0].name == "Band of the Hawks"
-            # ):
+
             title = chapter.title
             if chapter.volume:
                 volume = f"Volume {chapter.volume}"
@@ -67,38 +63,25 @@ def download_chapters(sorted_chapters: list, manga):
                 path_loc = f"/mnt/NAS/Manga/{m_title}/{volume}/{chapter.chapter}/"
             # if "'" in path_loc or '"' in path_loc:
             #     path_loc = f"/mnt/NAS/Manga/{manga.title['en']}/{chapter.chapter}"
-
-            os.system(f"""mkdir -p \"{path_loc}\"""")
-            with contextlib.redirect_stdout(None):
-                try:
-                    downloader.threaded_dl_chapter(chapter, path_loc, False)
-                except MangaDexPy.NoContentError:
-                    # API returned a 404 Not Found, therefore the wrapper will return a NoContentError
-                    print("This chapter doesn't exist.")
-                except MangaDexPy.APIError as e:
-                    # API returned something that wasn't expected, the wrapper will return an APIError
-                    # downloader.threaded_dl_chapter(chapter, path_loc, False)
-                    print("Status code is: " + str(e.status))
-                except:
-                    print("Other Error")
+            if not overwrite and os.path.exists(path_loc):
+                # print("Exists.")
+                pass
+            else:
+                os.system(f"""mkdir -p \"{path_loc}\"""")
+                with contextlib.redirect_stdout(None):
+                    try:
+                        downloader.threaded_dl_chapter(chapter, path_loc, False)
+                    except MangaDexPy.NoContentError:
+                        # API returned a 404 Not Found, therefore the wrapper will return a NoContentError
+                        print("This chapter doesn't exist.")
+                    except MangaDexPy.APIError as e:
+                        # API returned something that wasn't expected, the wrapper will return an APIError
+                        # downloader.threaded_dl_chapter(chapter, path_loc, False)
+                        print("Status code is: " + str(e.status))
+                    except:
+                        print("Other Error")
             bar()
     notify_send(name_manga)
-    # The below is ass and is not any faster...
-    # local_loc = f"/home/hirschy/Documents/Manga/{m_title}"
-    # nas_loc = f"/mnt/NAS/Manga/"
-    # print("Creating zip archive")
-    # shutil.make_archive(f"{local_loc}", "zip", local_loc)
-    # print("Preparing to move...")
-    # os.system(
-    #     f"""rsync -a --remove-source-files --ignore-existing \"{local_loc}.zip\" \"{nas_loc}\""""
-    # )
-    # print("Move complete.")
-    # print("Unzipping.")
-    # zip_file = f"{nas_loc}{m_title}.zip"
-    # shutil.unpack_archive(f"{zip_file}", f"{nas_loc}{m_title}", "zip")
-    # print("Removing files.")
-    # os.system(f"""rm -rf \"{local_loc}\"""")
-    # os.system(f"""rm -rf \"{local_loc}.zip\"""")
 
 
 class Hirschy_MangaDex:
@@ -131,11 +114,6 @@ class Hirschy_MangaDex:
         taken = str(end - start)
         message = "Time taken: "
         print(f"{colored(0,0,255, message)}{colored(0,255,0,taken[:10])}")
-        # # Getting the latest item in the list into a variable
-        # latest_chapter = chapters[-1]
-        # Telling the downloader to download in a folder
-        # Note that you need to escape backslashes in Python
-        # downloader.dl_manga(manga, "~/Berserk", False, "en", 1, True)
 
     def search(self):
         results = self.cli.search("manga", {"title": self.title}, limit=20)
@@ -250,4 +228,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(1)

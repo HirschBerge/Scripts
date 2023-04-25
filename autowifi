@@ -1,7 +1,0 @@
-#!/bin/sh
-
-while :
-do
-	/usr/local/bin/wifi
-	sleep 60
-done

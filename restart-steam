@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo -n "Stopping Steam\n"
-killall -9 steam
-echo -n "Starting Steam...\n"
-steam-native & > /dev/null 2>&1
-disown

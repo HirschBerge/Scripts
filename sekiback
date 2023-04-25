@@ -1,8 +1,0 @@
-#!/bin/sh
-## Get current date ##
-_now=$(date '+%Y%d%m')
-## Appending a current date from a $_now to a filename stored in $_file ##
-_folder="/home/hirschy/Documents/savesDONTREMOVE/$_now/"
-mkdir "$_folder"
-_saves="/mnt/GAMESTORAGE/Steam/steamapps/compatdata/814380/pfx/drive_c/users/steamuser/Application Data/Sekiro/76561198338460407/"
-pycp "$_saves/S0000.sl2" "$_saves/S0000.sl2.bak" "$_folder"

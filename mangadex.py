@@ -18,12 +18,22 @@ def colored(r, g, b, text):
 
 
 def sort_chapters(chapters: list):
+    skipped_chapters = [
+        x for x in chapters if x.uploader.username == "NotXunder" if x.chapter
+    ]
+    sorted_skipped_chapters = sorted(
+        skipped_chapters, key=lambda chap: float(chap.chapter)
+    )
+    print(
+        f"Skipped chapters uploaded by Mangaplus: {''.join(str(colored(255,0,0,c.chapter)) for c in sorted_skipped_chapters)}."
+    )
     eng_chapters = [
         x
         for x in chapters
         if x.language == "en"
-        if x.uploader.username != "MangaDex"
+        # if x.uploader.username != "MangaDex"
         if x.uploader.username != "comikey"
+        if x.uploader.username != "NotXunder"
         if x.chapter
     ]
     sorted_chapters = sorted(eng_chapters, key=lambda chap: float(chap.chapter))
@@ -40,6 +50,8 @@ def notify_send(title):
 
 def download_chapters(sorted_chapters: list, manga, overwrite=False):
     name_manga = f"{manga.title['en']}"
+    new_chapters = 0
+    skipped = 0
     with alive_bar(len(sorted_chapters), title=name_manga) as bar:
         for chapter in sorted_chapters:
             if chapter.title is None:
@@ -66,11 +78,15 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
             if not overwrite and os.path.exists(path_loc):
                 # print("Exists.")
                 pass
+            elif chapter.uploader.username == "NotXunder":
+                print(f"Chapter {chapter.chapter} skipped due to MangaPlus.")
+                skipped += 1
             else:
                 os.system(f"""mkdir -p \"{path_loc}\"""")
                 with contextlib.redirect_stdout(None):
                     try:
                         downloader.threaded_dl_chapter(chapter, path_loc, False)
+                        new_chapters += 1
                     except MangaDexPy.NoContentError:
                         # API returned a 404 Not Found, therefore the wrapper will return a NoContentError
                         print("This chapter doesn't exist.")
@@ -81,6 +97,10 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
                     except:
                         print("Other Error")
             bar()
+    print(
+        colored(255, 165, 0, "New Chapters Downloaded:"),
+        colored(0, 255, 0, new_chapters),
+    )
     notify_send(name_manga)
 
 

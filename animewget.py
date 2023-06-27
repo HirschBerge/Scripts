@@ -122,18 +122,7 @@ def get_info():
         content = args["url"]
     else:
         content = args["file"]
-    # try:
-    #     season = sys.argv[2]
-    # except IndexError:
-    #     print(
-    #         colored(
-    #             255,
-    #             0,
-    #             0,
-    #             "Season Error: You must include a season to download anime through this script.",
-    #         )
-    #     )
-    #     exit(1)
+
     season = str(args["season"]).zfill(2)
     if not args["episode"] and args["type"] == "episode":
         print("You need to include an episode # w/ --episode")

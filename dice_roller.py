@@ -24,19 +24,21 @@ def die_roller(d_type, amount, modifier):
     result = modifier
     [result := result + x for x in simulation]
     # print(f"Sum of all die is: {colored(0,255,0, result)}")
-    return result
+    max_damage = d_type * amount + modifier
+    return result, max_damage
 
 
 def domi_normal(amount, to_hit_modifier, fire):
     global LAST_ZERO, LAST_CRIT
     to_hit = die_roller(20, 1, to_hit_modifier)
-    damage = die_roller(10, amount, 7)
+    damage, max_damage = die_roller(10, amount, 7)
+    max_damage += fire
     if to_hit == (20 + to_hit_modifier):
         d_twenty_fancy = colored(0, 255, 0, (to_hit - to_hit_modifier))
         damage = 2 * damage
         print(
             f"As Dominion swings her flaming scythe towards her target, her blade seeks the obvious weakness in the defense of her enemies, striking true! A nat {d_twenty_fancy}!!",
-            f"With a huge gush of blood, she deals {colored(0, 255, 0, damage)} slashing damage and {colored(0, 255, 0, (2 * fire))} fire damage for a total of {colored(0, 255, 0, (damage + (2 * fire)))}!\n",
+            f"With a huge gush of blood, she deals {colored(0, 255, 0, damage)} slashing damage and {colored(0, 255, 0, (2 * fire))} fire damage for a total of {colored(0, 255, 0, (damage + (2 * fire)))} out of a max of {max_damage}!\n",
             sep="\n",
         )
         LAST_CRIT = 1
@@ -57,7 +59,7 @@ def domi_normal(amount, to_hit_modifier, fire):
             f"she strikes with a {d_twenty_fancy}.\n",
             f"With a huge gush of blood, she deals {colored(255, 69, 0, damage)} ",
             f"slashing damage and {colored(255, 69, 0, fire)} ",
-            f"fire damage for a total of {colored(255, 69, 0, (damage + fire))}!",
+            f"fire damage for a total of {colored(255, 69, 0, (damage + fire))} out of a max of {max_damage}!",
             f"\nRolls since last Nat 20: {colored(255, 69, 0, LAST_CRIT)} and since last Nat 0: {colored(255, 69, 0, LAST_ZERO)}\n",
             sep="",
         )

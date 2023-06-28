@@ -34,22 +34,22 @@ def domi_normal(amount, to_hit_modifier, fire):
     if to_hit == (20 + to_hit_modifier):
         d_twenty_fancy = colored(0, 255, 0, (to_hit - to_hit_modifier))
         damage = 2 * damage
-        LAST_CRIT = 1
-        LAST_ZERO += 1
         print(
             f"As Dominion swings her flaming scythe towards her target, her blade seeks the obvious weakness in the defense of her enemies, striking true! A nat {d_twenty_fancy}!!",
-            f"With a huge gush of blood, she deals {colored(0, 255, 0, damage)} slashing damage and {colored(0, 255, 0, (2 * fire))} fire damage for a total of {colored(0, 255, 0, (damage + (2 * fire)))}!",
+            f"With a huge gush of blood, she deals {colored(0, 255, 0, damage)} slashing damage and {colored(0, 255, 0, (2 * fire))} fire damage for a total of {colored(0, 255, 0, (damage + (2 * fire)))}!\n",
             sep="\n",
         )
+        LAST_CRIT = 1
+        LAST_ZERO += 1
     elif to_hit == (1 + to_hit_modifier):
         d_twenty_fancy = colored(255, 0, 0, (to_hit - to_hit_modifier))
         damage = 0
-        LAST_CRIT += 1
-        LAST_ZERO = 1
         print(
             f"Dominion fucking sucks! She rolled a nat {d_twenty_fancy}",
-            f"She deals {colored(255, 0, 0, damage)} because she can't hit shit!",
+            f"She deals {colored(255, 0, 0, damage)} because she can't hit shit!\n",
         )
+        LAST_CRIT += 1
+        LAST_ZERO = 1
     else:
         d_twenty_fancy = colored(255, 69, 0, to_hit)
         print(
@@ -58,19 +58,11 @@ def domi_normal(amount, to_hit_modifier, fire):
             f"With a huge gush of blood, she deals {colored(255, 69, 0, damage)} ",
             f"slashing damage and {colored(255, 69, 0, fire)} ",
             f"fire damage for a total of {colored(255, 69, 0, (damage + fire))}!",
-            f"\nRolls since last Nat 20: {colored(255, 69, 0, LAST_CRIT)} and since last Nat 0: {colored(255, 69, 0, LAST_ZERO)}",
+            f"\nRolls since last Nat 20: {colored(255, 69, 0, LAST_CRIT)} and since last Nat 0: {colored(255, 69, 0, LAST_ZERO)}\n",
             sep="",
         )
         LAST_CRIT += 1
         LAST_ZERO += 1
-
-
-def option_select(variable):
-    selected_option = variable.get()
-    if selected_option == "Normal Attack!":
-        domi_normal(2, 19, 5)
-    else:
-        messagebox.showinfo("Option Selected", f"You selected: {selected_option}")
 
 
 def open_gui_with_options():
@@ -78,24 +70,41 @@ def open_gui_with_options():
         "Normal Attack!",
         "Electric Arc",
         "Lil Bess",
-    ]  # Replace with your own options
-
+        "Something Else",
+    ]
     root = tk.Tk()
-    root.title("Option Selection")
+    root.title("Attack Selection")
 
-    variable = tk.StringVar(root)
-    variable.set(options[0])  # Set default option
+    # Create a frame to hold the buttons
+    button_frame = tk.Frame(root)
+    button_frame.pack(pady=10)
 
-    option_menu = tk.OptionMenu(root, variable, *options)
-    option_menu.pack(pady=10)
-
-    select_button = tk.Button(
-        root, text="Select", command=lambda: option_select(variable)
-    )
-    select_button.pack(pady=10)
+    # Create buttons for each option
+    buttons = []
+    for i in range(len(options)):
+        button = tk.Button(
+            button_frame,
+            text=options[i],
+            width=15,
+            height=2,
+            command=lambda idx=i: option_select(idx),
+        )
+        buttons.append(button)
+        button.grid(row=i // 2, column=i % 2, padx=10, pady=5)
 
     root.mainloop()
 
 
-# Call the function to open the GUI
+def option_select(option_index):
+    if option_index == 0:
+        domi_normal(2, 19, 5)
+    elif option_index == 1:
+        pass
+    elif option_index == 2:
+        pass
+    elif option_index == 3:
+        pass
+
+
+# Call the function to open the GUI with options
 open_gui_with_options()

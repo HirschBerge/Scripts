@@ -14,14 +14,16 @@ LAST_ZERO = 1
 
 
 def die_roller(d_type, amount, modifier):
+    # print(f"Rolling {amount}d{d_type} + {modifier}")
     simulation = []
     for i in range(1, (amount + 1)):
         rng = np.random.default_rng()
         options = rng.integers(low=1, high=(d_type + 1), size=10)
         simulation.append(random.choice(options))
-        # print(f"Round {i}: Options {options} Choices: {simulation}")
+        # print(f"Round {i}: Options {list(options)} Choices: {simulation}")
     result = modifier
     [result := result + x for x in simulation]
+    # print(f"Sum of all die is: {colored(0,255,0, result)}")
     return result
 
 

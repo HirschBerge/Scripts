@@ -3,6 +3,7 @@ import numpy as np
 import tkinter as tk
 from tkinter import messagebox
 import random
+from fractions import Fraction as frac
 
 
 def colored(r, g, b, text):
@@ -11,6 +12,9 @@ def colored(r, g, b, text):
 
 LAST_CRIT = 1
 LAST_ZERO = 1
+TOTAL_CRIT = 0
+TOTAL_ZERO = 0
+TOTAL_ROLLS = 0
 
 
 def die_roller(d_type, amount, modifier):
@@ -29,7 +33,7 @@ def die_roller(d_type, amount, modifier):
 
 
 def domi_normal(amount, to_hit_modifier, fire):
-    global LAST_ZERO, LAST_CRIT
+    global LAST_ZERO, LAST_CRIT, TOTAL_CRIT, TOTAL_ZERO, TOTAL_ROLLS
     to_hit, discard = die_roller(20, 1, to_hit_modifier)
     damage, max_damage = die_roller(10, amount, 7)
     crit_damage = 2 * damage
@@ -56,6 +60,8 @@ def domi_normal(amount, to_hit_modifier, fire):
             )
         LAST_CRIT = 1
         LAST_ZERO += 1
+        TOTAL_CRIT += 1
+        TOTAL_ROLLS += 1
     elif to_hit == (1 + to_hit_modifier):
         d_twenty_fancy = colored(255, 0, 0, (to_hit - to_hit_modifier))
         damage = 0
@@ -65,6 +71,8 @@ def domi_normal(amount, to_hit_modifier, fire):
         )
         LAST_CRIT += 1
         LAST_ZERO = 1
+        TOTAL_ZERO += 1
+        TOTAL_ROLLS += 1
     else:
         d_twenty_fancy = colored(255, 69, 0, to_hit)
         if damage == max_damage:
@@ -89,6 +97,7 @@ def domi_normal(amount, to_hit_modifier, fire):
             )
         LAST_CRIT += 1
         LAST_ZERO += 1
+        TOTAL_ROLLS += 1
 
 
 def open_gui_with_options():
@@ -134,3 +143,5 @@ def option_select(option_index):
 
 # Call the function to open the GUI with options
 open_gui_with_options()
+print(f"Average Critcal hits: {frac(TOTAL_CRIT, TOTAL_ROLLS)}")
+print(f"Average Critcal misses: {frac(TOTAL_ZERO, TOTAL_ROLLS)}")

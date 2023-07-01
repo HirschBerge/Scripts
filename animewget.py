@@ -141,7 +141,7 @@ def time_it(func):
         pass
     end = datetime.now()
     timing = str(end - start)
-    os.system(f"""clear ; exa -lah --group-directories-first --icons""")
+    #os.system(f"""clear ; exa -lah --group-directories-first --icons""")
     print(f"{colored(0,255,0,'Download complete!')}")
     print(f"Time taken: {colored(0, 255, 0, timing[:10])}")
 

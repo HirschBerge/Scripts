@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/sh
 SOUND_FILE=/usr/share/sounds/freedesktop/stereo/complete.oga
 
 sudo pacman -Syu

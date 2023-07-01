@@ -1,5 +1,5 @@
-#!/bin/bash
-bin_path='/usr/local/bin'
+#!/bin/sh
+bin_path='/home/hirschy/.local/bin'
 chmod +x -R ~/.scripts/
 sudo ln -s ~/.scripts/animewget.py "$bin_path/animewget"
 sudo ln -s ~/.scripts/mangadex.py "$bin_path/mdex"

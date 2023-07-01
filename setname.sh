@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/sh
 echo -e "Custom name: "
 read -r name
 exa -1 |grep -v OLD |grep -v NEW > OLD

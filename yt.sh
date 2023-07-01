@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/sh
 
 clip=$(xclip -selection c -o)
 echo $clip

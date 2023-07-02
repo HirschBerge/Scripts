@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-
+#!/usr/bin/env nix-shell
+#!nix-shell -i python3 -p "python3.withPackages (ps: with ps; [ argparse dbus-python ])"
 import sys
 import dbus
 import argparse

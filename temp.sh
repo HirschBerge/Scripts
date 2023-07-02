@@ -1,5 +1,5 @@
-#!/sh
-temp=$(sensors |grep "CPU" | grep "°C" | awk -F"+" '{ print $2 }' |sed -e 's/\.0//g'|grep -Eo '[0-9]{1,4}')
+#!/bin/sh
+temp=$(sensors |grep "Core 1" | grep "°C" | awk -F"+" '{ print $2 }' |sed -e 's/\.0//g'|grep -Eo '[0-9]{1,4}')
 # echo $temp
 if [ -z "$temp" ]; then
     echo "%{F#5D3FD3} $temp°C"

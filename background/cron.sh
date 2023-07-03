@@ -31,7 +31,7 @@ sets_background() {
   echo "$imgnorm" "$imgwide"
   cp "$imgwide" ~/.config/wallwide.png
   cp "$imgnorm" ~/.config/wallwide2.png
-  sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus xwallpaper --output DP-2 --zoom ~/.config/wallwide.png --output DP-0 --zoom ~/.config/wallwide2.png
+  sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus xwallpaper --output eDP-1 --zoom ~/.config/wallwide.png #--output DP-0 --zoom ~/.config/wallwide2.png
 }
 
 main() {

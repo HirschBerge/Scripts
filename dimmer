@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+BRIGHTNESS=$(xrandr --verbose |grep -i brightness |cut -f2 -d ' ' |head -n1)
+adjusted=$(echo $BRIGHTNESS $1 | awk '{print $1 + $2}')
+if [ "$adjusted" = 10 ]; then
+  percent="1"
+else
+  percent="$adjusted"
+fi
+echo $percent
+xrandr --output eDP-1 --brightness "$percent" && xrandr --output eDP-1 --brightness "$percent"

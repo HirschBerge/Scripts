@@ -83,6 +83,7 @@ in
     extraConfig = ''
         #set ${modify} Mod4
         floating_modifier ${modify}
+        bindsym ${modify}+o   [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
         exec_always --no-startup-id autotiling
         exec_always --no-startup-id sh ~/.config/polybar/launch.sh
         exec_always --no-startup-id ~/.scripts/monitorconfig.sh

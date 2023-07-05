@@ -20,7 +20,7 @@
 			"super + F4" = "prompt 'Hibernate computer?' 'sudo -A zzz -Z'";
 			"super + F5 is unbound" = "";
 			"super + {F9,F10}" = "{dmenumount,dmenuumount}";
-			"super + o" = "kill $(xdotool getwindowfocus getwindowpid)";
+			# "super + o" = "kill $(xdotool getwindowfocus getwindowpid)"; Kills all instances instead of just current window, whoops.
 		};
 	};
 }

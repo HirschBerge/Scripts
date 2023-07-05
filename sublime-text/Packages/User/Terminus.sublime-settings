@@ -1,0 +1,7 @@
+{
+    "view_settings": {
+        // these are extra view settings which are passed to the terminus_view,
+        // you could change settings like "font_face", "font_size" and paddings.
+        "font_face": "Fira Code Regular Nerd Font Complete Mono"
+    },
+}

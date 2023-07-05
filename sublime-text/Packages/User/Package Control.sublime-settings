@@ -1,0 +1,25 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"Agila Theme",
+		"FileIcons",
+		"Git",
+		"Github Tools",
+		"Guna",
+		"HTMLBeautify",
+		"INI",
+		"LSP",
+		"Package Control",
+		"python-black",
+		"Rust Enhanced",
+		"RustFmt",
+		"Terminus",
+		"Theme - Darkmatter",
+		"TOML",
+	],
+}

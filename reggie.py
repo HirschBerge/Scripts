@@ -10,11 +10,11 @@ def main():
         with open(out_file, "w+") as outf:
             for line in file:
                 line = line.strip()
+                line = re.sub(';', '#', line)
                 line = re.sub(r'=$', '= ', line)
                 search_pattern_1 = r'= '
                 search_pattern_2 = r'\[([bar module].*?)\]'
-                line = re.sub(';', '#', line)
-                if "#" not in line:
+                if not re.search(r'^\s.*#', line):
                     if re.search(search_pattern_1, line):
                         line = re.sub(r"$", '";', line)
                         line = re.sub('= ', '= "', line)

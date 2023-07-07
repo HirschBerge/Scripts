@@ -81,6 +81,9 @@ in
      };
     displayManager = {
       defaultSession = "none+i3";
+      setupCommands = ''
+        ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1080 --rate 200 --pos 0x1080 --output DP-0 --mode 2560x1080 --rate 200 --pos 0x0
+      '';
       };
     windowManager.i3 = {
       enable = true;

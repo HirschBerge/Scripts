@@ -86,7 +86,7 @@ in
         bindsym ${modify}+o   [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
         exec_always --no-startup-id autotiling
         exec_always --no-startup-id sh ~/.config/polybar/launch.sh
-        exec_always --no-startup-id ~/.scripts/monitorconfig.sh
+        # exec_always --no-startup-id ~/.scripts/monitorconfig.sh
         exec_always --no-startup-id ~/.local/bin/remaps
         exec --no-startup-id  picom -b
         exec --no-startup-id sh $HOME/.scripts/background/cron.sh $HOME/Pictures/Sci-Fi

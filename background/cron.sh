@@ -45,5 +45,5 @@ main() {
 }
 
 
-
+sleep 5
 main #>/dev/null 2>&1 &

@@ -1,4 +1,4 @@
-#!/sh
+#!/usr/bin/bash
 temp=$(sensors |grep "CPU" | grep "°C" | awk -F"+" '{ print $2 }' |sed -e 's/\.0//g'|grep -Eo '[0-9]{1,4}')
 # echo $temp
 if [ -z "$temp" ]; then

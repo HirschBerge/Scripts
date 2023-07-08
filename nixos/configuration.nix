@@ -110,7 +110,7 @@ in
     useUserPackages = true;
     users.hirschy = import ./home.nix;
   };
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1u"
   ];

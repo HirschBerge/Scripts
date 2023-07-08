@@ -23,7 +23,7 @@
             zstyle ':completion:*' menu select # select completions with arrow keys
             zstyle ':completion:*' group-name \'\' # group results by category
             zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
-            export PATH=$PATH:/home/hirschy/.local/bin:/home/hirschy/.cargo/bin:/home/hirschy/.spicetify
+            export PATH=$PATH:/home/hirschy/.local/bin:/home/hirschy/.cargo/bin:/home/hirschy/.zplug/repos/bigH/git-fuzzy/bin/
             export NIX_PAGER=cat
             export PROMPT_EOL_MARK=" "
             [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
@@ -83,6 +83,7 @@
             g="git";
             grep="rg";
             ga="git add .";
+            gs="git status";
             gaa="git add --all";
             gam="git am";
             gama="git am --abort";
@@ -205,31 +206,15 @@
             mpv="mpv -fs=yes";
             musicplay="~/.scripts/musicplay";
             mv="mv -i";
-            nas="cd ~/NAS/Anime";
+            nas="cd /mnt/NAS/Anime";
             netumount="sudo umount -f -l /mnt/Raid_Storage ~/Videos ~/Music/ /mnt/GAMESTORAGE && filesys";
             nmap="grc nmap --open -v";
-            npmD="npm i -D ";
-            npmF="npm i -f";
-            npmI="npm init";
-            npmL="npm list";
-            npmL0="npm ls --depth=0";
-            npmO="npm outdated";
-            npmP="npm publish";
-            npmR="npm run";
-            npmS="npm i -S ";
-            npmSe="npm search";
-            npmU="npm update";
-            npmV="npm -v";
-            npmg="npm i -g ";
-            npmi="npm info";
-            npmrd="npm run dev";
-            npmst="npm start";
-            npmt="npm test";
             pip="pip3";
             pp="cd ~/Pictures && exa -a";
             publicip="curl api.ipify.org";
             python="python3";
             r="ranger";
+            fuzzy="git-fuzzy";
             rd="rmdir";
             reboot="reboot";
             ref="shortcuts >/dev/null; source ~/.config/shortcutrc";
@@ -263,6 +248,13 @@
             yta="yt -x -f bestaudio/best";
             ytplaylist="yt-dlp -i -f mp3 --yes-playlist --add-metadata";
         };
+        zplug = {
+            enable = true;
+            plugins = [
+                # { name = "bigH/git-fuzzy"; tags = [ as:command, use:"bin/git-fuzzy"]; }
+                { name = "elstgav/branch-manager";}
+            ];
+        };
         oh-my-zsh = {
             enable = true;
             plugins = [
@@ -272,6 +264,8 @@
                 "npm"
                 "brew"
                 "history-substring-search"
+                # "branch-manager"
+                # "git-fuzzy"
             ];
         };
     };

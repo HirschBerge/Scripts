@@ -1,7 +1,14 @@
 {config, pkgs, ...}:
 
 {
-	imports = [ ./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix];
+	imports = [ 
+		./configs/zsh.nix 
+		./configs/i3.nix 
+		./configs/kitty.nix 
+		./configs/sxhkd.nix 
+		./configs/polybar.nix 
+		./configs/starship.nix
+	];
 	home.username = "hirschy";
 	home.homeDirectory = "/home/hirschy";
 	home.stateVersion = "23.05";
@@ -32,6 +39,8 @@
 	    grc
 	    i3lock-fancy-rapid
 	    neofetch
+	    spicetify-cli
+	    bc
 	];
 	programs.fzf = {
 		enable = true;

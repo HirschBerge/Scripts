@@ -44,7 +44,7 @@
             G = "| grep -i --color=auto";
             YT = "youtube-viewer";
             _="sudo ";
-            rebuild = "sudo nixos-rebuild switch";
+            rebuild = "sudo nixos-rebuild switch&& ~/.scripts/gen_suppression.sh";
             awg="animewget";
             bat="bat --paging=never";
             bd = "nvim ~/.config/directories";
@@ -77,7 +77,7 @@
             e="nvim";
             egrep="grep -E --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
             etrash="sudo rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*";
-            f="";
+            # f="";
             fgrep="grep -F --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
             find="time find";
             g="git";
@@ -214,7 +214,7 @@
             publicip="curl api.ipify.org";
             python="python3";
             r="ranger";
-            fuzzy="git-fuzzy";
+            f="git-fuzzy";
             rd="rmdir";
             reboot="reboot";
             ref="shortcuts >/dev/null; source ~/.config/shortcutrc";

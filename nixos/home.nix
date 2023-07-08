@@ -41,6 +41,7 @@
 	    neofetch
 	    spicetify-cli
 	    bc
+	    rnnoise-plugin
 	];
 	programs.fzf = {
 		enable = true;

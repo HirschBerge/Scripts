@@ -18,7 +18,6 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
-
   # rtkit is optional but recommended
   security.rtkit.enable = true;
   services.pipewire = {
@@ -29,6 +28,11 @@ in
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
+  # system.activationScripts.script.text =''
+  #       # ${pkgs.i3-gaps}/bin/i3 restart
+  #       /home/hirschy/.scripts/gen_suppression.sh
+  #       /home/hirschy/.config/polybar/launch.sh
+  #     '';
 
   imports =
     [ # Include the results of the hardware scan.

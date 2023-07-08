@@ -35,6 +35,7 @@ sets_background() {
 }
 
 main() {
+  ps aux -u hirschy| grep cron.sh | awk '{ print $2 }'
   while true; do
     shufflezwide2
     shufflezwide

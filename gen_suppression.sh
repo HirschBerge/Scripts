@@ -12,7 +12,7 @@ White='\033[0;37m'        # White
 
 file_path="/home/hirschy/.config/pipewire/pipewire.conf.d/"
 [ -d "$file_path" ] || mkdir -p $file_path
-[ -f "$file_path/99-input-denoising" ] || touch "$file_path/99-input-denoising.so"
+[ -f "$file_path/99-input-denoising" ] || touch "$file_path/99-input-denoising.conf"
 pkg_path="$(nix-store --query --requisites /run/current-system |grep -m 1 rnnoise)/lib/ladspa/librnnoise_ladspa.so"
 echo -en "
 context.modules = [
@@ -48,7 +48,7 @@ context.modules = [
     }
 }
 ]
-" > "$file_path/99-input-denoising.so"
+" > "$file_path/99-input-denoising.conf"
 
 
-printf "${Green}[+]${NoColor} Completed generating ${Purple} ~/.config/pipewire/pipewire.config.d/99-input-denoising.so${NoColor}"
+printf "${Green}[+]${NoColor} Completed generating ${Purple} ~/.config/pipewire/pipewire.config.d/99-input-denoising.conf${NoColor}"

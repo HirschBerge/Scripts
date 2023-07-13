@@ -104,7 +104,7 @@ def prettify(d):
                 f"{stars_str.ljust(6)}{colors.bold}{colors.fg.green}{colors.bg.black}{key.ljust(max_len +1 )}{colors.reset}{colors.fg.red}{value}{colors.reset}"
             )
         elif re.search(
-            r"cctank1|powerShellBestShell|xxJoshMoshxx|It Berns when I pee", key
+            r"cctank1|powerShellBestShell|xJoshMoshx|It Berns when I pee", key
         ):
             print(
                 f"{stars_str.ljust(6)}{colors.bold}{colors.fg.cyan}{colors.bg.black}{key.ljust(max_len +1 )}{colors.reset}{colors.fg.red}{value}{colors.reset}"

@@ -186,7 +186,7 @@ in
         bindsym ${modify}+7    workspace $ws7
         bindsym ${modify}+8    workspace $ws8
         bindsym ${modify}+9    workspace $ws9
-        bindsym ${modify}+0    workspace $ws10        # move focused container to workspace
+        bindsym ${modify}+0    workspace $ws10       
         bindsym ${modify}+Shift+1  move container to workspace $ws1
         bindsym ${modify}+Shift+2  move container to workspace $ws2
         bindsym ${modify}+Shift+3  move container to workspace $ws3
@@ -196,7 +196,8 @@ in
         bindsym ${modify}+Shift+7  move container to workspace $ws7
         bindsym ${modify}+Shift+8  move container to workspace $ws8
         bindsym ${modify}+Shift+9  move container to workspace $ws9
-        bindsym ${modify}+Shift+0  move container to workspace $ws10        for_window [class="Pinentry"] sticky enable
+        bindsym ${modify}+Shift+0  move container to workspace $ws10        
+        for_window [class="Pinentry"] sticky enable
         for_window [class="sent"] border pixel 0px
         for_window [title="GIMP Startup"] move workspace $ws5
         for_window [class="Gimp"] move workspace $ws5

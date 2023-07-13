@@ -48,7 +48,7 @@ in
 
   networking.hostName = "yoitsu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
+  services.flatpak.enable = true;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -118,6 +118,12 @@ in
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1u"
   ];
+  xdg.portal = {
+    enable = true;
+    # wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -146,10 +152,11 @@ in
     cmake
     lm_sensors
     zip
-    bottles
     steam-run
     lutris
     wineWowPackages.full
+    protonup-qt
+    gimp-with-plugins
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

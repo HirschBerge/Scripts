@@ -65,6 +65,7 @@
             cfn="nvim ~/.config/newsboat/config";
             cfu="nvim ~/.config/newsboat/urls";
             cfv="nvim ~/.config/nvim/init.vim";
+            flatpak="flatpak --user";
             cfz="nvim /.zshrc";
             cp="rsync -rah --progress -i";
             d="cd ~/Documents && exa -a";

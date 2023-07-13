@@ -120,8 +120,8 @@
             }
 
             ips(){
-                ip a |grep "inet" G "enp" | awk '{ print "Your IP Address is: " $2 }'
-                [[ `ip a | grep "tun\|nord"` ]] && ip a G "inet" G "tun\|nord" | awk '{ print "You are connected to VPN and your Alternate ip is: " $2 }'
+                ip a |rg "inet" |rg "enp" | awk '{ print "Your IP Address is: " $2 }'
+                [[ `ip a | grep "tun\|nord"` ]] && ip a |rg "inet" |rg "tun\|nord" | awk '{ print "You are connected to VPN and your Alternate ip is: " $2 }'
             }
 
             redo () {

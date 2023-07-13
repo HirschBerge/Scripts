@@ -127,7 +127,7 @@ in
         bottom = true;
 
         modules-left = "i3 right-end-bottom left-end-top title right-end-bottom";
-        modules-center = "left-end-bottom right-end-bottom";
+        modules-center = "left-end-bottom gpu-percent right-end-bottom";
         modules-right = "left-end-bottom cpu right-end-top left-end-bottom memory right-end-top left-end-bottom temp1";
       };
 
@@ -170,7 +170,12 @@ in
         label = "%output%";
         label-font = 2;
       };
-
+      "module/gpu-percent" = {
+        type = "custom/script";
+        exec = "nvidia-smi --query-gpu=memory.used,utilization.gpu,temperature.gpu --format=csv,noheader | awk '{ print \"RTX 3060ti\", $1$2, $3$4, $5\"C\" }'";
+        format-background = bg;
+        format-foreground = primary;
+      };
       "module/checknetwork" = {
         type = "custom/script";
         exec = "exec = ~/.config/polybar/scripts/check-network";
@@ -340,7 +345,7 @@ in
         interface = "enp6s0";
         label-connected = "%upspeed:7%";
         format-connected = "<label-connected>";
-        format-connected-prefix = "⬆⬆";
+        format-connected-prefix = " ⬆⬆";
         format-connected-prefix-foreground = "#FE522C";
         format-connected-foreground = "#228B22";
         format-connected-background = bg;
@@ -350,7 +355,7 @@ in
         interface = "enp6s0";
         label-connected = "%downspeed:7%";
         format-connected = "<label-connected>";
-        format-connected-prefix = "⬇⬇";
+        format-connected-prefix = " ⬇⬇";
         format-connected-prefix-foreground = "#3EC13F";
         format-connected-background = bg;
         format-connected-foreground = "#8B0000";

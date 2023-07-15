@@ -87,7 +87,7 @@
             }
 
             aniSeason(){
-              animewget --type season --season $1 -f $2 --progress
+              animewget --type season --season $1 -f $2
             }
 
             mv_yuzu(){

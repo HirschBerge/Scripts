@@ -172,9 +172,10 @@ in
       };
       "module/gpu-percent" = {
         type = "custom/script";
-        exec = "nvidia-smi --query-gpu=memory.used,utilization.gpu,temperature.gpu --format=csv,noheader | awk '{ print \"RTX 3060ti\", $1$2, $3$4, $5\"C\" }'";
+        # exec = "nvidia-smi --query-gpu=memory.used,utilization.gpu,temperature.gpu --format=csv,noheader | awk '{ print \"RTX 3060ti\", $1$2, $3$4, $5\"C\" }'";
+        exec = "~/.config/polybar/scripts/nvidia_mon_poly.sh";
         format-background = bg;
-        format-foreground = primary;
+        # format-foreground = primary;
       };
       "module/checknetwork" = {
         type = "custom/script";

@@ -157,6 +157,7 @@ in
     wineWowPackages.full
     protonup-qt
     gimp-with-plugins
+    zathura
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -200,6 +201,10 @@ in
       commands = [
         {
           command = "${pkgs.systemd}/bin/systemctl suspend";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/wrappers/bin/umount";
           options = [ "NOPASSWD" ];
         }
         {

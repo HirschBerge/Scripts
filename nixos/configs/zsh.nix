@@ -83,7 +83,7 @@
             find="time find";
             g="git";
             grep="rg";
-            ga="git add .";
+            ga="git add";
             gs="git status";
             gaa="git add --all";
             gam="git am";
@@ -208,7 +208,6 @@
             musicplay="~/.scripts/musicplay";
             mv="mv -i";
             nas="cd /mnt/NAS/Anime";
-            netumount="sudo umount -f -l /mnt/Raid_Storage ~/Videos ~/Music/ /mnt/GAMESTORAGE && filesys";
             nmap="grc nmap --open -v";
             pip="pip3";
             pp="cd ~/Pictures && exa -a";
@@ -217,7 +216,7 @@
             r="ranger";
             f="git-fuzzy";
             rd="rmdir";
-            reboot="reboot";
+            reboot="sudo umount /mnt/NAS/ && reboot";
             ref="shortcuts >/dev/null; source ~/.config/shortcutrc";
             removeurl="find /mnt/NAS/Anime -type f -name \"*url*\" -exec rm -f {} \; -print";
             renames="~/.scripts/rename";
@@ -229,7 +228,7 @@
             sc="cd ~/.local/bin && exa -a";
             scripts="cd ~/.scripts/";
             sdn="sudo shutdown -h now";
-            shutdown="umount -R /mnt/ ; sudo shutdown -h now";
+            shutdown="umount -R /mnt/ && sudo shutdown -h now";
             sorts="sort | uniq -c | sort -n";
             speedtest="speedtest-cli";
             ssh="kitty +kitten ssh";

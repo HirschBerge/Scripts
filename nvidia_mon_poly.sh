@@ -22,7 +22,7 @@ function color_mem() {
 		mem="$%{F#00FF00}$mem"
 	elif [ $mem -gt "1000" ] && [ $mem -le "3000" ]
 	then
-		mem="%{F#5D3FD3}$mem"
+		mem="%{F#00ffff}$mem"
 	elif [ $mem -gt "3001" ] && [ $mem -le "6000" ]
 	then
 		mem="%{F#ffff00}$mem"
@@ -36,7 +36,7 @@ function color_util() {
 		util="$%{F#00FF00}$util"
 	elif [ $util -gt "30" ] && [ $util -le "70" ]
 	then
-		util="%{F#5D3FD3}$util"
+		util="%{F#00ffff}$util"
 	elif [ $util -gt "70" ] && [ $util -le "85" ]
 	then
 		util="%{F#ffff00}$util"
@@ -50,7 +50,7 @@ function color_temp() {
 		temp="%{F#00FF00}$temp"
 	elif [ $temp -gt "40" ] && [ $temp -le "69" ]
 	then
-		temp="%{F#5D3FD3}$temp"
+		temp="%{F#00ffff}$temp"
 	elif [ $temp -gt "70" ] && [ $temp -le "79" ]
 	then
 		temp="%{F#ffff00}$temp"

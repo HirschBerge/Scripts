@@ -28,8 +28,8 @@ context.modules = [
                     plugin = \"$pkg_path\"
                     label = noise_suppressor_mono
                     control = {
-                        \"VAD Threshold (%)\" = 50.0
-                        \"VAD Grace Period (ms)\" = 200
+                        \"VAD Threshold (%)\" = 40.0
+                        \"VAD Grace Period (ms)\" = 100
                         \"Retroactive VAD Grace (ms)\" = 0
                     }
                 }

@@ -70,7 +70,7 @@ class anime_wget:
                     # bar.text(now_downloading)
                     with contextlib.redirect_stdout(None):
                         os.system(
-                            f"""axel -q -k -a -n 6 "{line}" --out="{filnm}" --no-clobber 2>/dev/null"""
+                            f"""axel -q -k -a -n 10 "{line}" --out="{filnm}" --no-clobber 2>/dev/null"""
                         )
                     bar()
 
@@ -90,7 +90,7 @@ class anime_wget:
                 )
                 now_downloading = f"Now Downloading: {filnm}"
                 print(now_downloading)
-                os.system(f"""axel -k -a -n 6 "{line}" --out="{filnm}" --no-clobber""")
+                os.system(f"""axel -k -a -n 10 "{line}" --out="{filnm}" --no-clobber""")
 
     def downloader_single(self):
         if self.episode is None:
@@ -113,7 +113,7 @@ class anime_wget:
             )
         )
         os.system(
-            f"""axel -a -n 6 -k "{self.anime}" --out="{self.file_name}" --no-clobber"""
+            f"""axel -a -n 10 -k "{self.anime}" --out="{self.file_name}" --no-clobber"""
         )
 
 
@@ -141,7 +141,7 @@ def time_it(func):
         pass
     end = datetime.now()
     timing = str(end - start)
-    #os.system(f"""clear ; exa -lah --group-directories-first --icons""")
+    # os.system(f"""clear ; exa -lah --group-directories-first --icons""")
     print(f"{colored(0,255,0,'Download complete!')}")
     print(f"Time taken: {colored(0, 255, 0, timing[:10])}")
 

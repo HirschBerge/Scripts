@@ -61,6 +61,7 @@
             { id = "ponfpcnoihfmfllpaingbgckeeldkhle";} # Enhancer for Youtube
             { id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
             { id = "gebbhagfogifgggkldgodflihgfeippi";} # Return youtube dislike button
+            { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
         ];
     };
     programs.brave = {
@@ -74,6 +75,7 @@
             { id = "ponfpcnoihfmfllpaingbgckeeldkhle";} # Enhancer for Youtube
             { id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
             { id = "gebbhagfogifgggkldgodflihgfeippi";} # Return youtube dislike button
+            { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
         ];
     };
 }

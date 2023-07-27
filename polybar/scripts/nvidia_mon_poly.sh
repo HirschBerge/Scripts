@@ -19,7 +19,7 @@ temp=$(echo $output |awk '{ print $3 }')
 function color_mem() {
 	if [ $mem -le "1000" ]
 	then
-		mem="$%{F#00FF00}$mem"
+		mem="%{F#00FF00}$mem"
 	elif [ $mem -gt "1000" ] && [ $mem -le "3000" ]
 	then
 		mem="%{F#00ffff}$mem"
@@ -33,7 +33,7 @@ function color_mem() {
 function color_util() {
 	if [ $util -le "30" ]
 	then
-		util="$%{F#00FF00}$util"
+		util="%{F#00FF00}$util"
 	elif [ $util -gt "30" ] && [ $util -le "70" ]
 	then
 		util="%{F#00ffff}$util"

@@ -39,7 +39,6 @@ in
         ./hardware-configuration.nix
         <home-manager/nixos>
     ];
-
   environment.pathsToLink = [ "/libexec"];
 
   # Bootloader.
@@ -79,6 +78,7 @@ in
     enable = true;
     layout = "us";
     xkbVariant = "";
+
     
     desktopManager = {
      xterm.enable = false;
@@ -88,6 +88,14 @@ in
       setupCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1080 --rate 200 --pos 0x1080 --output DP-0 --mode 2560x1080 --rate 200 --pos 0x0
       '';
+      lightdm = {
+        enable = true;
+        background = /home/hirschy/Pictures/nier.jpg;
+      };
+      # sddm = {
+      #   enable = true;
+      #   theme = "elarun";
+      #   };
       };
     windowManager.i3 = {
       enable = true;
@@ -142,7 +150,6 @@ in
     autojump
     discord
     spotify
-    steam
     picom
     sweet
     mpv
@@ -158,6 +165,7 @@ in
     protonup-qt
     gimp-with-plugins
     zathura
+    obsidian
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -193,6 +201,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  programs.steam.enable = true;
   system.stateVersion = "23.05"; # Did you read the comment?
   services.xserver.windowManager.i3.package = pkgs.i3-gaps;
   security.sudo = {

@@ -44,6 +44,7 @@
         rnnoise-plugin
         flatpak
         gnome.gnome-software
+        networkmanager_dmenu
     ];
     programs.fzf = {
         enable = true;

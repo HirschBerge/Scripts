@@ -49,7 +49,11 @@ def notify_send(title, new_chapters):
 
 
 def download_chapters(sorted_chapters: list, manga, overwrite=False):
-    name_manga = f"{manga.title['en']}"
+    # name_manga = f"{manga.title['en']}"
+    try:
+        name_manga = manga.title["en"]
+    except KeyError as e:
+        name_manga = manga.title["ja-ro"]
     new_chapters = 0
     skipped = 0
     with alive_bar(len(sorted_chapters), title=name_manga) as bar:
@@ -64,7 +68,7 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
                 volume = "No Volume"
             pattern = "[\!\?\,\[\]\+\@\#\$\%\^\&\*\.\(\)'\"]"
             title = re.sub(pattern, "", title)
-            m_title = re.sub(pattern, "", manga.title["en"])
+            m_title = re.sub(pattern, "", name_manga)
             bar.text(f" Chapter {chapter.chapter}: {title}")
             # bar.text(colored(0, 255, 0, "Now downloading chapter..."))
             if chapter.title:

@@ -1,0 +1,1 @@
+mpv ~/.config/dunst/notification.wav

@@ -124,7 +124,7 @@ in
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1u"
+    "openssl-1.1.1v"
   ];
   xdg.portal = {
     enable = true;
@@ -142,6 +142,9 @@ in
     wget
     brave
     git
+    lxappearance
+    neofetch
+    killall
     home-manager
     sublime4
     python311
@@ -166,6 +169,10 @@ in
     gimp-with-plugins
     zathura
     obsidian
+    unrar
+    ffmpeg_6-full
+    yuzu-mainline
+    dunst
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -229,7 +236,11 @@ in
           options = [ "NOPASSWD" ];
         }
         {
-          command = "${pkgs.sublime4}/bin/subl";
+          command = "/run/current-system/sw/bin/subl";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/nix-channel";
           options = [ "NOPASSWD" ];
         }
         {

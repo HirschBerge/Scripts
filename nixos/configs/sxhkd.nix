@@ -10,7 +10,7 @@
 			"super + d" = "~/.config/rofi/launchers/type-7/launcher.sh";
 			"super + e" = "echo open";
 			"super + w" = "echo open";
-			"super + shift + w" = "chromium https://roll20.net";
+			"super + shift + w" = "chromium https://roll20.net https://drive.google.com/drive/my-drive https://pathbuilder2e.com/app.html?v=70c";
 			"super + l" = "i3lock-fancy-rapid 5 3";
 			"super + x" = "~/.config/rofi/powermenu/type-5/powermenu.sh";
 			"shift + Print" = "~/.local/bin/maimpick";

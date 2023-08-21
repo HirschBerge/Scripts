@@ -1,1 +1,1 @@
-mpv ~/.config/dunst/notification.wav
+if [ "$1" != "Spotify" ]; then mpv ~/.config/dunst/notification.wav ; fi

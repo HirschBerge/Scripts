@@ -2,7 +2,7 @@
 import os
 import sys
 from datetime import datetime
-from alive_progress import alive_bar
+from alive_progress import alive_bar  # Make sure to put alive-progress with a venv
 import argparse
 import contextlib
 import subprocess
@@ -141,7 +141,7 @@ def time_it(func):
         pass
     end = datetime.now()
     timing = str(end - start)
-    #os.system(f"""clear ; exa -lah --group-directories-first --icons""")
+    # os.system(f"""clear ; exa -lah --group-directories-first --icons""")
     print(f"{colored(0,255,0,'Download complete!')}")
     print(f"Time taken: {colored(0, 255, 0, timing[:10])}")
 
@@ -154,11 +154,7 @@ def get_anime_title():
 
 def notify_send():
     ani_title = get_anime_title()
-    os.system(
-        f"""notify-send -t 3000 -u normal \"Finished downloading from anime: {ani_title}\" """
-    )
-    SOUND_FILE = "/usr/share/sounds/freedesktop/stereo/complete.oga"
-    os.system(f"""[ -f {SOUND_FILE} ] && paplay {SOUND_FILE}""")
+    os.system(f"""dunstify -u normal \"Downloaded an episode from {ani_title}\"""")
 
 
 def main():

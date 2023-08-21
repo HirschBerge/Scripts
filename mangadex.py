@@ -40,9 +40,9 @@ def sort_chapters(chapters: list):
     return sorted_chapters
 
 
-def notify_send(title):
+def notify_send(title, new_chapters):
     os.system(
-        f"""notify-send -t 3000 -u normal \"Finished downloading {title} from MangaDex: \" """
+        f"""dunstify -i ~/.cache/mdex.jpg -u normal \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
     )
     SOUND_FILE = "/usr/share/sounds/freedesktop/stereo/complete.oga"
     os.system(f"""[ -f {SOUND_FILE} ] && paplay {SOUND_FILE}""")
@@ -101,7 +101,7 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
         colored(255, 165, 0, "New Chapters Downloaded:"),
         colored(0, 255, 0, new_chapters),
     )
-    notify_send(name_manga)
+    notify_send(name_manga, new_chapters)
 
 
 class Hirschy_MangaDex:
@@ -126,6 +126,8 @@ class Hirschy_MangaDex:
         print(
             f"Manga is: {colored(87,8,97,manga.title['en'])} written by {colored(255,0,0,manga.author[0].name)}"
         )
+        cover = f"{manga.cover.url}"
+        os.system(f"wget --quiet -O ~/.cache/mdex.jpg {cover}")
         # # Getting chapters for that manga
         chapters = manga.get_chapters()
         sorted_chapters = sort_chapters(chapters)

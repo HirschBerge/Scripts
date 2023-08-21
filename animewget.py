@@ -2,7 +2,7 @@
 import os
 import sys
 from datetime import datetime
-from alive_progress import alive_bar
+from alive_progress import alive_bar  # Make sure to put alive-progress with a venv
 import argparse
 import contextlib
 import subprocess
@@ -70,7 +70,7 @@ class anime_wget:
                     # bar.text(now_downloading)
                     with contextlib.redirect_stdout(None):
                         os.system(
-                            f"""axel -q -k -a -n 10 "{line}" --out="{filnm}" --no-clobber 2>/dev/null"""
+                            f"""axel -q -k -a -n 6 "{line}" --out="{filnm}" --no-clobber 2>/dev/null"""
                         )
                     bar()
 
@@ -90,7 +90,7 @@ class anime_wget:
                 )
                 now_downloading = f"Now Downloading: {filnm}"
                 print(now_downloading)
-                os.system(f"""axel -k -a -n 10 "{line}" --out="{filnm}" --no-clobber""")
+                os.system(f"""axel -k -a -n 6 "{line}" --out="{filnm}" --no-clobber""")
 
     def downloader_single(self):
         if self.episode is None:
@@ -113,7 +113,7 @@ class anime_wget:
             )
         )
         os.system(
-            f"""axel -a -n 10 -k "{self.anime}" --out="{self.file_name}" --no-clobber"""
+            f"""axel -a -n 6 -k "{self.anime}" --out="{self.file_name}" --no-clobber"""
         )
 
 
@@ -154,11 +154,7 @@ def get_anime_title():
 
 def notify_send():
     ani_title = get_anime_title()
-    os.system(
-        f"""notify-send -t 3000 -u normal \"Finished downloading from anime: {ani_title}\" """
-    )
-    SOUND_FILE = "/usr/share/sounds/freedesktop/stereo/complete.oga"
-    os.system(f"""[ -f {SOUND_FILE} ] && paplay {SOUND_FILE}""")
+    os.system(f"""dunstify -u normal \"Downloaded an episode from {ani_title}\"""")
 
 
 def main():

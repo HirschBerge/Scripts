@@ -40,16 +40,20 @@ def sort_chapters(chapters: list):
     return sorted_chapters
 
 
-def notify_send(title):
+def notify_send(title, new_chapters):
     os.system(
-        f"""notify-send -t 3000 -u normal \"Finished downloading {title} from MangaDex: \" """
+        f"""dunstify -i ~/.cache/mdex.jpg -u normal \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
     )
     SOUND_FILE = "/usr/share/sounds/freedesktop/stereo/complete.oga"
     os.system(f"""[ -f {SOUND_FILE} ] && paplay {SOUND_FILE}""")
 
 
 def download_chapters(sorted_chapters: list, manga, overwrite=False):
-    name_manga = f"{manga.title['en']}"
+    # name_manga = f"{manga.title['en']}"
+    try:
+        name_manga = manga.title["en"]
+    except KeyError as e:
+        name_manga = manga.title["ja-ro"]
     new_chapters = 0
     skipped = 0
     with alive_bar(len(sorted_chapters), title=name_manga) as bar:
@@ -64,7 +68,7 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
                 volume = "No Volume"
             pattern = "[\!\?\,\[\]\+\@\#\$\%\^\&\*\.\(\)'\"]"
             title = re.sub(pattern, "", title)
-            m_title = re.sub(pattern, "", manga.title["en"])
+            m_title = re.sub(pattern, "", name_manga)
             bar.text(f" Chapter {chapter.chapter}: {title}")
             # bar.text(colored(0, 255, 0, "Now downloading chapter..."))
             if chapter.title:
@@ -101,7 +105,7 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
         colored(255, 165, 0, "New Chapters Downloaded:"),
         colored(0, 255, 0, new_chapters),
     )
-    notify_send(name_manga)
+    notify_send(name_manga, new_chapters)
 
 
 class Hirschy_MangaDex:
@@ -123,9 +127,15 @@ class Hirschy_MangaDex:
             # API returned something that wasn't expected, the wrapper will return an APIError
             print("Status code is: " + str(e.status))
             exit(1)
+        try:
+            manga_title = manga.title["en"]
+        except KeyError as e:
+            manga_title = manga.title["ja-ro"]
         print(
-            f"Manga is: {colored(87,8,97,manga.title['en'])} written by {colored(255,0,0,manga.author[0].name)}"
+            f"Manga is: {colored(87,8,97,manga_title)} written by {colored(255,0,0,manga.author[0].name)}"
         )
+        cover = f"{manga.cover.url}"
+        os.system(f"wget --quiet -O ~/.cache/mdex.jpg {cover}")
         # # Getting chapters for that manga
         chapters = manga.get_chapters()
         sorted_chapters = sort_chapters(chapters)
@@ -142,8 +152,12 @@ class Hirschy_MangaDex:
         for result in results:
             # author = self.cli.search("author", {"id": result.author[0]})
             try:
+                result_title = result.title["en"]
+            except KeyError as e:
+                result_title = result.title["ja-ro"]
+            try:
                 print(
-                    f"{colored(0,0,255, f'{count}.')} {colored(255,255,0,result.title['en'])}- {result.desc['en'][:40]}...\n"
+                    f"{colored(0,0,255, f'{count}.')} {colored(255,255,0,result_title)}- {result.desc['en'][:40]}...\n"
                     f"URL to Manga: {colored(0,255,0,f'https://mangadex.org/title/{result.id}')}"
                 )
             except TypeError:
@@ -156,7 +170,7 @@ class Hirschy_MangaDex:
                     )
                 )
                 print(
-                    f"{colored(0,0,255,f'{count}.')}{colored(255,255,0,result.title['en'])}...\n"
+                    f"{colored(0,0,255,f'{count}.')}{colored(255,255,0, result_title)}...\n"
                     f"URL to Manga: {colored(0,255,0,f'https://mangadex.org/title/{result.id}')}"
                 )
             except KeyError:
@@ -165,7 +179,7 @@ class Hirschy_MangaDex:
                         255,
                         0,
                         0,
-                        "No EN Title it seems",
+                        "No known Title it seems",
                     )
                 )
                 print(
@@ -196,8 +210,12 @@ class Hirschy_MangaDex:
             # API returned something that wasn't expected, the wrapper will return an APIError
             print("Status code is: " + str(e.status))
             exit(1)
+        try:
+            manga_title = manga.title["en"]
+        except KeyError as e:
+            manga_title = manga.title["ja-ro"]
         print(
-            f"Manga is: {colored(87,8,97,manga.title['en'])} written by {colored(255,0,0,manga.author[0].name)}"
+            f"Manga is: {colored(87,8,97,manga_title)} written by {colored(255,0,0,manga.author[0].name)}"
         )
         # # Getting chapters for that manga
         chapters = manga.get_chapters()

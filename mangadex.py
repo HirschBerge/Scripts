@@ -37,6 +37,13 @@ def sort_chapters(chapters: list):
         if x.chapter
     ]
     sorted_chapters = sorted(eng_chapters, key=lambda chap: float(chap.chapter))
+    unique_chapters_dict = {}
+    for chapter in sorted_chapters:
+        chapter_number = chapter.chapter
+        if chapter_number not in unique_chapters_dict:
+            unique_chapters_dict[chapter_number] = chapter
+    # Extracting the unique chapter objects
+    sorted_chapters = list(unique_chapters_dict.values())
     return sorted_chapters
 
 
@@ -44,8 +51,6 @@ def notify_send(title, new_chapters):
     os.system(
         f"""dunstify -i ~/.cache/mdex.jpg -u normal \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
     )
-    SOUND_FILE = "/usr/share/sounds/freedesktop/stereo/complete.oga"
-    os.system(f"""[ -f {SOUND_FILE} ] && paplay {SOUND_FILE}""")
 
 
 def download_chapters(sorted_chapters: list, manga, overwrite=False):
@@ -80,26 +85,23 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
             # if "'" in path_loc or '"' in path_loc:
             #     path_loc = f"/mnt/NAS/Manga/{manga.title['en']}/{chapter.chapter}"
             if not overwrite and os.path.exists(path_loc):
-                # print("Exists.")
                 pass
-            elif chapter.uploader.username == "NotXunder":
-                print(f"Chapter {chapter.chapter} skipped due to MangaPlus.")
-                skipped += 1
             else:
                 os.system(f"""mkdir -p \"{path_loc}\"""")
                 with contextlib.redirect_stdout(None):
                     try:
                         downloader.threaded_dl_chapter(chapter, path_loc, False)
                         new_chapters += 1
-                    except MangaDexPy.NoContentError:
-                        # API returned a 404 Not Found, therefore the wrapper will return a NoContentError
-                        print("This chapter doesn't exist.")
+                        already_done.append(str(chapter.chapter))
                     except MangaDexPy.APIError as e:
-                        # API returned something that wasn't expected, the wrapper will return an APIError
-                        # downloader.threaded_dl_chapter(chapter, path_loc, False)
-                        print("Status code is: " + str(e.status))
-                    except:
-                        print("Other Error")
+                        if e.status == 400:
+                            print(
+                                "Bad Request: There was an issue with the API request."
+                            )
+                            # Additional error handling or actions can be taken here
+                        else:
+                            print("An API error occurred with status code:", e.status)
+                            # Additional error handling or actions can be taken here
             bar()
     print(
         colored(255, 165, 0, "New Chapters Downloaded:"),
@@ -175,12 +177,7 @@ class Hirschy_MangaDex:
                 )
             except KeyError:
                 print(
-                    colored(
-                        255,
-                        0,
-                        0,
-                        "No known Title it seems",
-                    )
+                    f"{colored(0,0,255, f'{count}.')} {colored(255,0,0, 'No known Title it seems')}"
                 )
                 print(
                     f"{colored(255,255,0,result.title)}\n"
@@ -197,7 +194,7 @@ class Hirschy_MangaDex:
     def chapter_dl(self):
         self.manga_id = self.search()
         start_chapter = float(input("Choose starting chapter: "))
-        end_chapter = float(input("Choose ending chapter (blank if single chapter): "))
+        end_chapter = float(input("Choose ending chapter: "))
         start_time = datetime.now()
         # Asking the API about that manga with uuid 'manga_id'
         try:

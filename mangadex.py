@@ -44,7 +44,6 @@ def sort_chapters(chapters: list):
             unique_chapters_dict[chapter_number] = chapter
     # Extracting the unique chapter objects
     sorted_chapters = list(unique_chapters_dict.values())
-    [print(x.chapter) for x in sorted_chapters]
     return sorted_chapters
 
 
@@ -94,15 +93,15 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
                         downloader.threaded_dl_chapter(chapter, path_loc, False)
                         new_chapters += 1
                         already_done.append(str(chapter.chapter))
-                    except MangaDexPy.NoContentError:
-                        # API returned a 404 Not Found, therefore the wrapper will return a NoContentError
-                        print("This chapter doesn't exist.")
                     except MangaDexPy.APIError as e:
-                        # API returned something that wasn't expected, the wrapper will return an APIError
-                        # downloader.threaded_dl_chapter(chapter, path_loc, False)
-                        print("Status code is: " + str(e.status))
-                    except:
-                        print("Other Error")
+                        if e.status == 400:
+                            print(
+                                "Bad Request: There was an issue with the API request."
+                            )
+                            # Additional error handling or actions can be taken here
+                        else:
+                            print("An API error occurred with status code:", e.status)
+                            # Additional error handling or actions can be taken here
             bar()
     print(
         colored(255, 165, 0, "New Chapters Downloaded:"),
@@ -178,12 +177,7 @@ class Hirschy_MangaDex:
                 )
             except KeyError:
                 print(
-                    colored(
-                        255,
-                        0,
-                        0,
-                        "No known Title it seems",
-                    )
+                    f"{colored(0,0,255, f'{count}.')} {colored(255,0,0, 'No known Title it seems')}"
                 )
                 print(
                     f"{colored(255,255,0,result.title)}\n"
@@ -200,7 +194,7 @@ class Hirschy_MangaDex:
     def chapter_dl(self):
         self.manga_id = self.search()
         start_chapter = float(input("Choose starting chapter: "))
-        end_chapter = float(input("Choose ending chapter (blank if single chapter): "))
+        end_chapter = float(input("Choose ending chapter: "))
         start_time = datetime.now()
         # Asking the API about that manga with uuid 'manga_id'
         try:

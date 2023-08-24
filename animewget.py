@@ -44,7 +44,7 @@ def colored(r, g, b, text):
     return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
 
-class anime_wget:
+class AnimeWget:
     def __init__(self, anime, season, episode, file_name=None):
         self.anime = anime
         self.season = season
@@ -70,7 +70,7 @@ class anime_wget:
                     # bar.text(now_downloading)
                     with contextlib.redirect_stdout(None):
                         os.system(
-                            f"""axel -q -k -a -n 6 "{line}" --out="{filnm}" --no-clobber 2>/dev/null"""
+                            f"""axel -q -k -a -n 6 "{line}" --out="{filnm}" --no-clobber --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"  2>/dev/null"""
                         )
                     bar()
 
@@ -90,7 +90,9 @@ class anime_wget:
                 )
                 now_downloading = f"Now Downloading: {filnm}"
                 print(now_downloading)
-                os.system(f"""axel -k -a -n 6 "{line}" --out="{filnm}" --no-clobber""")
+                os.system(
+                    f"""axel -a -n 6 -k "{line}" --out="{filnm}" --no-clobber --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" """
+                )
 
     def downloader_single(self):
         if self.episode is None:
@@ -113,7 +115,7 @@ class anime_wget:
             )
         )
         os.system(
-            f"""axel -a -n 6 -k "{self.anime}" --out="{self.file_name}" --no-clobber"""
+            f"""axel -a -n 6 -k "{self.anime}" --out="{self.file_name}" --no-clobber --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" """
         )
 
 
@@ -160,7 +162,7 @@ def notify_send():
 def main():
     ani_title = get_anime_title()
     content, season, episode, filnm = get_info()
-    get_anime = anime_wget(content, season, episode, filnm)
+    get_anime = AnimeWget(content, season, episode, filnm)
     if args["type"] == "episode":
         now_downloading = f"Now Downloading: {ani_title}: {filnm}"
         print(colored(255, 0, 0, now_downloading))

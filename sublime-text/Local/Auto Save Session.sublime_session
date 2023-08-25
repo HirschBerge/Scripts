@@ -2257,7 +2257,7 @@
 					"file": "/etc/nixos/configs/zsh.nix",
 					"settings":
 					{
-						"buffer_size": 12387,
+						"buffer_size": 12385,
 						"encoding": "UTF-8",
 						"line_ending": "Unix"
 					},
@@ -2366,6 +2366,14 @@
 							},
 							"AQAAAIcgAAAAAAAAiCAAAAAAAAAAAAAA",
 							"AQAAAAAAAAABAAAAhyAAAAAAAACHIAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							34,
+							2,
+							"left_delete",
+							null,
+							"AgAAAMcPAAAAAAAAxw8AAAAAAAABAAAALsYPAAAAAAAAxg8AAAAAAAABAAAAIA",
+							"AQAAAAAAAAABAAAAyA8AAAAAAADIDwAAAAAAAAAAAAAAAPC/"
 						]
 					]
 				},
@@ -2741,7 +2749,7 @@
 			],
 			"find":
 			{
-				"height": 27.0
+				"height": 49.0
 			},
 			"find_in_files":
 			{
@@ -2755,6 +2763,7 @@
 				"case_sensitive": false,
 				"find_history":
 				[
+					"ga=",
 					"+o",
 					"++o"
 				],
@@ -2919,15 +2928,15 @@
 							"semi_transient": false,
 							"settings":
 							{
-								"buffer_size": 12387,
+								"buffer_size": 12385,
 								"regions":
 								{
 								},
 								"selection":
 								[
 									[
-										8328,
-										8328
+										4038,
+										4038
 									]
 								],
 								"settings":
@@ -2938,7 +2947,7 @@
 									"translate_tabs_to_spaces": true
 								},
 								"translation.x": 0.0,
-								"translation.y": 1791.0,
+								"translation.y": 756.0,
 								"zoom_level": 1.0
 							},
 							"stack_index": 0,

@@ -11,7 +11,7 @@
 
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/type-5"
-theme='style-5'
+theme='style-1'
 
 # CMDs
 lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7`"
@@ -78,7 +78,7 @@ run_cmd() {
 				openbox --exit
 			elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
 				bspc quit
-			elif [[ "$DESKTOP_SESSION" == 'none+i3' ]]; then
+			elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
 				i3-msg exit
 			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
@@ -100,14 +100,16 @@ case ${chosen} in
         ;;
     $hibernate)
 		run_cmd --hibernate
-		i3lock-fancy-rapid 5 3
         ;;
     $lock)
-	    [[ -x $(which betterlockscreen) ]] && betterlockscreen -l || [[ -x $(which i3lock-fancy-rapid) ]] && i3lock-fancy-rapid 5 3
+		if [[ -x '/usr/bin/betterlockscreen' ]]; then
+			betterlockscreen -l
+		elif [[ -x '/usr/bin/i3lock' ]]; then
+			i3lock
+		fi
         ;;
     $suspend)
 		run_cmd --suspend
-		i3lock-fancy-rapid 5 3
         ;;
     $logout)
 		run_cmd --logout

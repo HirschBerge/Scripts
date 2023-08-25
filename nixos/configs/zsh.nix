@@ -82,7 +82,7 @@
             find="time find";
             g="git";
             grep="rg";
-            ga="git add .";
+            ga="git add";
             gaa="git add --all";
             gam="git am";
             gama="git am --abort";

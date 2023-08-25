@@ -66,7 +66,7 @@
             cfu="nvim ~/.config/newsboat/urls";
             cfv="nvim ~/.config/nvim/init.vim";
             cfz="nvim /.zshrc";
-            cp="rsync -rah --progress -i";
+            cp="rsync -rah --progress";
             d="cd ~/Documents && exa -a";
             dd="dd status=progress";
             diff="diff --color=auto";

@@ -32,13 +32,6 @@
 	    grc
 	    i3lock-fancy-rapid
 	    neofetch
-	    iosevka
-	    siji
-	    fantasque-sans-mono
-	    noto-fonts-cjk-sans
-	    borg-sans-mono
-	    terminus_font
-	    material-icons
 	    mangohud
 	    dunst
 	];

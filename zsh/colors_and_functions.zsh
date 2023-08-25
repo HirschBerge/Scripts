@@ -87,7 +87,7 @@
             }
 
             aniSeason(){
-              animewget --type season --season $1 -f $2
+              animewget --type season --season $1 -f $2 --progress
             }
 
             mv_yuzu(){
@@ -120,7 +120,8 @@
             }
 
             ips(){
-		    ip a | rg -e "(inet.*enp)" |awk '{ print "IP Addr: " $2 " " $9 }'
+                ip a |grep "inet" G "enp" | awk '{ print "Your IP Address is: " $2 }'
+                [[ `ip a | grep "tun\|nord"` ]] && ip a G "inet" G "tun\|nord" | awk '{ print "You are connected to VPN and your Alternate ip is: " $2 }'
             }
 
             redo () {

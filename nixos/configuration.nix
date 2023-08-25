@@ -18,6 +18,7 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
+
   # rtkit is optional but recommended
   security.rtkit.enable = true;
   services.pipewire = {
@@ -28,17 +29,13 @@ in
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
-  # system.activationScripts.script.text =''
-  #       # ${pkgs.i3-gaps}/bin/i3 restart
-  #       /home/hirschy/.scripts/gen_suppression.sh
-  #       /home/hirschy/.config/polybar/launch.sh
-  #     '';
 
   imports =
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
         <home-manager/nixos>
     ];
+
   environment.pathsToLink = [ "/libexec"];
 
   # Bootloader.
@@ -47,7 +44,7 @@ in
 
   networking.hostName = "yoitsu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  services.flatpak.enable = true;
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -78,24 +75,12 @@ in
     enable = true;
     layout = "us";
     xkbVariant = "";
-
     
     desktopManager = {
      xterm.enable = false;
      };
     displayManager = {
       defaultSession = "none+i3";
-      setupCommands = ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1080 --rate 200 --pos 0x1080 --output DP-0 --mode 2560x1080 --rate 200 --pos 0x0
-      '';
-      lightdm = {
-        enable = true;
-        background = /home/hirschy/Pictures/nier.jpg;
-      };
-      # sddm = {
-      #   enable = true;
-      #   theme = "elarun";
-      #   };
       };
     windowManager.i3 = {
       enable = true;
@@ -122,16 +107,10 @@ in
     useUserPackages = true;
     users.hirschy = import ./home.nix;
   };
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1v"
   ];
-  xdg.portal = {
-    enable = true;
-    # wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -142,9 +121,6 @@ in
     wget
     brave
     git
-    lxappearance
-    neofetch
-    killall
     home-manager
     sublime4
     python311
@@ -153,6 +129,7 @@ in
     autojump
     discord
     spotify
+    steam
     picom
     sweet
     mpv
@@ -162,17 +139,10 @@ in
     cmake
     lm_sensors
     zip
+    bottles
     steam-run
     lutris
     wineWowPackages.full
-    protonup-qt
-    gimp-with-plugins
-    zathura
-    obsidian
-    unrar
-    ffmpeg_6-full
-    yuzu-mainline
-    dunst
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -208,52 +178,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  programs.steam.enable = true;
   system.stateVersion = "23.05"; # Did you read the comment?
   services.xserver.windowManager.i3.package = pkgs.i3-gaps;
-  security.sudo = {
-    enable = true;
-    extraRules = [{
-      commands = [
-        {
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/wrappers/bin/umount";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/reboot";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/poweroff";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/subl";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/nix-channel";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.neovim}/bin/nvim";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/systemctl";
-          options = [ "NOPASSWD"];
-        }
-      ];
-      groups = [ "wheel" ];
-    }];
-  };
 
 }

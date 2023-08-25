@@ -11,6 +11,17 @@ in
         bars = [ ];
         assigns = {};
         modifier = "Mod3"; # Empty
+        startup = [
+          { command = "${pkgs.fusuma}/bin/fusuma -c ~/.config/fusuma/fusuma.yaml -d"; always = true; notification = false; }
+          { command =  "${pkgs.autotiling}/bin/autotiling -d"; always = true; notification = false; }
+          { command = "sh ~/.config/polybar/launch.sh"; always = true; notification = false; }
+          { command =  "~/.scripts/monitorconfig.sh"; always = true; notification = false; } #Nahh
+          { command =  "~/.local/bin/remaps"; always = true; notification = false; }
+          { command =  "${pkgs.picom}/bin/picom -b"; always = true; notification = false; }
+          { command = "${pkgs.sxhkd}/bin/sxhkd -m 1"; always = true; notification = false; }
+          { command = " sh $HOME/.scripts/background/cron.sh $HOME/Pictures/Sci-Fi"; always = true; notification = false; }
+          { command = "${pkgs.dunst}/bin/dunst" ; always = true; notification = false; }
+        ];
         keybindings = lib.mkOptionDefault {
           "${modify}+Shift+Return" = "exec --no-startup-id samedir";
           "${modify}+Shift+space" = "floating toggle";
@@ -18,7 +29,7 @@ in
           "${modify}+Shift+c"  =  "exec --no-startup-id i3 restart";
           "${modify}+Escape"  =  "workspace prev";  
           "${modify}+r"  =  "mode \"resize\"";        
-          # "${modify}+o"  =  "kill `xdotool getwindowfocus getwindowpid`";
+          "${modify}+o"  =  "[con_id=\"__focused__\" instance=\"^(?$\"] kill";
           "${modify}+t"  =  "split toggle";
           "${modify}+Shift+t"  =  "gaps inner current set 15; gaps outer current set 15";
           "${modify}+Shift+y"  =  "exec --no-startup-id i3resize left";
@@ -83,15 +94,7 @@ in
     extraConfig = ''
         #set ${modify} Mod4
         floating_modifier ${modify}
-        bindsym ${modify}+o   [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
-        exec_always --no-startup-id autotiling
-        exec_always --no-startup-id dunst
-        exec_always --no-startup-id sh ~/.config/polybar/launch.sh
-        # exec_always --no-startup-id ~/.scripts/monitorconfig.sh
-        exec_always --no-startup-id ~/.local/bin/remaps
-        exec --no-startup-id  picom -b
-        exec --no-startup-id sh $HOME/.scripts/background/cron.sh $HOME/Pictures/Sci-Fi
-        #exec_always --no-startup-id  kill `ps -aux | grep ~/.scripts/background/background.sh |grep "/bin" |awk '{ print $2 }'`
+        exec_always --no-startup-id ~/.scripts/monitorconfig.sh
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
         client.focused          #8a2be2 #285577 #ffffff #770000 #8a2be2
@@ -187,7 +190,7 @@ in
         bindsym ${modify}+7    workspace $ws7
         bindsym ${modify}+8    workspace $ws8
         bindsym ${modify}+9    workspace $ws9
-        bindsym ${modify}+0    workspace $ws10       
+        bindsym ${modify}+0    workspace $ws10        # move focused container to workspace
         bindsym ${modify}+Shift+1  move container to workspace $ws1
         bindsym ${modify}+Shift+2  move container to workspace $ws2
         bindsym ${modify}+Shift+3  move container to workspace $ws3
@@ -197,8 +200,7 @@ in
         bindsym ${modify}+Shift+7  move container to workspace $ws7
         bindsym ${modify}+Shift+8  move container to workspace $ws8
         bindsym ${modify}+Shift+9  move container to workspace $ws9
-        bindsym ${modify}+Shift+0  move container to workspace $ws10        
-        for_window [class="Pinentry"] sticky enable
+        bindsym ${modify}+Shift+0  move container to workspace $ws10        for_window [class="Pinentry"] sticky enable
         for_window [class="sent"] border pixel 0px
         for_window [title="GIMP Startup"] move workspace $ws5
         for_window [class="Gimp"] move workspace $ws5

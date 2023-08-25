@@ -24,15 +24,15 @@
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
   # Enable the KDE Greeter
+  services.xserver.displayManager.sddm.enable = true;
   hardware.nvidia = {
 
     # Modesetting is needed for most wayland compositors
     modesetting.enable = true;
-    forceFullCompositionPipeline = true;
 
     # Use the open source version of the kernel module
     # Only available on driver 515.43.04+
-    open = false;
+    open = true;
 
     # Enable the nvidia settings menu
     nvidiaSettings = true;
@@ -44,9 +44,11 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  hardware.nvidia.forceFullCompositionPipeline = true;
+
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7e545b5a-39bd-406c-8dd2-8b2d674a90e1";
+    { device = "/dev/disk/by-uuid/7cd52afe-f20d-4364-b527-5b557ae4dcd5";
       fsType = "ext4";
     };
   fileSystems."/mnt/NAS" = {
@@ -55,7 +57,7 @@
   };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9527-FA15";
+    { device = "/dev/disk/by-uuid/0A6C-6113";
       fsType = "vfat";
     };
 
@@ -65,7 +67,7 @@
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/a8448c5d-1fe6-4452-87e6-1ab85c30fd28"; }
+    [ { device = "/dev/disk/by-uuid/dc6d14d5-df52-475c-966a-ebe751896366"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -78,6 +80,5 @@
   # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = true;                                                                                                                                                                         
-  # hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

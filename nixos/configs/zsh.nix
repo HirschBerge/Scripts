@@ -23,7 +23,7 @@
             zstyle ':completion:*' menu select # select completions with arrow keys
             zstyle ':completion:*' group-name \'\' # group results by category
             zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
-            export PATH=$PATH:/home/hirschy/.local/bin:/home/hirschy/.cargo/bin:/home/hirschy/.zplug/repos/bigH/git-fuzzy/bin/
+            export PATH=$PATH:/home/hirschy/.local/bin:/home/hirschy/.cargo/bin:/home/hirschy/.spicetify
             export NIX_PAGER=cat
             export PROMPT_EOL_MARK=" "
             [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
@@ -44,7 +44,7 @@
             G = "| grep -i --color=auto";
             YT = "youtube-viewer";
             _="sudo ";
-            rebuild = "sudo nixos-rebuild switch&& ~/.scripts/gen_suppression.sh";
+            rebuild = "sudo nixos-rebuild switch";
             awg="animewget";
             bat="bat --paging=never";
             bd = "nvim ~/.config/directories";
@@ -65,7 +65,6 @@
             cfn="nvim ~/.config/newsboat/config";
             cfu="nvim ~/.config/newsboat/urls";
             cfv="nvim ~/.config/nvim/init.vim";
-            flatpak="flatpak --user";
             cfz="nvim /.zshrc";
             cp="rsync -rah --progress -i";
             d="cd ~/Documents && exa -a";
@@ -78,13 +77,12 @@
             e="nvim";
             egrep="grep -E --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
             etrash="sudo rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*";
-            # f="";
+            f="";
             fgrep="grep -F --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
             find="time find";
             g="git";
             grep="rg";
-            ga="git add";
-            gs="git status";
+            ga="git add .";
             gaa="git add --all";
             gam="git am";
             gama="git am --abort";
@@ -174,6 +172,7 @@
             glum="git pull upstream $(git_main_branch)";
             gm="gi merge";
             gma="git merge --abort";
+            gs="git status";
             gmom="git merge origin/$(git_main_branch)";
             gms="git merge --squash";
             gmtl="git mergetool --no-prompt";
@@ -207,16 +206,33 @@
             mpv="mpv -fs=yes";
             musicplay="~/.scripts/musicplay";
             mv="mv -i";
-            nas="cd /mnt/NAS/Anime";
+            nas="cd ~/NAS/Anime";
+            netumount="sudo umount -f -l /mnt/Raid_Storage ~/Videos ~/Music/ /mnt/GAMESTORAGE && filesys";
             nmap="grc nmap --open -v";
+            npmD="npm i -D ";
+            npmF="npm i -f";
+            npmI="npm init";
+            npmL="npm list";
+            npmL0="npm ls --depth=0";
+            npmO="npm outdated";
+            npmP="npm publish";
+            npmR="npm run";
+            npmS="npm i -S ";
+            npmSe="npm search";
+            npmU="npm update";
+            npmV="npm -v";
+            npmg="npm i -g ";
+            npmi="npm info";
+            npmrd="npm run dev";
+            npmst="npm start";
+            npmt="npm test";
             pip="pip3";
             pp="cd ~/Pictures && exa -a";
             publicip="curl api.ipify.org";
             python="python3";
             r="ranger";
-            f="git-fuzzy";
             rd="rmdir";
-            reboot="sudo umount /mnt/NAS/ && reboot";
+            reboot="reboot";
             ref="shortcuts >/dev/null; source ~/.config/shortcutrc";
             removeurl="find /mnt/NAS/Anime -type f -name \"*url*\" -exec rm -f {} \; -print";
             renames="~/.scripts/rename";
@@ -228,7 +244,7 @@
             sc="cd ~/.local/bin && exa -a";
             scripts="cd ~/.scripts/";
             sdn="sudo shutdown -h now";
-            shutdown="umount -R /mnt/ && sudo shutdown -h now";
+            shutdown="umount -R /mnt/ ; sudo shutdown -h now";
             sorts="sort | uniq -c | sort -n";
             speedtest="speedtest-cli";
             ssh="kitty +kitten ssh";
@@ -248,13 +264,6 @@
             yta="yt -x -f bestaudio/best";
             ytplaylist="yt-dlp -i -f mp3 --yes-playlist --add-metadata";
         };
-        zplug = {
-            enable = true;
-            plugins = [
-                # { name = "bigH/git-fuzzy"; tags = [ as:command, use:"bin/git-fuzzy"]; }
-                { name = "elstgav/branch-manager";}
-            ];
-        };
         oh-my-zsh = {
             enable = true;
             plugins = [
@@ -264,8 +273,6 @@
                 "npm"
                 "brew"
                 "history-substring-search"
-                # "branch-manager"
-                # "git-fuzzy"
             ];
         };
     };

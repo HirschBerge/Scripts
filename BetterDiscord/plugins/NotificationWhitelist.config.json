@@ -1,0 +1,15 @@
+{
+    "currentVersionInfo": {
+        "version": "0.0.2",
+        "hasShownChangelog": true
+    },
+    "settings": {
+        "serverWhitelist": [],
+        "folderWhitelist": [],
+        "channelWhitelist": [
+            "752006850337046529"
+        ],
+        "enableWhitelisting": true,
+        "allowNonMessageNotifications": false
+    }
+}

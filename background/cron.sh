@@ -36,7 +36,7 @@ sets_background() {
   echo "$imgnorm" "$imgwide"
   cp "$imgwide" ~/.config/wallwide.png
   cp "$imgnorm" ~/.config/wallwide2.png
-  [[ $number -eq 10 ]] && /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --no-randr --focus /mnt/NAS/Pictures/lewd.jpg || /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --output DP-2 --zoom ~/.config/wallwide.png --output DP-0 --zoom ~/.config/wallwide2.png
+  [[ $number -eq 10 ]] && /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --no-randr --focus /mnt/NAS/Pictures/lewd2.png || /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --output DP-2 --zoom ~/.config/wallwide.png --output DP-0 --zoom ~/.config/wallwide2.png
 }
 
 main() {

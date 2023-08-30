@@ -75,6 +75,7 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
             title = re.sub(pattern, "", title)
             m_title = re.sub(pattern, "", name_manga)
             bar.text(f" Chapter {chapter.chapter}: {title}")
+            already_done = []
             # bar.text(colored(0, 255, 0, "Now downloading chapter..."))
             if chapter.title:
                 path_loc = (
@@ -108,6 +109,17 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
         colored(0, 255, 0, new_chapters),
     )
     notify_send(name_manga, new_chapters)
+
+
+def get_manga_title(result):
+    languages = ["en", "ja-ro", "es", "fr", "ko"]
+    for lang in languages:
+        try:
+            result_title = result.title[lang]
+            return result_title
+        except KeyError:
+            pass
+    return None
 
 
 class Hirschy_MangaDex:
@@ -153,10 +165,16 @@ class Hirschy_MangaDex:
         count = 1
         for result in results:
             # author = self.cli.search("author", {"id": result.author[0]})
-            try:
-                result_title = result.title["en"]
-            except KeyError as e:
-                result_title = result.title["ja-ro"]
+            result_title = get_manga_title(result)
+            if result_title is None:
+                raise Exception(f"Language not matched. {result.title}")
+            # try:
+            #     result_title = result.title["en"]
+            # except KeyError as e:
+            #     try:
+            #         result_title = result.title["ja-ro"]
+            #     except:
+            #         print(result.title)
             try:
                 print(
                     f"{colored(0,0,255, f'{count}.')} {colored(255,255,0,result_title)}- {result.desc['en'][:40]}...\n"

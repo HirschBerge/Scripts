@@ -7,22 +7,26 @@ if [ -n "$1" ]; then
 fi
 
 shufflezwide2() {
-  for z in $(exa -d "$folder"/* | shuf | head -1); do
+  for z in $(/etc/profiles/per-user/hirschy/bin/exa -d "$folder"/* | shuf | head -1); do
     echo "$z" > "$HOME/.scripts/background/resourcesnorm"
   done
 }
 
 shufflezwide() {
-  for z in $(exa -d "$folder"/* | shuf | head -1); do
+  for z in $(/etc/profiles/per-user/hirschy/bin/exa -d "$folder"/* | shuf | head -1); do
     echo "$z" > "$HOME/.scripts/background/resourceswide"
   done
 }
 
 function stopprocess {
-  for i in $(ps -aux | grep .scripts/background/cron.sh | grep "/bin\|sh " | awk '{ print $2 }'); do
-    echo Killing $i
-    sudo kill -9 $i
-  done
+   local mypid=$$    # capture this run's pid
+
+   declare pids=($(pgrep -f ${0##*/}))   # get all the pids running this script
+
+   for pid in ${pids[@]/$mypid/}; do   # cycle through all pids except this one
+      kill $pid                        # kill the other pids
+      sleep 1                          # give time to complete
+   done
 }
 
 sets_background() {
@@ -31,11 +35,12 @@ sets_background() {
   echo "$imgnorm" "$imgwide"
   cp "$imgwide" ~/.config/wallwide.png
   cp "$imgnorm" ~/.config/wallwide2.png
-  sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus xwallpaper --output eDP-1 --zoom ~/.config/wallwide.png #--output DP-0 --zoom ~/.config/wallwide2.png
+  /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --output eDP-1 --zoom ~/.config/wallwide.png #--output DP-0 --zoom ~/.config/wallwide2.png
+
 }
 
 main() {
-  ps aux -u hirschy| grep cron.sh | awk '{ print $2 }'
+  stopprocess
   while true; do
     shufflezwide2
     shufflezwide
@@ -46,5 +51,5 @@ main() {
 }
 
 
-
+sleep 5
 main #>/dev/null 2>&1 &

@@ -1,1 +1,6 @@
-if [ "$1" != "Spotify" ]; then mpv ~/.config/dunst/notification.wav ; fi
+if [ "$1" == "Spotify" ] || [ "$1" == "discord" ]
+then 
+	echo ""
+else	
+	mpv ~/.config/dunst/notification.wav
+fi

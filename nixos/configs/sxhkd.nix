@@ -10,7 +10,7 @@
 			"super + d" = "~/.config/rofi/launchers/type-7/launcher.sh";
 			"super + e" = "echo open";
 			"super + w" = "echo open";
-			"super + shift + w" = "chromium https://roll20.net";
+			"super + shift + w" = "chromium https://roll20.net https://pathbuilder2e.com https://drive.google.com";
 			"super + l" = "i3lock-fancy-rapid 5 3";
 			"super + x" = "~/.config/rofi/powermenu/type-5/powermenu.sh";
 			"shift + Print" = "~/.local/bin/maimpick";
@@ -20,7 +20,7 @@
 			"super + F4" = "prompt 'Hibernate computer?' 'sudo -A zzz -Z'";
 			"super + F5 is unbound" = "";
 			"super + {F9,F10}" = "{dmenumount,dmenuumount}";
-			"super + o" = "kill $(xdotool getwindowfocus getwindowpid)";
+			# "super + o" = "kill $(xdotool getwindowfocus getwindowpid)";
 		};
 	};
 }

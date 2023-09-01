@@ -7,7 +7,7 @@
 	home.stateVersion = "23.05";
 	home.packages = with pkgs; [
 		zsh
-		htop
+		btop
 		i3-gaps
 		rofi
 		kitty
@@ -34,6 +34,8 @@
 	    neofetch
 	    mangohud
 	    dunst
+	    obsidian
+	    zathura
 	];
 	programs.fzf = {
 		enable = true;

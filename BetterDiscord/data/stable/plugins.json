@@ -2,7 +2,7 @@
     "BDContextMenu": true,
     "RemoveBlockedUsers": true,
     "PinDMs": true,
-    "ZeresPluginLibrary": true,
+    "ZeresPluginLibrary": false,
     "CharCounter": true,
     "ClickableMentions": true,
     "DoNotTrack": true,

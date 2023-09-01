@@ -24,7 +24,6 @@
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
   # Enable the KDE Greeter
-  services.xserver.displayManager.sddm.enable = true;
   hardware.nvidia = {
 
     # Modesetting is needed for most wayland compositors

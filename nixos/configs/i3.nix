@@ -12,7 +12,6 @@ in
         assigns = {};
         modifier = "Mod3"; # Empty
         startup = [
-          { command = "${pkgs.fusuma}/bin/fusuma -c ~/.config/fusuma/fusuma.yaml -d"; always = true; notification = false; }
           { command =  "${pkgs.autotiling}/bin/autotiling -d"; always = true; notification = false; }
           { command = "sh ~/.config/polybar/launch.sh"; always = true; notification = false; }
           { command =  "~/.scripts/monitorconfig.sh"; always = true; notification = false; } #Nahh
@@ -94,7 +93,7 @@ in
     extraConfig = ''
         #set ${modify} Mod4
         floating_modifier ${modify}
-        exec_always --no-startup-id ~/.scripts/monitorconfig.sh
+        # exec_always --no-startup-id ~/.scripts/monitorconfig.sh
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
         client.focused          #8a2be2 #285577 #ffffff #770000 #8a2be2
@@ -175,7 +174,7 @@ in
         workspace $ws7 output $monitor2
         workspace $ws8 output $monitor2
         workspace $ws9 output $monitor2
-        workspace $ws10 output $monitor2        #Autostart apps on spec workspaces
+        workspace $ws10 output $monitor2        
         exec --no-startup-id brave
         #exec --no-startup-id sleep 6 && i3-msg 'workspace $ws6; exec $TERMINAL -e ncmpcpp'
         exec --no-startup-id spotify
@@ -190,7 +189,7 @@ in
         bindsym ${modify}+7    workspace $ws7
         bindsym ${modify}+8    workspace $ws8
         bindsym ${modify}+9    workspace $ws9
-        bindsym ${modify}+0    workspace $ws10        # move focused container to workspace
+        bindsym ${modify}+0    workspace $ws10        
         bindsym ${modify}+Shift+1  move container to workspace $ws1
         bindsym ${modify}+Shift+2  move container to workspace $ws2
         bindsym ${modify}+Shift+3  move container to workspace $ws3
@@ -200,7 +199,8 @@ in
         bindsym ${modify}+Shift+7  move container to workspace $ws7
         bindsym ${modify}+Shift+8  move container to workspace $ws8
         bindsym ${modify}+Shift+9  move container to workspace $ws9
-        bindsym ${modify}+Shift+0  move container to workspace $ws10        for_window [class="Pinentry"] sticky enable
+        bindsym ${modify}+Shift+0  move container to workspace $ws10        
+        for_window [class="Pinentry"] sticky enable
         for_window [class="sent"] border pixel 0px
         for_window [title="GIMP Startup"] move workspace $ws5
         for_window [class="Gimp"] move workspace $ws5

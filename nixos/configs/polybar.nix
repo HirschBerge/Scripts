@@ -347,7 +347,7 @@ in
         interface = "enp6s0";
         label-connected = "%upspeed:7%";
         format-connected = "<label-connected>";
-        format-connected-prefix = "⬆⬆";
+        format-connected-prefix = "⬆⬆ ";
         format-connected-prefix-foreground = "#FE522C";
         format-connected-foreground = "#228B22";
         format-connected-background = bg;
@@ -357,7 +357,7 @@ in
         interface = "enp6s0";
         label-connected = "%downspeed:7%";
         format-connected = "<label-connected>";
-        format-connected-prefix = "⬇⬇";
+        format-connected-prefix = "⬇⬇ ";
         format-connected-prefix-foreground = "#3EC13F";
         format-connected-background = bg;
         format-connected-foreground = "#8B0000";

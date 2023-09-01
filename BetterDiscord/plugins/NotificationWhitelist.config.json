@@ -7,7 +7,8 @@
         "serverWhitelist": [],
         "folderWhitelist": [],
         "channelWhitelist": [
-            "752006850337046529"
+            "752006850337046529",
+            "1085380200059113563"
         ],
         "enableWhitelisting": true,
         "allowNonMessageNotifications": false

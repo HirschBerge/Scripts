@@ -11,12 +11,47 @@ in
 {
   # Remove sound.enable or turn it off if you had it set previously, it seems to cause conflicts with pipewire
   #sound.enable = false;
-  systemd.services.background = {
-    script = ''
-      sleep 15; /home/hirschy/.scripts/background/cron.sh /home/hirschy/Pictures/Sci-Fi/ 
-    '';
-    wantedBy = [ "multi-user.target" ];
-  };
+  #  systemd.services = {
+  #   background = {
+  #     wantedBy = [ "multi-user.target" ]; 
+  #     after = [ "network.target" ];
+  #     description = "Background changer.";
+  #     enable = true;
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       User = "hirschy";
+  #       ExecStartPost= "/run/current-system/sw/bin/sleep 15";
+  #       ExecStart = ''/home/hirschy/.scripts/background/cron.sh /home/hirschy/Pictures/Sci-Fi'';         
+  #       ExecStop = ''ps aux |rg "[b]ackground" | awk \'{ print $2 }\' | xargs kill '';
+  #     };
+  #   };
+  #   remaps = {
+  #     wantedBy = [ "multi-user.target" ]; 
+  #     after = [ "network.target" ];
+  #     description = "Keyboard remaps.";
+  #     enable = true;
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       User = "hirschy";
+  #       # ExecStartPost= "/run/current-system/sw/bin/sleep 15";
+  #       ExecStart = ''/run/current-system/sw/bin/bash /home/hirschy/.local/bin/remaps'';         
+  #       # ExecStop = ''ps aux |rg "[r]emaps" | awk \'{ print $2 }\' | xargs kill'';
+  #     };
+  #   };
+  #   displaysetup = {
+  #     wantedBy = [ "multi-user.target" ]; 
+  #     after = [ "network.target" ];
+  #     before = [ "getty.target" ];
+  #     description = "Sets correct screen settings";
+  #     enable = true;
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       User = "hirschy";
+  #       ExecStart = ''/run/current-system/sw/bin/nvidia-settings --assign CurrentMetaMode="DP-2: nvidia-auto-select @2560x1080 +0+0 {ForceCompositionPipeline=On}, DP-0: nvidia-auto-select @2560x1080 +0+1080 {ForceCompositionPipeline=On}"; /run/current-system/sw/bin/xrandr --output DP-2 --mode 2560x1080 --rate 200 --pos 0x1080 --output DP-0 --mode 2560x1080 --rate 200 --pos 0x0'';         
+  #       # ExecStop = ''ps aux |rg "[s]xhkd" | awk \'{ print $2 }\' | xargs kill '';
+  #     };
+  #   };
+  # };
 
 
   # rtkit is optional but recommended
@@ -81,20 +116,22 @@ in
      };
     displayManager = {
       defaultSession = "none+i3";
+      lightdm = {
+        enable = true;
+        background = /home/hirschy/Pictures/nier.jpg;
+        };
       };
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
         dmenu
-      	i3status
-      	i3lock
-      	i3blocks
-      	polybar
-        siji
+        i3status
+        i3lock
+        i3blocks
+        polybar
       ];
     };
   };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.hirschy = {
     isNormalUser = true;
@@ -139,10 +176,10 @@ in
     cmake
     lm_sensors
     zip
-    bottles
-    steam-run
     lutris
     wineWowPackages.full
+    gimp
+    rtorrent
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -154,7 +191,7 @@ in
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";    
     };
@@ -172,6 +209,8 @@ in
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

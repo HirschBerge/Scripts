@@ -31,6 +31,8 @@
             [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
       '';
         shellAliases = {
+            "-s {jpg,png,jpeg}" = "kitty +kitten icat";
+            "-s {mp4,mkv,mp3}" = "mpv"; 
             ".." = "cd ..";
             "..." = "cd ..; cd ..";
             "600" = "chmod -R 600";

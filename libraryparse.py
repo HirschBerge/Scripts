@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 import os
+from helper import *
 
 # Specify the root directory
 root_directory = "/mnt/NAS/Anime/"
-
-
-def colored(r, g, b, text):
-    return "\033[38;2;{};{};{}m{}\033[38;2;255;255;255m".format(r, g, b, text)
 
 
 def get_dir_info(root_directory):

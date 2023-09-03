@@ -11,10 +11,7 @@ import logging
 import string
 import re
 import shutil
-
-
-def colored(r, g, b, text):
-    return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
+from helper import *
 
 
 def sort_chapters(chapters: list):
@@ -47,10 +44,20 @@ def sort_chapters(chapters: list):
     return sorted_chapters
 
 
-def notify_send(title, new_chapters):
+def notify_send(title, new_chapters, cover_url=None):
     os.system(
         f"""dunstify -i ~/.cache/mdex.jpg -u normal \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
     )
+    d = DiscordWebHook(f"{title}")
+    if cover_url:
+        d.send_message(
+            f"Downloaded ***{new_chapters}*** new chapters of ***{title}*** from MangaDex",
+            image_url=cover_url,
+        )
+    else:
+        d.send_message(
+            f"Downloaded ***{new_chapters}*** new chapters of ***{title}*** from MangaDex"
+        )
 
 
 def download_chapters(sorted_chapters: list, manga, overwrite=False):
@@ -108,11 +115,11 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
         colored(255, 165, 0, "New Chapters Downloaded:"),
         colored(0, 255, 0, new_chapters),
     )
-    notify_send(name_manga, new_chapters)
+    return new_chapters, name_manga
 
 
 def get_manga_title(result):
-    languages = ["en", "ja-ro", "es", "fr", "ko"]
+    languages = ["en", "ja-ro", "es", "fr", "ko", "ja"]
     for lang in languages:
         try:
             result_title = result.title[lang]
@@ -153,11 +160,12 @@ class Hirschy_MangaDex:
         # # Getting chapters for that manga
         chapters = manga.get_chapters()
         sorted_chapters = sort_chapters(chapters)
-        download_chapters(sorted_chapters, manga)
+        new_chapters, name_manga = download_chapters(sorted_chapters, manga)
         end = datetime.now()
         taken = str(end - start)
         message = "Time taken: "
         print(f"{colored(0,0,255, message)}{colored(0,255,0,taken[:10])}")
+        notify_send(name_manga, new_chapters, cover)
 
     def search(self):
         results = self.cli.search("manga", {"title": self.title}, limit=20)
@@ -168,13 +176,6 @@ class Hirschy_MangaDex:
             result_title = get_manga_title(result)
             if result_title is None:
                 raise Exception(f"Language not matched. {result.title}")
-            # try:
-            #     result_title = result.title["en"]
-            # except KeyError as e:
-            #     try:
-            #         result_title = result.title["ja-ro"]
-            #     except:
-            #         print(result.title)
             try:
                 print(
                     f"{colored(0,0,255, f'{count}.')} {colored(255,255,0,result_title)}- {result.desc['en'][:40]}...\n"

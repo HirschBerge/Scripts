@@ -6,6 +6,7 @@ from alive_progress import alive_bar  # Make sure to put alive-progress with a v
 import argparse
 import contextlib
 import subprocess
+from helper import colored
 
 parser = argparse.ArgumentParser(description="Downloading anime")
 parser.add_argument(
@@ -40,10 +41,6 @@ parser.add_argument(
 args = vars(parser.parse_args())
 
 
-def colored(r, g, b, text):
-    return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
-
-
 class AnimeWget:
     def __init__(self, anime, season, episode, file_name=None):
         self.anime = anime
@@ -70,7 +67,7 @@ class AnimeWget:
                     # bar.text(now_downloading)
                     with contextlib.redirect_stdout(None):
                         os.system(
-                            f"""axel -q -k -a -n 6 "{line}" --out="{filnm}" --no-clobber --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"  2>/dev/null"""
+                            f"""axel -a -n 6 -k "{line}" --out="{filnm}" --no-clobber --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" """
                         )
                     bar()
 

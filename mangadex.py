@@ -1,38 +1,35 @@
 #!/usr/bin/env python3.11
 import MangaDexPy
 from MangaDexPy import downloader
-import os
-import contextlib
+import os, contextlib, sys, logging, string, re, shutil, uuid
 from datetime import datetime
-import sys
-import uuid
 from alive_progress import alive_bar
-import logging
-import string
-import re
-import shutil
 from helper import *
 
 
 def sort_chapters(chapters: list):
-    skipped_chapters = [
-        x for x in chapters if x.uploader.username == "NotXunder" if x.chapter
-    ]
-    sorted_skipped_chapters = sorted(
-        skipped_chapters, key=lambda chap: float(chap.chapter)
-    )
-    print(
-        f"Skipped chapters uploaded by Mangaplus: {''.join(str(colored(255,0,0,c.chapter)) for c in sorted_skipped_chapters)}."
-    )
+    # skipped_chapters = [
+    #     x for x in chapters if x.uploader.username == "NotXunder" if x.chapter
+    # ]
+    # sorted_skipped_chapters = sorted(
+    #     skipped_chapters, key=lambda chap: float(chap.chapter)
+    # )
+    # print(
+    #     f"Skipped chapters uploaded by Mangaplus: {''.join(str(colored(255,0,0,c.chapter)) for c in sorted_skipped_chapters)}."
+    # )
     eng_chapters = [
         x
         for x in chapters
         if x.language == "en"
-        # if x.uploader.username != "MangaDex"
+        if x.uploader.username != "MangaDex"
         if x.uploader.username != "comikey"
         if x.uploader.username != "NotXunder"
+        if x.uploader.username != "AzukiTeam"
+        if x.uploader.username != "inkrcomics"
         if x.chapter
     ]
+    # test = [[x.uploader.username, x.chapter] for x in eng_chapters if x.chapter == "2"]
+    # print(test)
     sorted_chapters = sorted(eng_chapters, key=lambda chap: float(chap.chapter))
     unique_chapters_dict = {}
     for chapter in sorted_chapters:
@@ -49,15 +46,19 @@ def notify_send(title, new_chapters, cover_url=None):
         f"""dunstify -i ~/.cache/mdex.jpg -u normal \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
     )
     d = DiscordWebHook(f"{title}")
-    if cover_url:
+    if cover_url and new_chapters > 0:
         d.send_message(
             f"Downloaded ***{new_chapters}*** new chapters of ***{title}*** from MangaDex",
             image_url=cover_url,
+            Ping=True,
+        )
+    elif new_chapters > 0:
+        d.send_message(
+            f"Downloaded ***{new_chapters}*** new chapters of ***{title}*** from MangaDex",
+            Ping=True,
         )
     else:
-        d.send_message(
-            f"Downloaded ***{new_chapters}*** new chapters of ***{title}*** from MangaDex"
-        )
+        d.send_message(f"No new chapters of ***{title}*** from MangaDex")
 
 
 def download_chapters(sorted_chapters: list, manga, overwrite=False):
@@ -276,6 +277,17 @@ def main():
                 exit(1)
             mdex = Hirschy_MangaDex(title=titl)
             mdex.chapter_dl()
+        elif argument == "updates":
+            print("Finding and deleting empty chapters and images....")
+            clean_up_parents("/mnt/NAS/Manga/")
+            os.system("""find /mnt/NAS/Manga -empty -delete -print""")
+            md_list = get_mdlist()
+            d = DiscordWebHook("Spam Incoming!")
+            d.send_message("Starting mass updates...", Ping=True)
+            for manga in md_list:
+                mdex = Hirschy_MangaDex(manga_id=manga)
+                mdex.download_manga_en()
+            d.send_message("Spam complete!", Ping=False)
         else:
             mdex = Hirschy_MangaDex(title=argument)
             mdex.search_dl()

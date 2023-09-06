@@ -201,6 +201,13 @@ in
     pkgs.dbus.out
     config.system.path
   ];
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "* * * * *         hirschy    date >> /home/hirschy/.cache/test.log"
+      "*/30 * * * *      hirschy    /home/hirschy/.scripts/.venv/bin/python3 /home/hirschy/.scripts/manga_update.py"
+    ];
+  };
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 

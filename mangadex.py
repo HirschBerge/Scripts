@@ -3,7 +3,6 @@ import MangaDexPy
 from MangaDexPy import downloader
 import os, contextlib, sys, logging, string, re, shutil, uuid
 from datetime import datetime
-from alive_progress import alive_bar
 from helper import *
 
 
@@ -17,15 +16,18 @@ def sort_chapters(chapters: list):
     # print(
     #     f"Skipped chapters uploaded by Mangaplus: {''.join(str(colored(255,0,0,c.chapter)) for c in sorted_skipped_chapters)}."
     # )
+    external_uploaders = [
+        "MangaDex",
+        "comikey",
+        "NotXunder",
+        "AzukiTeam",
+        "inkrcomics",
+    ]
     eng_chapters = [
         x
         for x in chapters
         if x.language == "en"
-        if x.uploader.username != "MangaDex"
-        if x.uploader.username != "comikey"
-        if x.uploader.username != "NotXunder"
-        if x.uploader.username != "AzukiTeam"
-        if x.uploader.username != "inkrcomics"
+        if x.uploader.username not in external_uploaders
         if x.chapter
     ]
     # test = [[x.uploader.username, x.chapter] for x in eng_chapters if x.chapter == "2"]
@@ -59,64 +61,6 @@ def notify_send(title, new_chapters, cover_url=None):
         )
     else:
         d.send_message(f"No new chapters of ***{title}*** from MangaDex")
-
-
-def download_chapters(sorted_chapters: list, manga, overwrite=False):
-    # name_manga = f"{manga.title['en']}"
-    try:
-        name_manga = manga.title["en"]
-    except KeyError as e:
-        name_manga = manga.title["ja-ro"]
-    new_chapters = 0
-    skipped = 0
-    with alive_bar(len(sorted_chapters), title=name_manga) as bar:
-        for chapter in sorted_chapters:
-            if chapter.title is None:
-                chapter.title = ""
-
-            title = chapter.title
-            if chapter.volume:
-                volume = f"Volume {chapter.volume}"
-            else:
-                volume = "No Volume"
-            pattern = "[\!\?\,\[\]\+\@\#\$\%\^\&\*\.\(\)'\"]"
-            title = re.sub(pattern, "", title)
-            m_title = re.sub(pattern, "", name_manga)
-            bar.text(f" Chapter {chapter.chapter}: {title}")
-            already_done = []
-            # bar.text(colored(0, 255, 0, "Now downloading chapter..."))
-            if chapter.title:
-                path_loc = (
-                    f"/mnt/NAS/Manga/{m_title}/{volume}/{chapter.chapter} {title}/"
-                )
-            else:
-                path_loc = f"/mnt/NAS/Manga/{m_title}/{volume}/{chapter.chapter}/"
-            # if "'" in path_loc or '"' in path_loc:
-            #     path_loc = f"/mnt/NAS/Manga/{manga.title['en']}/{chapter.chapter}"
-            if not overwrite and os.path.exists(path_loc):
-                pass
-            else:
-                os.system(f"""mkdir -p \"{path_loc}\"""")
-                with contextlib.redirect_stdout(None):
-                    try:
-                        downloader.threaded_dl_chapter(chapter, path_loc, False)
-                        new_chapters += 1
-                        already_done.append(str(chapter.chapter))
-                    except MangaDexPy.APIError as e:
-                        if e.status == 400:
-                            print(
-                                "Bad Request: There was an issue with the API request."
-                            )
-                            # Additional error handling or actions can be taken here
-                        else:
-                            print("An API error occurred with status code:", e.status)
-                            # Additional error handling or actions can be taken here
-            bar()
-    print(
-        colored(255, 165, 0, "New Chapters Downloaded:"),
-        colored(0, 255, 0, new_chapters),
-    )
-    return new_chapters, name_manga
 
 
 class Hirschy_MangaDex:

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import MangaDexPy
+from MangaDexPy import downloader
 from helper import *
-import sys
-import datetime
+import sys, datetime, re, contextlib
+
 
 cli = MangaDexPy.MangaDex()
 
@@ -32,6 +33,9 @@ def get_latest_chapter(manga_id: str):
             f"{colored(255,0,0,get_manga_title(manga))} failed to get chapter list..."
         )
         return None
+
+    latest_list = [latest_chapter]
+    latest_list.append(latest_chapter)
     manga_title = get_manga_title(manga)
     if check_recent(latest_chapter.created_at, offset=35):
         d = DiscordWebHook(bot_name="New Chapter Alert!!")
@@ -47,6 +51,8 @@ def get_latest_chapter(manga_id: str):
                 image_url=f"{manga.cover.url}",
                 Ping=True,
             )
+            _, _ = download_chapters(latest_list, manga)
+            d.send_message(f"This chapter has been downloaded.")
     with open("/home/hirschy/.cache/manga_check.log", "a") as myfile:
         myfile.write(
             f"{(datetime.datetime.now(datetime.timezone.utc)- datetime.timedelta(hours=4)).strftime('%m-%d-%y %H:%M:%S')}: {manga_title}: {latest_chapter.chapter}, {fix_time(latest_chapter.created_at)}\n"

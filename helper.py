@@ -1,5 +1,33 @@
 import requests, os, shutil
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+
+
+def check_recent(timestamp, offset: int = 5):
+    input_time = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S%z")
+    current_time = datetime.now(input_time.tzinfo)
+    time_difference = current_time - input_time
+    if input_time > current_time:
+        # Input time is in the future, set it to today's date at noon UTC
+        input_time = current_time.replace(hour=12, minute=0, second=0, microsecond=0)
+    return input_time > datetime.now(timezone.utc) - timedelta(minutes=offset)
+
+def pull_externalURL(chapter_id: str):
+    base_url = "https://api.mangadex.org"
+    r = requests.get(f"{base_url}/chapter/{chapter_id}")
+    return r.json()["data"]['attributes']['externalUrl']
+
+def fix_time(input_timestamp):
+    try:
+        # Convert ISO 8601 to datetime object
+        dt = datetime.fromisoformat(input_timestamp)
+        # Convert the datetime to the desired format
+        formatted_timestamp = dt.strftime("%m-%d-%y %H:%M:%S")
+        # Get the timezone offset and format it as "-HH:MM"
+        tz_offset = dt.strftime("%z")
+        formatted_timestamp += f" {tz_offset[:3]}:{tz_offset[3:]}"
+        return formatted_timestamp[:-7]
+    except ValueError:
+        return None
 
 
 def colored(r, g, b, text):
@@ -23,6 +51,17 @@ def clean_up_parents(directory):
                         print(f"Deleting: {colored(255,0,0,parent_dir)}")
             except:
                 pass
+
+
+def get_manga_title(result):
+    languages = ["en", "ja-ro", "es", "fr", "ko", "ja"]
+    for lang in languages:
+        try:
+            result_title = result.title[lang]
+            return result_title
+        except KeyError:
+            pass
+    return None
 
 
 class DiscordWebHook:

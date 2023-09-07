@@ -11,8 +11,8 @@ chosen=$(grep -v "#" ~/.local/share/larbs/emoji | dmenu -fn "DejaVu Sans" -i -l 
 
 c=$(echo "$chosen" | sed "s/ .*//")
 echo "$c" | tr -d '\n' | xclip -selection clipboard
-notify-send "'$c' copied to clipboard." &
+dunstify "'$c' copied to clipboard." &
 
 s=$(echo "$chosen" | sed "s/.*; //" | awk '{print $1}')
 echo "$s" | tr -d '\n' | xclip
-notify-send "'$s' copied to primary." &
+dunstify "'$s' copied to primary." &

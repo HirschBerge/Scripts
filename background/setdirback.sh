@@ -13,7 +13,7 @@ function stopprocess {
 function setback {
 	rm -rf ~/Backgrounds/*
 	pycp ~/Pictures/$direct/* ~/Backgrounds >/dev/null 2>&1
-	notify-send "Setting the Background to $direct"
+	dunstify "Setting the Background to $direct"
 	stopprocess
 	~/.scripts/background/background.sh >/dev/null 2>&1
 }

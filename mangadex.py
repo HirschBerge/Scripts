@@ -119,17 +119,6 @@ def download_chapters(sorted_chapters: list, manga, overwrite=False):
     return new_chapters, name_manga
 
 
-def get_manga_title(result):
-    languages = ["en", "ja-ro", "es", "fr", "ko", "ja"]
-    for lang in languages:
-        try:
-            result_title = result.title[lang]
-            return result_title
-        except KeyError:
-            pass
-    return None
-
-
 class Hirschy_MangaDex:
     def __init__(self, manga_id: str = "", title="", start: float = 0, end: float = -1):
         self.cli = MangaDexPy.MangaDex()

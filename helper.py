@@ -130,7 +130,7 @@ def get_manga_title(result):
 class DiscordWebHook:
     def __init__(self, bot_name="Webhook Bot"):
         self.bot_name = bot_name
-        self.webhook_url = "https://discord.com/api/webhooks/1085380232908902420/67yS35DSklhRDQyf9r-9om4ragu6rpXykkQeXoXoRpa5ACcCeNftme_QxMnbzdUDhatO"
+        self.webhook_url = "https://discord.com/api/webhooks/1085380232908902420/67yS35DSklhRDQyf9r-9om4ragu6rpXykkQeXoXoRpa5ACcCeNftme_QxMnbzdUDhatO" #Welcome
 
     def send_message(self, content, image_url=None, Ping=False):
         to_ping = "215327353423921159"
@@ -167,7 +167,7 @@ def get_mdlist():
     base_url = "https://api.mangadex.org"
     creds = {
         "username": "hirschy",
-        "password": "password",
+        "password": "password", #I don't really care. I'm sure this is out there in the dataleak anyway, lolol.
     }
     r = requests.post(f"{base_url}/auth/login", json=creds)
     r_json = r.json()

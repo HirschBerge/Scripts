@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from sys import platform
 
-re_syn = r"^.*(\d+\.\d+)% Abraham LinkedIn$"
+re_syn = r"^.*(\d+\.\d+)% Giliath  Osborne$"
 
 from sys import platform
 
@@ -99,12 +99,12 @@ def prettify(d):
                 f"{'Rank'.ljust(6)}{'Player'.ljust(max_len +1 )}{colors.fg.red}MMR{colors.reset}"
             )
         count += 1
-        if re.search(r"Abraham LinkedIn|storm", key):
+        if re.search(r"Abraham LinkedIn|storm|Giliath Osborne", key):
             print(
                 f"{stars_str.ljust(6)}{colors.bold}{colors.fg.green}{colors.bg.black}{key.ljust(max_len +1 )}{colors.reset}{colors.fg.red}{value}{colors.reset}"
             )
         elif re.search(
-            r"cctank1|powerShellBestShell|xJoshMoshx|It Berns when I pee", key
+            r"cctank1|powerShellBestShell|xJoshMoshx|It Berns when I pee|SlimyWarlock", key
         ):
             print(
                 f"{stars_str.ljust(6)}{colors.bold}{colors.fg.cyan}{colors.bg.black}{key.ljust(max_len +1 )}{colors.reset}{colors.fg.red}{value}{colors.reset}"

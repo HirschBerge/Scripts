@@ -37,7 +37,7 @@ def get_latest_chapter(manga_id: str):
     latest_list = [latest_chapter]
     latest_list.append(latest_chapter)
     manga_title = get_manga_title(manga)
-    if check_recent(latest_chapter.created_at, offset=35):
+    if check_recent(latest_chapter.created_at, offset=32):
         d = DiscordWebHook(bot_name="New Chapter Alert!!")
         if latest_chapter in third_party:
             d.send_message(
@@ -51,7 +51,7 @@ def get_latest_chapter(manga_id: str):
                 image_url=f"{manga.cover.url}",
                 Ping=True,
             )
-            _, _ = download_chapters(latest_list, manga)
+            new_chapters, name_manga = download_chapters(latest_list, manga)
             d.send_message(f"This chapter has been downloaded.")
     with open("/home/hirschy/.cache/manga_check.log", "a") as myfile:
         myfile.write(

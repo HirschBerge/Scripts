@@ -43,7 +43,7 @@ function stopprocess {
 }
 
 sets_background() {
-  lewd=$((1 + $RANDOM % 50))
+  lewd=$((1 + $RANDOM % 100))
   imgwide=$(cat "$HOME/.scripts/background/resourceswide")
   imgnorm=$(cat "$HOME/.scripts/background/resourcesnorm")
   echo "$imgnorm" "$imgwide"

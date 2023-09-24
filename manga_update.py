@@ -37,7 +37,11 @@ def get_latest_chapter(manga_id: str):
     latest_list = [latest_chapter]
     latest_list.append(latest_chapter)
     manga_title = get_manga_title(manga)
-    if check_recent(latest_chapter.created_at, offset=32):
+    if manga_title == "Berserk":
+        since_when = 120
+    else:
+        since_when = 33
+    if check_recent(latest_chapter.created_at, offset=since_when):
         d = DiscordWebHook(bot_name="New Chapter Alert!!")
         if latest_chapter in third_party:
             d.send_message(

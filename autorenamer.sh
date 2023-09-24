@@ -19,3 +19,4 @@ cat OLD | grep -E "Episode [0-9][^0-9]" | awk -v season="$1" -F"Episode " '{ pri
 cat OLD | grep -E "Episode [0-9]{2}" | awk -v season="$1" -F"Episode " '{ print "S0"season "E"$2 }' >> NEW
 
 rename OLD NEW
+exa --group-directories-first -l --icons

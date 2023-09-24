@@ -6,7 +6,7 @@
     "settings": {
         "categoryPresets": {
             "enablePresets": true,
-            "theme": "tokyonight"
+            "theme": "onedark"
         },
         "categoryEditor": {
             "enableEditor": false,

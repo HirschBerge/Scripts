@@ -120,7 +120,7 @@
             }
 
             ips(){
-                ip a |grep "inet" |grep "enp" | awk '{ print "Your IP Address is: " $2 }'
+                ip a |grep enp |grep inet |sed 's,/24.*noprefixroute,,' |awk '{ print $3": " $2}'  
                 [[ `ip a | grep "tun\|nord"` ]] && ip a | grep "inet" |grep "tun\|nord" | awk '{ print "You are connected to VPN and your Alternate ip is: " $2 }'
             }
 
@@ -145,6 +145,11 @@
               ga
               gcm $1
               gp
+            }
+
+            rebuild (){
+              sudo nix-channel --update
+              sudo nixos-rebuild switch
             }
 
             ex ()

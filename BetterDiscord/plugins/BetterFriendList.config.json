@@ -1,6 +1,8 @@
 {
 	"all": {
-		"favorizedFriends": [],
+		"favorizedFriends": [
+			"126839294357798912"
+		],
 		"general": {
 			"addTotalAmount": true,
 			"addFavorizedCategory": true,

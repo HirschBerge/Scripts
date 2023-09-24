@@ -48,7 +48,6 @@
             G = "| grep -i --color=auto";
             YT = "youtube-viewer";
             _="sudo ";
-            rebuild = "sudo nixos-rebuild switch";
             awg="animewget";
             bat="bat --paging=never";
             bd = "nvim ~/.config/directories";

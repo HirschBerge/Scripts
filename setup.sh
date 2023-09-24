@@ -10,7 +10,6 @@ Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
-
 TARGET="$HOME/.config/"
 
 [[ -d "$TARGET" ]] && printf "${Green}[+]${Blue} Configs folder exists. Propigating...${NoColor}\n" || mkdir $TARGET
@@ -28,7 +27,6 @@ sudo nix-channel --update
 sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
 sudo nix-channel --update
 printf "${Green}Complete!${NoColor}\n"
-# shellcheck disable=SC2059
 set -eu
 
 readonly FIRST_FONT_VERSION='10.3.1'
@@ -61,27 +59,9 @@ first_main() {
   printf "${BLUE}::${NC} Extracting to ${IT}~/.local/share/fonts${NC}...\n"
   mkdir -p "${USER_FONT_DIR}"
   unzip -qo "${temp_dir}/${FIRST_FONT_NAME}.zip" -d "${USER_FONT_DIR}/${FIRST_FONT_NAME}"
-
-  printf "${BLUE}::${NC} Rebuilding font cache...\n"
-  fc-cache -f "${USER_FONT_DIR}"
-
   rm -r "${temp_dir}"
 }
 
-first_main
-
-# kak:filetype=sh
-#!/usr/bin/env sh
-# shellcheck disable=SC2059
-
-# Download and install the M+ Nerd Font for the current user.
-#
-# See:
-#   * https://mplus-fonts.osdn.jp/about-en.html
-#   * https://github.com/ryanoasis/nerd-fonts
-#
-# Author: Benedikt Vollmerhaus <benedikt@vollmerhaus.org>
-# License: MIT
 
 readonly FONT_VERSION='2.0.0'
 readonly FONT_NAME='M+ 1m'
@@ -124,6 +104,7 @@ second_main() {
   fc-cache -f "${USER_FONT_DIR}"
 }
 
+first_main
 second_main
 
 # kak:filetype=sh

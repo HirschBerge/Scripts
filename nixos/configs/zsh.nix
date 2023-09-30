@@ -69,7 +69,7 @@
             cfu="nvim ~/.config/newsboat/urls";
             cfv="nvim ~/.config/nvim/init.vim";
             cfz="nvim /.zshrc";
-            cp="rsync -rah --progress";
+            cp="rsync -rah --info=progress2";
             d="cd ~/Documents && exa -a";
             dd="dd status=progress";
             diff="diff --color=auto";
@@ -241,8 +241,8 @@
             renames="~/.scripts/rename";
             restartpipewire="systemctl --user restart wireplumber pipewire pipewire-pulse";
             rm="rm -iv";
-            rmv="rsync -rahvz --info=progress --remove-source-files";
-            rscp="rsync -rah --progress --ignore-existing";
+            rmv="rsync -rahvz --info=progress2 --remove-source-files";
+            rscp="rsync -rah --info=progress2 --ignore-existing";
             run-help="man";
             sc="cd ~/.local/bin && exa -a";
             scripts="cd ~/.scripts/";

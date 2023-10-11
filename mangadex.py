@@ -92,14 +92,19 @@ class Hirschy_MangaDex:
         cover = f"{manga.cover.url}"
         os.system(f"wget --quiet -O ~/.cache/mdex.jpg {cover}")
         # # Getting chapters for that manga
-        chapters = manga.get_chapters()
+        try:
+            chapters = manga.get_chapters()
+        except:
+            print(colored(255,0,0, f"Something went wrong with {manga_title}"))
+            return 1
         sorted_chapters = sort_chapters(chapters)
         new_chapters, name_manga = download_chapters(sorted_chapters, manga)
         end = datetime.now()
         taken = str(end - start)
         message = "Time taken: "
         print(f"{colored(0,0,255, message)}{colored(0,255,0,taken[:10])}")
-        notify_send(name_manga, new_chapters, cover)
+        if new_chapters >= 1:
+            notify_send(name_manga, new_chapters, cover)
 
     def search(self):
         results = self.cli.search("manga", {"title": self.title}, limit=20)

@@ -1,3 +1,6 @@
+# Placeholder
+## Will probably transition to Hyprland in the Christmas Break.
+
 # Scripts
 ### Just some stuff for my workflow(s) I guess. Ignore how awful and janky this all is. Most of it is old and possibly could be removed.
 ## Installation

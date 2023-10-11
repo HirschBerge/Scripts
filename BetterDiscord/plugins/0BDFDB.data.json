@@ -360,7 +360,7 @@
 		"Paginator": {"strings": ["totalPageCount", "selectedPage"]},
 		"PanelButton": {"strings": ["Masks.PANEL_BUTTON"]},
 		"PopoutFocusLock": {"strings": ["impressionName", "useImperativeHandle"], "funcStrings": ["impressionName"]},
-		"PrivateChannelItems": {"strings": ["handleCloseButtonMouseDown", "LEAVE_GROUP_DM_MANAGED_BODY"], "exported": false, "value": "exports", "map": {
+		"PrivateChannelItems": {"strings": ["getRecipientId", "LEAVE_GROUP_DM_MANAGED_BODY"], "exported": false, "value": "exports", "map": {
 			"DirectMessage": ["getUser", "getRecipientId"],
 			"GroupDM": [".getGuildId", "selected:n,muted"],
 			"LinkButton": [".apply(this"]
@@ -5584,6 +5584,7 @@
 		}
 	},
 	"BDFDB_Patrons": {
+		"864982372751245313": 	{"active": true,	"tier": "t2",	"text": "",											"color": "",			"id": "windowsuss (fynn)"},
 		"148234730523852800": 	{"active": true,	"tier": "t2",	"text": "",											"color": "",			"id": "inbroso (MaEp)"},
 		"105509397211406336": 	{"active": true,	"tier": "t2",	"text": "",											"color": "",			"id": "samtino (SgJeff)"},
 		"323494393828999168": 	{"active": true,	"tier": "t2",	"text": "",											"color": "",			"id": "polak (SzKu)"},

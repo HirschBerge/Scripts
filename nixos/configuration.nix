@@ -147,7 +147,7 @@ in
   };
 
   nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1v"
+    "openssl-1.1.1w"
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -161,6 +161,7 @@ in
     git
     home-manager
     sublime4
+    traceroute
     python311
     python311Packages.pip
     pavucontrol
@@ -183,9 +184,12 @@ in
     rtorrent
     ffmpeg
     aria
+    p7zip
+    pciutils
     # blueman
     # bluez
   ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   security.sudo = {

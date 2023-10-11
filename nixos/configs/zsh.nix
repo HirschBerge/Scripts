@@ -48,6 +48,8 @@
             G = "| grep -i --color=auto";
             YT = "youtube-viewer";
             _="sudo ";
+            "rust_dev" = "nix develop";
+            "rustinit" = "nix flake init --template github:the-nix-way/dev-templates#rust";
             awg="animewget";
             bat="bat --paging=never";
             bd = "nvim ~/.config/directories";
@@ -69,6 +71,7 @@
             cfu="nvim ~/.config/newsboat/urls";
             cfv="nvim ~/.config/nvim/init.vim";
             cfz="nvim /.zshrc";
+            traceroute="grc traceroute";
             cp="rsync -rah --info=progress2";
             d="cd ~/Documents && exa -a";
             dd="dd status=progress";

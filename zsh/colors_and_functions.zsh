@@ -127,7 +127,11 @@
             redo () {
                 history | sort -n | sed -e 's/^\s[[:digit:]]*\s*//g' -e 's/^\*\s*//g' -e 's/^[[:digit:]]*\s//g' -e 's/[[:digit:]]*\*\s//g' | fzf | zsh
             }
-
+            betterdiscord(){
+              betterdiscordctl install
+              betterdiscordctl reinstall
+              ps aux | grep [d]iscord | awk '{ print $2 }' |xargs kill
+            }
             open(){
                     opout $1
                     nvim $1

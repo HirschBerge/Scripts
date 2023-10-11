@@ -98,6 +98,7 @@ in
         font-3 = "M+ 1m:style=Medium:size=12;3";
         # ; Smaller font size for shorter spaces
         font-4 = "M+ 1m:style=Medium:size=7;3";
+        font-5 = "Noto Color Emoji:pixelsize=16:style=Regular:scale=10;2";
       };
 
       "bar/top-primary" = {
@@ -107,7 +108,7 @@ in
         modules-left = "volume right-end-top left-end-bottom ping networkspeedup networkspeeddown right-end-top left-end-bottom playpause spotify1 right-end-top";
         modules-right = "left-end-top wifi eth public right-end-bottom left-end-top date right-end-bottom left-end-top";
 
-        modules-center = "left-end-top distro-icon right-end-top";#"left-end-top weather right-end-top";
+        modules-center = "left-end-bottom distro-icon right-end-top left-end-bottom weather right-end-top";#"left-end-top weather right-end-top";
         tray-background = "${color.module-bg}";
         tray-padding = "${layout.module-padding}";
         tray-position = "right";
@@ -307,6 +308,13 @@ in
           exec = "/home/hirschy/.config/polybar/scripts/temp.sh";
           format-background = bg;
         };
+        "module/weather" = {
+          type = "custom/script";
+          interval = 30;
+          format = "<label> ";
+          exec = "/home/hirschy/.proojects/Weather_app/target/debug/weather_app --polybar";
+          format-background = bg;
+        };
       "module/network" = {
         type = "internal/network";
         interval = 2;
@@ -347,8 +355,8 @@ in
         interface = "enp6s0";
         label-connected = "%upspeed:7%";
         format-connected = "<label-connected>";
-        format-connected-prefix = "⬆⬆ ";
-        format-connected-prefix-foreground = "#FE522C";
+        format-connected-prefix = "↑↑";
+        format-connected-prefix-foreground = "#228B22";
         format-connected-foreground = "#228B22";
         format-connected-background = bg;
       };
@@ -357,8 +365,8 @@ in
         interface = "enp6s0";
         label-connected = "%downspeed:7%";
         format-connected = "<label-connected>";
-        format-connected-prefix = "⬇⬇ ";
-        format-connected-prefix-foreground = "#3EC13F";
+        format-connected-prefix = " ↓↓";
+        format-connected-prefix-foreground = "#8B0000";
         format-connected-background = bg;
         format-connected-foreground = "#8B0000";
       };

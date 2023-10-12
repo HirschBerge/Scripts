@@ -186,8 +186,6 @@ in
     aria
     p7zip
     pciutils
-    # blueman
-    # bluez
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   hardware.bluetooth.enable = true;

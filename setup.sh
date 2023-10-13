@@ -18,8 +18,8 @@ printf "${Green}[+] ${Blue}Copying program config files to ${Yellow}~/.config${N
 rsync -rahi  --exclude ".git/" --exclude "nixos/" --exclude "bin" --exclude "setup.sh" $PWD/ $TARGET >/dev/null
 printf "${Green}[+] ${Blue}Copying NixOS files to ${Purple}/etc/nixos${NoColor}\n"
 sleep 1
-TARGET="/etc/nixos/"
-sudo rsync -rahi ./nixos/ $TARGET >/dev/null
+#TARGET="/etc/nixos/"
+#sudo rsync -rahi ./nixos/ $TARGET >/dev/null
 
 printf "${Green}[+] ${Blue}Allow Home-Manager${NoColor}\n"
 sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager

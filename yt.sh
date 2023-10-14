@@ -1,6 +1,6 @@
 #!/bin/sh
 
-clip=$(xclip -selection c -o)
+clip=$(wl-paste)
 echo $clip
 if [[ $1 == *"http"* ]]; then
   url=$1

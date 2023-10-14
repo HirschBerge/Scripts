@@ -2,11 +2,19 @@
 
 folder="$HOME/Backgrounds/animewide/"
 
+sleep_time=300
+
+if [ -n "$2" ]; then
+  sleep_time="$2"
+fi
+
 if [ -n "$1" ]; then
   folder="$1"
 fi
 
-send_discord_message() {
+
+echo $folder
+send_discord_messae() {
   local WEBHOOK_URL="https://discord.com/api/webhooks/1085380232908902420/67yS35DSklhRDQyf9r-9om4ragu6rpXykkQeXoXoRpa5ACcCeNftme_QxMnbzdUDhatO"
   local USERNAME="Sexy Surprise"
   local message_content="$1"
@@ -49,12 +57,15 @@ sets_background() {
   echo "$imgnorm" "$imgwide"
   cp "$imgwide" ~/.config/wallwide.png
   cp "$imgnorm" ~/.config/wallwide2.png
+  export SWWW_TRANSITION_FPS=120
+  export SWWW_TRANSITION_STEP=2
   if [[ $lewd -eq 1 ]]
   then
-    /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --no-randr --focus /mnt/NAS/Pictures/lewd2.png
+    /run/current-system/sw/bin/swww img /mnt/NAS/Pictures/lewd2.png
     send_discord_message "<@215327353423921159> SURPRISEEEEE" 
   else 
-    /run/wrappers/bin/sudo -u hirschy DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path/run/user/1000/bus /etc/profiles/per-user/hirschy/bin/xwallpaper --output DP-2 --zoom ~/.config/wallwide.png --output DP-0 --zoom ~/.config/wallwide2.png
+    /run/current-system/sw/bin/swww img -t random -o DP-1 ~/.config/wallwide.png 
+    /run/current-system/sw/bin/swww img -t random -o DP-2 ~/.config/wallwide2.png 
   fi
 }
 
@@ -65,10 +76,9 @@ main() {
     shufflezwide
     sets_background
     # chmod +x -R "$HOME/Backgrounds/*" "$HOME/.scripts/"
-    sleep 300
+    sleep $sleep_time
   done
 }
 
 
-sleep 5
 main #>/dev/null 2>&1 &

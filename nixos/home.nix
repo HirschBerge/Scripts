@@ -5,10 +5,7 @@
 	home.username = "hirschy";
 	home.homeDirectory = "/home/hirschy";
 	home.stateVersion = "23.05";
-	programs.home-manager.enable =true;
-	home.sessionVariables = {
-		EDITOR = "nvim";
-	};
+	programs.home-manager.enable = true;
 	home.packages = with pkgs; [
 		zsh
 		btop
@@ -43,7 +40,6 @@
 	gtk.enable = true;
 	gtk.iconTheme.package = pkgs.papirus-icon-theme;
 	gtk.iconTheme.name = "Papirus-Dark";
-
 	gtk.theme.package = pkgs.sweet;
 	gtk.theme.name = "Sweet-Dark";
 
@@ -55,6 +51,7 @@
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "kvantum";
     GTK_USE_PORTAL = 1;
+	EDITOR = "nvim";    
   };
 	programs.git = {
 		enable = true;

@@ -24,6 +24,7 @@
 window#waybar {
   background-color: transparent;
 }
+
 window > box {
   margin-left: 5px;
   margin-right: 5px;
@@ -72,6 +73,11 @@ tooltip label {
   padding-right: 6px;
   color: #7ebae4;
 }
+#hyrpland-window{
+  /* background-color: rgba(0,0,0, 0.4); */
+  color: #D8188D;
+
+}
 #mode,
 #clock,
 #memory,
@@ -83,6 +89,10 @@ tooltip label {
 #background,
 #network,
 #battery,
+#window{
+  color: #33ccff;
+  background-color: transparent; /* rgba(0,0,0, 0.4);*/
+}
 #custom-powermenu {
   padding-left: 10px;
   background-color: rgba(0,0,0, 0.4);
@@ -99,8 +109,8 @@ tooltip label {
   background-color: rgba(0,0,0, 0.4);
 }
 #cpu {
-  color: #D8188D;
   background-color: rgba(0,0,0, 0.4);
+  color: #D8188D;
 }
 #clock {
   color: #1A7BC7;
@@ -110,8 +120,8 @@ tooltip label {
                  color: rgb(221, 182, 242);
                }*/
 #custom-wall {
-  color: #33ccff;
   background-color: rgba(0,0,0, 0.4);
+  color: #33ccff;
 }
 #temperature {
   color: rgb(150, 205, 251);
@@ -161,4 +171,19 @@ tooltip label {
   border-bottom-left-radius: 10px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 00px;
+}
+#custom-weather{
+  background-color: rgba(0,0,0, 0.4);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 00px;
+}
+#custom-background{
+  background-color: rgba(0,0,0, 0.4);
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #490DCD;
 }

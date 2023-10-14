@@ -5,10 +5,13 @@
   "modules-left": [
     "custom/launcher",
     "temperature",
-    "wlr/workspaces"
+    "wlr/workspaces",
+    "hyprland/window"
   ],
+
   "modules-center": [
     "custom/playerctl",
+    "custom/weather",
     "custom/background"
   ],
   "modules-right": [
@@ -39,7 +42,14 @@
       "default": ""
     }
   },
-
+  "custom/weather": {
+    "format": " {} ",
+    "exec": "/home/hirschy/projects/Weather_app/target/debug/weather_app --polybar"
+  },
+  "hyprland/window": {  
+    //"format": "{}"   // <--- these is the default value  
+    "format": "  <span font='12' weight='bold'  rise='-4444'>{}</span>"  
+  },
   "clock": {
     "interval": 60,
     "align": 0,
@@ -49,20 +59,18 @@
     "format-alt": " {:%a %b %d, %G}"
   },
   "custom/background": {
-    "format": "⏺",
-    "on-click": "~/.config/hypr/scripts/wayground.sh",
-    "tooltip": true,
-    "tooltip-format": "Click to change the background to Monogatari."
+    "format": "⏺ ",
+    "on-click": "~/.config/hypr/scripts/wayground.sh"
   },
   "cpu": {
-    "format": "\udb80\udf5b {usage}%",
+    "format": "\udb80\udf5b {usage}% ",
     "interval": 1
   },
   "custom/launcher": {
     "format": "\uf313 ",
-    "on-click": "$HOME/.config/hypr/scripts/menu",
-    "on-click-middle": "exec default_wall",
-    "on-click-right": "exec wallpaper_random",
+    "on-click": "brave https://search.nixos.org/packages",
+    "on-click-middle": "brave https://search.nixos.org/options",
+    "on-click-right": "brave https://mipmip.github.io/home-manager-option-search/",
     "tooltip": false
   },
   "custom/powermenu": {
@@ -79,7 +87,7 @@
     "tooltip": false
   },
   "memory": {
-    "format": "\udb83\udee0 {used}GB",
+    "format": "\udb83\udee0 {used}GB ",
     "interval": 1,
     "states": {
       "warning": 85
@@ -123,13 +131,13 @@
   "network": {
       "interval": 5,
       //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
-      "format-wifi": " {essid}",
-      "format-ethernet": " {ipaddr}/{cidr}",
-      "format-linked": " {ifname} (No IP)",
-      "format-disconnected": "睊 Disconnected",
-      "format-disabled": "睊 Disabled",
-      "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
-      "tooltip-format": " {ifname} via {gwaddr}",
+      "format-wifi": " {essid} ",
+      "format-ethernet": " {ipaddr}/{cidr} ",
+      "format-linked": " {ifname} (No IP) ",
+      "format-disconnected": "睊 Disconnected ",
+      "format-disabled": "睊 Disabled ",
+      "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits} ",
+      "tooltip-format": " {ifname} via {gwaddr} ",
   },
   "pulseaudio": {
       //"format": "{volume}% {icon} {format_source}",

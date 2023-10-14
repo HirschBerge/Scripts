@@ -2,7 +2,7 @@
   font-family: "JetBrainsMono Nerd Font";
   font-size: 12pt;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 0px;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -27,15 +27,18 @@ window#waybar {
 window > box {
   margin-left: 5px;
   margin-right: 5px;
-  margin-top: 5px;
-  background-color: #1e1e2a;
+  margin-bottom: 5px;
   padding: 3px;
   padding-left: 8px;
   border: 2px none #33ccff;
+  background-color: transparent;
 }
 #workspaces {
   padding-left: 0px;
   padding-right: 4px;
+  background-color: rgba(0,0,0, 0.4);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 #workspaces button {
   padding-top: 5px;
@@ -62,7 +65,10 @@ tooltip label {
 }
 #custom-launcher {
   font-size: 20px;
+  background-color: rgba(0,0,0, 0.4);
   padding-left: 8px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   padding-right: 6px;
   color: #7ebae4;
 }
@@ -74,12 +80,12 @@ tooltip label {
 #mpd,
 #custom-wall,
 #temperature,
-#backlight,
-#pulseaudio,
+#background,
 #network,
 #battery,
 #custom-powermenu {
   padding-left: 10px;
+  background-color: rgba(0,0,0, 0.4);
   padding-right: 10px;
 }
 
@@ -89,50 +95,70 @@ tooltip label {
 /*     color: rgb(26, 24, 38); */
 /* } */
 #memory {
-  color: rgb(181, 232, 224);
+  color: #24C3C6;
+  background-color: rgba(0,0,0, 0.4);
 }
 #cpu {
-  color: rgb(245, 194, 231);
+  color: #D8188D;
+  background-color: rgba(0,0,0, 0.4);
 }
 #clock {
-  color: rgb(217, 224, 238);
+  color: #1A7BC7;
+  background-color: rgba(0,0,0, 0.4);
 }
 /* #idle_inhibitor {
                  color: rgb(221, 182, 242);
                }*/
 #custom-wall {
   color: #33ccff;
+  background-color: rgba(0,0,0, 0.4);
 }
 #temperature {
   color: rgb(150, 205, 251);
+  background-color: rgba(0,0,0, 0.4);
 }
-#backlight {
+#background {
   color: rgb(248, 189, 150);
-}
-#pulseaudio {
-  color: rgb(245, 224, 220);
+  background-color: rgba(0,0,0, 0.4);
 }
 #network {
-  color: #abe9b3;
+  color: #651085;
+  background-color: rgba(0,0,0, 0.4);
 }
 #network.disconnected {
   color: rgb(255, 255, 255);
+  background-color: rgba(0,0,0, 0.4);
 }
 #custom-powermenu {
   color: rgb(242, 143, 173);
+  background-color: rgba(0,0,0, 0.4);
   padding-right: 8px;
-}
-#tray {
-  padding-right: 8px;
-  padding-left: 10px;
 }
 #mpd.paused {
   color: #414868;
   font-style: italic;
+  background-color: rgba(0,0,0, 0.4);
 }
 #mpd.stopped {
   background: transparent;
+  background-color: rgba(0,0,0, 0.4);
 }
 #mpd {
   color: #c0caf5;
+  background-color: rgba(0,0,0, 0.4);
+}
+#tray {
+  padding-right: 8px;
+  padding-left: 10px;
+  background-color: rgba(0,0,0, 0.4);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#pulseaudio{
+  color: #490DCD;
+  background-color: rgba(0,0,0, 0.4);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 00px;
 }

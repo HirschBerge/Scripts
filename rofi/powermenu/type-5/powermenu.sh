@@ -10,6 +10,13 @@
 ## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
+# Doesn't work, lol
+# if pgrep -x rofi ;
+# then
+#  pgrep rofi |xargs kill
+  # exit 0
+# fi
+
 dir="$HOME/.config/rofi/powermenu/type-5"
 theme='style-1'
 

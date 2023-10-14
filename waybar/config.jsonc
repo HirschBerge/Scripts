@@ -1,5 +1,5 @@
 {
-  "position": "top",
+  "position": "bottom",
   "layer": "top",
 
   "modules-left": [
@@ -8,12 +8,12 @@
     "wlr/workspaces"
   ],
   "modules-center": [
-    "custom/playerctl"
+    "custom/playerctl",
+    "custom/background"
   ],
   "modules-right": [
     "mpd",
     "pulseaudio",
-    "backlight",
     "memory",
     "cpu",
     "network",
@@ -25,14 +25,14 @@
     "format": "{icon}",
     "on-click": "activate",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
+      "1": "",
+      "2": "🕹",
+      "3": "",
       "4": "",
       "5": "",
-      "6": "",
+      "6": "",
       "7": "",
-      "8": "",
+      "8": "",
       "9": "",
       "10": "〇",
       "focused": "",
@@ -48,6 +48,12 @@
     "format": " {:%H:%M}",
     "format-alt": " {:%a %b %d, %G}"
   },
+  "custom/background": {
+    "format": "⏺",
+    "on-click": "~/.config/hypr/scripts/wayground.sh",
+    "tooltip": true,
+    "tooltip-format": "Click to change the background to Monogatari."
+  },
   "cpu": {
     "format": "\udb80\udf5b {usage}%",
     "interval": 1
@@ -61,7 +67,7 @@
   },
   "custom/powermenu": {
     "format": "\uf011",
-    "on-click": "$HOME/.config/hypr/scripts/wlogout",
+    // "on-click": "$HOME/.config/rofi/powermenu/type-5/powermenu.sh",
     "tooltip": false
   },
   "idle_inhibitor": {
@@ -73,7 +79,7 @@
     "tooltip": false
   },
   "memory": {
-    "format": "\udb83\udee0 {percentage}%",
+    "format": "\udb83\udee0 {used}GB",
     "interval": 1,
     "states": {
       "warning": 85
@@ -127,7 +133,7 @@
   },
   "pulseaudio": {
       //"format": "{volume}% {icon} {format_source}",
-      "format": "{icon} {volume}%",
+      "format": " {icon} {volume}% ",
       "format-muted": " Mute",
       "format-bluetooth": " {volume}% {format_source}",
       "format-bluetooth-muted": " Mute",

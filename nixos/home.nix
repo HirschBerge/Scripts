@@ -35,6 +35,7 @@
 	  	mangohud
 	  	obsidian
 	  	zathura
+	  	grim
     	slurp
 		sweet
 		libsForQt5.qtstyleplugin-kvantum

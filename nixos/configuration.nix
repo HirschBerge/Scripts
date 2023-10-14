@@ -13,6 +13,8 @@ in
         ./hardware-configuration.nix
         <home-manager/nixos>
         ./8bitdo.nix
+        ./wayland.nix
+        # ./xorg.nix
     ];
     nixpkgs.config.permittedInsecurePackages = [
       "openssl-1.1.1w"
@@ -160,68 +162,24 @@ in
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     })
     )
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    brave
-    git
-    home-manager
-    sublime4
-    traceroute
-    python311
-    python311Packages.pip
-    pavucontrol
-    autojump
-    discord
-    spotify
-    steam
-    picom
-    sweet
-    mpv
-    yt-dlp
-    chromium
-    ripgrep
-    cmake
-    lm_sensors
-    zip
-    lutris
-    wineWowPackages.full
-    gimp
-    rtorrent
-    ffmpeg
-    aria
-    p7zip
-    pciutils
-    waybar
-    dunst# mako
-    libnotify
-    swww
-    kitty
-    ranger
-    rofi-wayland
-    gcc
-    rnnoise-plugin
+      kitty
+      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      gcc
+      wget
+      git
+      home-manager
+      sublime4
+      traceroute
+      python311
+      python311Packages.pip
+      chromium
+      ripgrep
+      cmake
+      lm_sensors
+      ffmpeg
+      pciutils
   ];
 
-  programs.hyprland = {
-    enable = true;
-    nvidiaPatches = true;
-    xwayland.enable = true;
-  };
-
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint Electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-    "MOZ_ENABLE_WAYLAND" = "1"; # for firefox to run on wayland
-    "MOZ_WEBRENDER" = "1";
-    "XWAYLAND_NO_GLAMOR" = "1";
-    # for hyprland with nvidia gpu, ref https://wiki.hyprland.org/Nvidia/ I think this caused SDDM to not work.
-    # "LIBVA_DRIVER_NAME" = "nvidia";
-    # "XDG_SESSION_TYPE" = "wayland";
-    # "GBM_BACKEND" = "nvidia-drm";
-    # "__GLX_VENDOR_LIBRARY_NAME" = "nvidia";
-    # "WLR_EGL_NO_MODIFIRES" = "1"; 
-  };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # XDG portal
   xdg.portal.enable = true;
@@ -233,7 +191,33 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";    
+    };
+  };
+  # List services that you want to enable:
+  services.dbus.packages = [
+    pkgs.dbus.out
+    config.system.path
+  ];
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "* * * * *         hirschy    date >> /home/hirschy/.cache/test.log"
+      "*/30 * * * *      hirschy    /home/hirschy/.scripts/.venv/bin/python3 /home/hirschy/.scripts/manga_update.py"
+    ];
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

@@ -1,7 +1,8 @@
 {config, pkgs, ...}:
 
 {
-	imports = [ ./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ];
+	imports = [ ./configs/zsh.nix ./configs/hypr.nix ./configs/kitty.nix ./configs/starship.nix ];
+	# imports = [ ./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
 	home.username = "hirschy";
 	home.homeDirectory = "/home/hirschy";
 	home.stateVersion = "23.05";
@@ -11,31 +12,41 @@
 		btop
 		starship
 		fzf
-    	sxhkd
-	  	bat
-	  	wl-clipboard
-	  	axel
-		sxhkd
-    	exa
-	    nerdfonts
-	  	unzip
-	  	sxiv
-	 	maim
-	  	betterdiscordctl
-	  	xcape
-	  	xorg.xmodmap
-	  	xdotool
-	  	nmap
-	  	grc
-	  	i3lock-fancy-rapid
-	  	neofetch
-	  	mangohud
-	  	obsidian
-	  	zathura
-	  	grim
-    	slurp
+		bat
+		axel
+		exa
+		nerdfonts
+		unzip
+    	rnnoise-plugin
+		sxiv
+    	dunst# mako
+		betterdiscordctl
+		nmap
+		grc
+		neofetch
+		mangohud
+		obsidian
+		zathura
 		sweet
 		libsForQt5.qtstyleplugin-kvantum
+    	aria
+		ani-cli
+	    zip
+	    rtorrent
+	    lutris
+	    wineWowPackages.full
+	    libnotify
+    	yt-dlp
+	    ranger
+	    gimp
+	    p7zip
+	    brave
+	    pavucontrol
+	    autojump
+	    discord
+	    spotify
+	    steam
+	    mpv
 	];
 	gtk.enable = true;
 	gtk.iconTheme.package = pkgs.papirus-icon-theme;
@@ -45,7 +56,7 @@
 
 	xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
 		[General]
-		theme=MateriaDark
+		theme=Swee-Dark
 	'';
 
   home.sessionVariables = {

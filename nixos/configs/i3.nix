@@ -3,16 +3,16 @@ let
   modify = "Mod4";
 in
 {
+  home.packages = with pkgs; [
+    sxhkd
+    xcape
+    xorg.xmodmap
+    xdotool
+    picom
+    maim
+    xwallpaper
+  ];
   xsession.windowManager.i3 = {
-    home.packages = with pkgs; [
-      sxhkd
-      xcape
-      xorg.xmodmap
-      xdotool
-      picom
-      maim
-      xwallpaper
-    ];
     enable = true;
     package = pkgs.i3-gaps;
     config = rec {

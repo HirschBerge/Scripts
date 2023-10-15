@@ -47,6 +47,8 @@
 	    spotify
 	    steam
 	    mpv
+	    jq
+	    wf-recorder
 	];
 	gtk.enable = true;
 	gtk.iconTheme.package = pkgs.papirus-icon-theme;

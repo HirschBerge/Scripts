@@ -21,6 +21,14 @@ sleep 1
 #TARGET="/etc/nixos/"
 #sudo rsync -rahi ./nixos/ $TARGET >/dev/null
 
+results=""
+
+# Search for "ELDEN RING" in ~/.local/share and append the results
+results+="$(find ~/.local/share -type d -name 'ELDEN RING')"
+
+# Search for "ELDEN RING" in /mnt and append the results
+results+="$(find /mnt -type d -name 'ELDEN RING')"
+rsync ./er-patcher $results/
 printf "${Green}[+] ${Blue}Allow Home-Manager${NoColor}\n"
 sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 sudo nix-channel --update

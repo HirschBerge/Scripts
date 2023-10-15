@@ -6,5 +6,10 @@
             "ascending": false,
             "view": "grid"
         }
+    },
+    "drawerStates": {
+        "settings": {
+            "developer": true
+        }
     }
 }

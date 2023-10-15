@@ -5,6 +5,7 @@ waybar_init (){
   waybar
 }
 swww_init (){
+  sleep 1
   swww init
   # ~/.scripts/background/cron.sh ~/Pictures/Sci-Fi/ #Issues with this, kinda hacking, but oh well
 }

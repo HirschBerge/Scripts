@@ -10,7 +10,8 @@
   ],
 
   "modules-center": [
-    "custom/playerctl",
+    // "custom/playerctl",
+    "custom/nvidia",
     "custom/weather",
     "custom/background"
   ],
@@ -42,13 +43,20 @@
       "default": ""
     }
   },
+  "custom/nvidia": {
+    "format": " {} ",
+    "exec": "$HOME/.config/polybar/scripts/nvidia_mon_poly.sh",
+    // "interval": 3
+  },
   "custom/weather": {
     "format": " {} ",
-    "exec": "/home/hirschy/projects/Weather_app/target/debug/weather_app --polybar"
+    "exec": "/home/hirschy/projects/Weather_app/target/debug/weather_app --polybar",
+    "interval": 60
   },
   "hyprland/window": {  
     //"format": "{}"   // <--- these is the default value  
-    "format": "  <span font='12' weight='bold'  rise='-4444'>{}</span>"  
+    "format": "  <span font='12' weight='bold'  rise='-4444'>{}</span>",
+    "max-length": 50
   },
   "clock": {
     "interval": 60,

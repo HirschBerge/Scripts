@@ -18,7 +18,7 @@
 							"750077454726725732"
 						],
 						"pos": 0,
-						"collapsed": true,
+						"collapsed": false,
 						"color": [
 							173,
 							20,
@@ -96,7 +96,7 @@
 			},
 			"groups": {
 				"enabled": true,
-				"collapsed": false
+				"collapsed": true
 			}
 		},
 		"recentOrder": {

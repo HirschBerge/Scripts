@@ -16,6 +16,8 @@ if [ ! -f $SteamLib ] || [ ! -d $SteamThumb ] || [ ! -f $RofiConf ] ; then
     exit 1
 fi
 
+declare -A game_opts
+game_opts["ELDEN RING"]="python er-patcher --rate 144 --all --"
 
 # check steam mount paths
 SteamPaths=`grep '"path"' $SteamLib | awk -F '"' '{print $4}'`
@@ -53,7 +55,13 @@ done | rofi -dmenu -theme-str "${r_override}" -config $RofiConf)
 # launch game
 if [ ! -z "$RofiSel" ] ; then
     launchid=`echo "$GameList" | grep "$RofiSel" | cut -d '|' -f 2`
-    steam -applaunch "${launchid} [gamemoderun %command%]" &
+    if [[ ${game_opts["$game"]+exists}} ]]; then
+        steam -applaunch "${launchid} [ $game_opts[$game] gamemoderun %command%]" &
+      else
+        steam -applaunch "${launchid} [gamemoderun %command%]" & 
+      fi 
     dunstify "Launching ${RofiSel}..." -i ${SteamThumb}/${launchid}_header.jpg -r 91190 -t 2200
+    sleep 15
+    ps aux | grep [d]irectx | awk '{ print $2 }'| xargs kill
 fi
 

@@ -1,14 +1,14 @@
 {config, pkgs, ...}:
+       
 
 {
 	imports = [ ./configs/zsh.nix ./configs/hypr.nix ./configs/kitty.nix ./configs/starship.nix ];
-	# imports = [ ./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
+	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
 	home.username = "hirschy";
 	home.homeDirectory = "/home/hirschy";
 	home.stateVersion = "23.05";
 	programs.home-manager.enable = true;
 	home.packages = with pkgs; [
-		zsh
 		btop
 		starship
 		fzf
@@ -17,38 +17,37 @@
 		exa
 		nerdfonts
 		unzip
-    	rnnoise-plugin
+		rnnoise-plugin
 		sxiv
-    	dunst# mako
+		dunst# mako
 		betterdiscordctl
 		nmap
 		grc
 		neofetch
-		mangohud
 		obsidian
 		zathura
 		sweet
 		libsForQt5.qtstyleplugin-kvantum
-    	aria
+		aria
 		ani-cli
-	    zip
-	    rtorrent
-	    lutris
-	    wineWowPackages.full
-	    libnotify
-    	yt-dlp
-	    ranger
-	    gimp
-	    p7zip
-	    brave
-	    pavucontrol
-	    autojump
-	    discord
-	    spotify
-	    steam
-	    mpv
-	    jq
-	    wf-recorder
+		zip
+		rtorrent
+		lutris
+		wineWowPackages.full
+		libnotify
+		yt-dlp
+		ranger
+		gimp
+		p7zip
+		brave
+		pavucontrol
+		autojump
+		discord
+		spotify
+		mpv
+		jq
+		wf-recorder
+		eww-wayland
 	];
 	gtk.enable = true;
 	gtk.iconTheme.package = pkgs.papirus-icon-theme;
@@ -60,12 +59,12 @@
 		[General]
 		theme=Swee-Dark
 	'';
-
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "kvantum";
     GTK_USE_PORTAL = 1;
-	EDITOR = "nvim";    
+		eEDITOR = "nvim";    
   };
+
 	programs.git = {
 		enable = true;
 		userName = "HirschBerge";
@@ -86,7 +85,7 @@
 			{ id = "ponfpcnoihfmfllpaingbgckeeldkhle";} # Enhancer for Youtube
 			{ id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
 			{ id = "gebbhagfogifgggkldgodflihgfeippi";} # Return YouTube Dislike Button
-            { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
+      { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
 		];
 	};
 	programs.brave = {

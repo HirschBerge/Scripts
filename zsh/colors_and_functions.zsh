@@ -207,7 +207,12 @@
               public=$(curl -s api.ipify.org)
               printf "${Green}[+]${NoColor} Switching complete. Your new local IP is ${Green}$LOCAL${NoColor}  and new public IP is ${Green}$public${NoColor} \n"
             }
-
+            keyword_kill(){
+              input_string="$1"
+              first="${input_string[1,1]}"
+              ending="${input_string[2,-1]}"
+              ps aux| grep [$first]$ending | awk '{ print $2 }'| xargs kill
+            }
             dotfileBUp(){
                 for j in zsh-syntax-highlighting/ zsh-git-prompt/ zsh-autosuggestions/ powerlevel10k/ .config/ .zsh_history .fonts.conf
                 do

@@ -56,7 +56,7 @@ Opening a file::
 
    >>> with q.open() as f: f.readline()
    ...
-   '#!/bin/bash\n'
+   '#!/usr/usr/bin/env bash\n'
 
 
 Documentation

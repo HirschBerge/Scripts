@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/usr/bin/env bash
 
 # Fetch the current wallpaper information using swww query
 WALLPAPER_INFO=$(swww query)

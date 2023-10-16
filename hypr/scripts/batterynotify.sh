@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/usr/bin/env bash
 
 # Check if the system is a laptop
 is_laptop() {

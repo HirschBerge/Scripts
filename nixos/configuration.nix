@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  themes = pkgs.callPackage  ./configs/sddm-theme.nix {};
 in
 
 {
@@ -14,7 +15,7 @@ in
         <home-manager/nixos>
         ./8bitdo.nix
         ./wayland.nix
-        # ./xorg.nix
+        ./configs/gaming.nix 
     ];
     nixpkgs.config.permittedInsecurePackages = [
       "openssl-1.1.1w"
@@ -107,8 +108,11 @@ in
    services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-   services.xserver.displayManager.sddm.enable = true;
-
+   services.xserver.displayManager.sddm = {
+      enable = true;
+      enableHidpi = true;
+      theme = "abstractguts-sddm-theme";
+    };
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -141,8 +145,10 @@ in
     useUserPackages = true;
     users.hirschy = import ./home.nix;
   };
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.hirschy = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Hirschy";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -181,6 +187,7 @@ in
       lm_sensors
       ffmpeg
       pciutils
+      themes.abstractguts-sddm-theme
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

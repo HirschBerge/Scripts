@@ -1,6 +1,12 @@
 {config, pkgs, ...}:
        
-
+let 
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+in
 {
 	imports = [ ./configs/zsh.nix ./configs/hypr.nix ./configs/kitty.nix ./configs/starship.nix ];
 	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
@@ -14,7 +20,8 @@
 		fzf
 		bat
 		axel
-		exa
+		# exa # Stable Channel
+		eza # Unstable Channel
 		nerdfonts
 		unzip
 		rnnoise-plugin

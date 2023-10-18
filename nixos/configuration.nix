@@ -23,7 +23,6 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   systemd.services.remaps = {
     description = "...";
     # serviceConfig.PassEnvironment = "DISPLAY";

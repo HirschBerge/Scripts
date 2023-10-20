@@ -12,7 +12,7 @@ SteamLib="$HOME/.local/share/Steam/config/libraryfolders.vdf"
 SteamThumb="$HOME/.local/share/Steam/appcache/librarycache"
 
 if [ ! -f $SteamLib ] || [ ! -d $SteamThumb ] || [ ! -f $RofiConf ] ; then
-    dunstify "Steam library not found!" -r 91190 -t 2200
+    notify-send "Steam library not found!" -r 91190 -t 2200
     exit 1
 fi
 
@@ -58,10 +58,13 @@ if [ ! -z "$RofiSel" ] ; then
     if [[ ${game_opts["$game"]+exists}} ]]; then
         steam -applaunch "${launchid} [ $game_opts[$game] gamemoderun %command%]" &
       else
-        steam -applaunch "${launchid} [gamemoderun %command%]" & 
+        steam -applaunch "${launchid} [gamemoderun %command%]" &
       fi 
-    dunstify "Launching ${RofiSel}..." -i ${SteamThumb}/${launchid}_header.jpg -r 91190 -t 2200
+    sleep 5
+    notify-send "Launching a game!" "${RofiSel}..." -i ${SteamThumb}/${launchid}_header.jpg -r 91190 -t 2200
     sleep 15
     ps aux | grep [d]irectx | awk '{ print $2 }'| xargs kill
+    wait
+    notify-send "Game Ended" "${RofiSel}"
 fi
 

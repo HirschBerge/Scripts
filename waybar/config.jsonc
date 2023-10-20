@@ -5,7 +5,7 @@
   "modules-left": [
     "custom/launcher",
     "temperature",
-    "wlr/workspaces",
+    "hyprland/workspaces",
     "hyprland/window"
   ],
 
@@ -22,12 +22,13 @@
     "cpu",
     "network",
     "clock",
-    "custom/powermenu",
-    "tray"
+    // "custom/powermenu",
+    "tray",
+    "custom/notifs"
   ],
-  "wlr/workspaces": {
+  "hyprland/workspaces": {
     "format": "{icon}",
-    "on-click": "activate",
+    // "on-click": "activate", # blocks clicking for some reason
     "format-icons": {
       "1": "",
       "2": "🕹",
@@ -42,6 +43,29 @@
       "focused": "",
       "default": ""
     }
+  },
+  "custom/notifs": {
+    "tooltip": false,
+    "layer": "bottom",
+    "format": " {icon} ",
+    "format-icons": {
+      "notification": "<span font='14' weight='bold'></span><span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1; ~/.config/swaync/launch.sh --toggle",
+    "on-click-right": "sleep 0.1; ~/.config/swaync/launch.sh --dnd",
+    "escape": true
+    // "format": "  <span font='12' weight='bold'  rise='-4444'>🔔</span>",
+    // "on-click": "~/.config/swaync/launch.sh"
   },
   "custom/nvidia": {
     "format": " {} ",
@@ -62,9 +86,11 @@
     "interval": 60,
     "align": 0,
     "rotate": 0,
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip": false,
+    // "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
     "format": " {:%H:%M}",
-    "format-alt": " {:%a %b %d, %G}"
+    "on-click": "sleep 0.1 ; ~/.config/eww/scripts/launch_dashboard",
+    // "format-alt": " {:%a %b %d, %G}"
   },
   "custom/background": {
     "format": "⏺ ",
@@ -180,6 +206,7 @@
   },
   "tray": {
     "icon-size": 15,
+    "on-click": "sleep 0.1 ; ~/.config/eww/scripts/launch_dashboard",
     "spacing": 5
   }
 }

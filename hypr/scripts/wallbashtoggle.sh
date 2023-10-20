@@ -22,5 +22,5 @@ do
     $wallbash
 done
 
-dunstify "t1" -a "$notif" -i "~/.config/dunst/icons/hyprdots.png" -r 91190 -t 2200
+notify-send "t1" -a "$notif" -i "~/.config/dunst/icons/hyprdots.png" -r 91190 -t 2200
 

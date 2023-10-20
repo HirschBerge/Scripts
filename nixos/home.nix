@@ -22,11 +22,12 @@ in
 		axel
 		# exa # Stable Channel
 		eza # Unstable Channel
+		playerctl
 		nerdfonts
 		unzip
 		rnnoise-plugin
 		sxiv
-		dunst# mako
+		swaynotificationcenter# dunst# mako
 		betterdiscordctl
 		nmap
 		grc

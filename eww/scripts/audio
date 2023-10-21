@@ -38,8 +38,8 @@ get_volicon() {
 get_micicon() {
 	while true; do
   	MUTE="$(wpctl status |grep "\*"|grep $input_dev |grep -o 'MUTED')"
-    echo $MUTE
-  	if [[ "$MUTE" == "*MUTE*" ]]; then
+    # echo $MUTE
+  	if [[ "${MUTE}" == "MUTED" ]]; then
     	echo ""
   	else
 	 		echo ""

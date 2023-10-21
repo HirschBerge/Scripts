@@ -23,6 +23,7 @@ in
 		# exa # Stable Channel
 		eza # Unstable Channel
 		playerctl
+		xfce.thunar
 		nerdfonts
 		unzip
 		rnnoise-plugin
@@ -35,7 +36,6 @@ in
 		obsidian
 		zathura
 		sweet
-		libsForQt5.qtstyleplugin-kvantum
 		aria
 		ani-cli
 		zip
@@ -47,28 +47,46 @@ in
 		ranger
 		gimp
 		p7zip
-		brave
 		pavucontrol
 		autojump
 		discord
 		spotify
 		mpv
-		jq
 		wf-recorder
 		eww-wayland
 	];
-	gtk.enable = true;
-	gtk.iconTheme.package = pkgs.papirus-icon-theme;
-	gtk.iconTheme.name = "Papirus-Dark";
-	gtk.theme.package = pkgs.sweet;
-	gtk.theme.name = "Sweet-Dark";
+	gtk = {
+		enable = true;
+		# theme.package = pkgs.sweet;
+		# theme.name = "Sweet-Dark";
+    theme = {
+      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "pink" ];
+        size = "compact";
+        tweaks = [ "rimless" "black" ];
+        variant = "macchiato";
+      };
+    };
+		iconTheme = {
+				package = pkgs.catppuccin-papirus-folders.override {
+			    flavor = "macchiato";
+			    accent = "mauve";
+			  };
+				name = "Papirus-Dark";
+		};
+			cursorTheme = {
+				package = pkgs.catppuccin-cursors.macchiatoMauve;
+				name = "Catppuccin-Macchiato-Mauve";
+		};
+	};
 
 	xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
 		[General]
-		theme=Swee-Dark
+		theme=Sweet-Dark
 	'';
   home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "kvantum";
+    # QT_STYLE_OVERRIDE = "kvantum";
     GTK_USE_PORTAL = 1;
 		eEDITOR = "nvim";    
   };

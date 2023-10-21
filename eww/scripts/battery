@@ -4,7 +4,8 @@
 ## Get Battery 
 get_percentage() {
   while true; do
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+    # BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1) #For laptop
+    BAT="hidpp_battery_0"
     echo "$(cat /sys/class/power_supply/${BAT}/capacity)%"
     sleep 3
   done
@@ -13,13 +14,15 @@ get_percentage() {
 ## Get Battery Icon
 get_icon() {
   while true; do
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+    BAT="hidpp_battery_0"
+    # BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
     BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
     BATVAL="$(cat /sys/class/power_supply/${BAT}/capacity)"
 
     if [[ "$BATSTATUS" == "Discharging" ]];then
+      name="🖱️"
       if [ "$BATVAL" -gt 90 ];then
-        echo ""
+        echo "${name}"
       elif [ "$BATVAL" -gt 80 ];then
         echo ""
       elif [ "$BATVAL" -gt 70 ];then
@@ -50,6 +53,6 @@ get_icon() {
 if [[ "$1" == "--perc" ]]; then
 	get_percentage
 elif [[ "$1" == "--icon" ]]; then
-	get_icon
+	get_icon taco
 fi
 

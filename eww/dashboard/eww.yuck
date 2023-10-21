@@ -16,11 +16,12 @@
 (deflisten ARTIST `bash ../scripts/music --artist`)
 (deflisten STATUS `bash ../scripts/music --status`)
 (deflisten COVER `bash ../scripts/music --cover`)
+(defpoll COVER :interval "1s" `bash ../scripts/music --cover`)
 
 
 ;; Calendar vars
-(defpoll day :interval "20h" "date '+%d'")
-(defpoll year :interval "20h" "date '+%Y'")
+(defpoll day :interval "1h" "date '+%d'")
+(defpoll year :interval "1h" "date '+%Y'")
 
 
 

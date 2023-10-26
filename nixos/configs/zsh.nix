@@ -4,7 +4,7 @@
         enable = true;    
 		enableCompletion = true;
 		enableAutosuggestions = true;
-		enableSyntaxHighlighting = true;
+		syntaxHighlighting.enable = true;
         initExtra = ''
             setopt autocd # auto cd when only path is entered
             setopt nomatch # throw an error on glob matching nothing
@@ -198,8 +198,8 @@
             intensemap="grc nmap --open -n -A -T4 -v";
             ka="killall";
             l="ls -lah";
-            la="clear && eza --group-directories-first -la --icons";
-            ll="clear && eza --group-directories-first -l --icons";
+            la="clear && eza --group-directories-first -la --icons=always";
+            ll="clear && eza --group-directories-first -l --icons=always";
             ls="clear && eza --icons";
             lsa="ls -lah";
             lsblk="clear && lsblk";
@@ -279,6 +279,8 @@
                 "npm"
                 "brew"
                 "history-substring-search"
+                "git"
+                "web-search"
             ];
         };
     };

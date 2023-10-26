@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  themes = pkgs.callPackage  ./configs/sddm-theme.nix {};
+  themes = pkgs.callPackage  ./configs/themes.nix {};
 in
 
 {
@@ -48,7 +48,7 @@ in
           options = [ "NOPASSWD" ];
         }
         {
-          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+          command = "/run/current-system/sw/bin/nixos-rebuild";
           options = [ "NOPASSWD" ];
         }
         {
@@ -110,7 +110,7 @@ in
    services.xserver.displayManager.sddm = {
       enable = true;
       enableHidpi = true;
-      theme = "abstractguts-sddm-theme";
+      theme = "abstractguts-themes";
     };
   # Configure keymap in X11
   services.xserver = {
@@ -186,7 +186,7 @@ in
       lm_sensors
       ffmpeg
       pciutils
-      themes.abstractguts-sddm-theme
+      themes.abstractguts-themes
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

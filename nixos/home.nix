@@ -6,6 +6,7 @@ let
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+  	themes = pkgs.callPackage  ./configs/themes.nix {};
 in
 {
 	imports = [ ./configs/zsh.nix ./configs/hypr.nix ./configs/kitty.nix ./configs/starship.nix ];
@@ -18,12 +19,14 @@ in
 		btop
 		starship
 		fzf
-		bat
+		fd
+    bat
 		axel
 		# exa # Stable Channel
 		eza # Unstable Channel
 		playerctl
 		xfce.thunar
+		xfce.tumbler
 		nerdfonts
 		unzip
 		rnnoise-plugin
@@ -60,24 +63,28 @@ in
 		# theme.package = pkgs.sweet;
 		# theme.name = "Sweet-Dark";
     theme = {
-      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+      name = "Catppuccin-Mocha-Compact-Pink-Dark";
       package = pkgs.catppuccin-gtk.override {
         accents = [ "pink" ];
         size = "compact";
-        tweaks = [ "rimless" "black" ];
-        variant = "macchiato";
+        tweaks = [ "rimless" ];
+        variant = "mocha";
       };
     };
-		iconTheme = {
-				package = pkgs.catppuccin-papirus-folders.override {
-			    flavor = "macchiato";
-			    accent = "mauve";
-			  };
-				name = "Papirus-Dark";
-		};
-			cursorTheme = {
-				package = pkgs.catppuccin-cursors.macchiatoMauve;
-				name = "Catppuccin-Macchiato-Mauve";
+    iconTheme = {
+    	name = "candy-icons";
+    	package = themes.candy-icons;
+    	};
+		# iconTheme = {
+		# 	package = pkgs.catppuccin-papirus-folders.override {
+		# 		flavor = "mocha";
+		# 	 	accent = "mauve";
+		# 	};
+		# 	name = "Papirus-Dark";
+		# };
+		cursorTheme = {
+			package = pkgs.catppuccin-cursors.mochaMauve;
+			name = "Catppuccin-Mocha-Mauve-Cursors";
 		};
 	};
 

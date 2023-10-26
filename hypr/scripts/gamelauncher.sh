@@ -65,6 +65,5 @@ if [ ! -z "$RofiSel" ] ; then
     sleep 15
     ps aux | grep [d]irectx | awk '{ print $2 }'| xargs kill
     wait
-    notify-send "Game Ended" "${RofiSel}"
 fi
 

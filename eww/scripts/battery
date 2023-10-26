@@ -6,7 +6,7 @@ get_percentage() {
   while true; do
     # BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1) #For laptop
     BAT="hidpp_battery_0"
-    echo "$(cat /sys/class/power_supply/${BAT}/capacity)%"
+    echo "$(cat /sys/class/power_supply/${BAT}/capacity)"
     sleep 3
   done
 }
@@ -23,23 +23,23 @@ get_icon() {
       name="🖱️"
       if [ "$BATVAL" -gt 90 ];then
         echo "${name}"
-      elif [ "$BATVAL" -gt 80 ];then
+      elif [ "$BATVAL" -ge 80 ];then
         echo ""
-      elif [ "$BATVAL" -gt 70 ];then
+      elif [ "$BATVAL" -ge 70 ];then
         echo ""
-      elif [ "$BATVAL" -gt 60 ];then
+      elif [ "$BATVAL" -ge 60 ];then
         echo ""
-      elif [ "$BATVAL" -gt 50 ];then
+      elif [ "$BATVAL" -ge 50 ];then
         echo ""
-      elif [ "$BATVAL" -gt 40 ];then
+      elif [ "$BATVAL" -ge 40 ];then
         echo ""
-      elif [ "$BATVAL" -gt 30 ];then
+      elif [ "$BATVAL" -ge 30 ];then
         echo ""
-      elif [ "$BATVAL" -gt 20 ];then
+      elif [ "$BATVAL" -ge 20 ];then
         echo ""
-      elif [ "$BATVAL" -gt 10 ];then
+      elif [ "$BATVAL" -ge 10 ];then
         echo ""
-      elif [ "$BATVAL" -gt 0 ];then
+      elif [ "$BATVAL" -ge 0 ];then
         echo ""
       fi
      else

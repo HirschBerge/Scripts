@@ -1,27 +1,27 @@
 {
-    "name": "Terminus", 
-    "variables": {
-        "black": "#000000", 
-        "caret": "#f8f8f2", 
-        "foreground": "#f8f8f2", 
-        "light_blue": "color(#3bc0f0 l(+ 15%))", 
-        "cyan": "#66d9ef", 
-        "light_green": "color(#aee837 l(+ 15%))", 
-        "green": "#aee837", 
-        "background": "#080d13", 
-        "light_magenta": "color(#ff4088 l(+ 15%))", 
-        "blue": "#3bc0f0", 
-        "brown": "#f6f080", 
-        "light_brown": "color(#f6f080 l(+ 15%))", 
-        "light_white": "#ffffff", 
-        "white": "#696969", 
-        "red": "#ec3333", 
-        "light_cyan": "color(#66d9ef l(+ 15%))", 
-        "light_red": "color(#ec3333 l(+ 15%))", 
-        "magenta": "#ff4088", 
-        "light_black": "color(#696969 l(+ 15%))"
-    }, 
     "globals": {
-        "background": "#080d12"
-    }
+        "background": "#1e1e2e"
+    }, 
+    "variables": {
+        "light_green": "color(#a6e3a1 l(+ 15%))", 
+        "magenta": "#f38ba8", 
+        "caret": "#cdd6f4", 
+        "light_magenta": "color(#f38ba8 l(+ 15%))", 
+        "black": "#000000", 
+        "light_blue": "color(#89b4fa l(+ 15%))", 
+        "brown": "#f9e2af", 
+        "light_red": "color(#eba0ac l(+ 15%))", 
+        "white": "#6c7086", 
+        "foreground": "#cdd6f4", 
+        "blue": "#89b4fa", 
+        "background": "#1e1e2f", 
+        "light_white": "#ffffff", 
+        "light_black": "color(#6c7086 l(+ 15%))", 
+        "light_brown": "color(#f9e2af l(+ 15%))", 
+        "cyan": "#94e2d5", 
+        "light_cyan": "color(#94e2d5 l(+ 15%))", 
+        "red": "#eba0ac", 
+        "green": "#a6e3a1"
+    }, 
+    "name": "Terminus"
 }

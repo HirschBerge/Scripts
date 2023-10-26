@@ -1,5 +1,5 @@
 ;; ** Variables ***********************************************************************
-;;set filetype:yuck
+
 ;; System vars
 (deflisten BLIGHT `bash ../scripts/backlight --get`)
 (deflisten BATTERY `bash ../scripts/battery --perc`)
@@ -16,7 +16,6 @@
 (deflisten ARTIST `bash ../scripts/music --artist`)
 (deflisten STATUS `bash ../scripts/music --status`)
 (deflisten COVER `bash ../scripts/music --cover`)
-(defpoll COVER :interval "1s" `bash ../scripts/music --cover`)
 
 
 ;; Calendar vars
@@ -34,15 +33,15 @@
 	  (box :class "volume_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
 		(button :width 30 :onclick "bash ../scripts/audio --toggle-vol" 
           (label :class "iconvolume" :text VOLUMEICON))
-		(scale :min 0 :max 100 :value VOLUME :active "true" :onchange "bash ../scripts/audio --set-vol {}"))
+		(scale :min 10 :max 150 :value VOLUME :active "true" :onchange "bash ../scripts/audio --set-vol {}"))
       (box :class "mic_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
 		(button :width 30 :onclick "bash ../scripts/audio --toggle-mic" 
           (label :class "iconmic" :text MICICON))
-		(scale :min 0 :max 100 :value MIC :active "true" :onchange "bash ../scripts/audio --set-mic {}"))
+		(scale :min 10 :max 150 :value MIC :active "true" :onchange "bash ../scripts/audio --set-mic {}"))
       (box :class "bright_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
 		(button :width 30 :onclick "" 
-		  (label :width 30 :class "iconbright" :text ""))
-        (scale :min 100 :max 120000 :value BLIGHT :active "true" :onchange "bash ../scripts/backlight --set {}")))))
+		  (label :width 30 :class "iconbright" :text "🖱"))
+        (scale :min 1 :max 100 :value BATTERY :active "true" )))))
 
 
 
@@ -50,8 +49,8 @@
 (defwidget battery []
   (box :class "genwin" :vexpand "false" :hexpand "false" :width 65
     (box :class "battery" :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
-		(label :class "baticon" :text BATTERYICON)
-        (label :text BATTERY))))
+		(label :class "baticon" :text "🖱${BATTERYICON}")
+        (label :text "${BATTERY}%"))))
 
 
 ;; network
@@ -59,7 +58,6 @@
   (box :class "genwin" :vexpand "false" :hexpand "true" :orientation "h" :width 200
 	(button :class "btn_net" :onclick "bash ../scripts/network --toggle" :onmiddleclick ""
       (label :class "network" :text NET))))
-
 
 ;; bluetooth
 (defwidget bluetooth []
@@ -97,7 +95,7 @@
 (defwidget music []
     (box :class "genwin" :orientation "v" :space-evenly "false" :vexpand "false" :hexpand "false"
 		  
-      (box :class "genwin" :orientation "h" :space-evenly "true" :vexpand "false" :hexpand "false"
+      (box :class "genwin" :orientation "span" :space-evenly "true" :vexpand "false" :hexpand "false"
         (box :class "album_art" :vexpand "false" :hexpand "false" :style "background-image: url('${COVER}');")
           (box :orientation "v" :width 80
 	  	    (label :halign "center" :class "song" :wrap "true" :limit-width 20 :text SONG)

@@ -1,5 +1,5 @@
 ;; ** Variables ***********************************************************************
-
+;;set filetype:yuck
 ;; System vars
 (deflisten BLIGHT `bash ../scripts/backlight --get`)
 (deflisten BATTERY `bash ../scripts/battery --perc`)

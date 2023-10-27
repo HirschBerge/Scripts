@@ -23,6 +23,7 @@ def sort_chapters(chapters: list):
         "AzukiTeam",
         "inkrcomics",
     ]
+
     eng_chapters = [
         x
         for x in chapters
@@ -45,7 +46,7 @@ def sort_chapters(chapters: list):
 
 def notify_send(title, new_chapters, cover_url=None):
     os.system(
-        f"""dunstify -i ~/.cache/mdex.jpg -u normal \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
+        f"""notify-send -i ~/.cache/mdex.jpg -u normal {title} \"Downloaded {new_chapters} new chapters of {title} from MangaDex\" """
     )
     d = DiscordWebHook(f"{title}")
     if cover_url and new_chapters > 0:
@@ -95,7 +96,7 @@ class Hirschy_MangaDex:
         try:
             chapters = manga.get_chapters()
         except:
-            print(colored(255,0,0, f"Something went wrong with {manga_title}"))
+            print(colored(255, 0, 0, f"Something went wrong with {manga_title}"))
             return 1
         sorted_chapters = sort_chapters(chapters)
         new_chapters, name_manga = download_chapters(sorted_chapters, manga)

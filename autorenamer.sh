@@ -9,7 +9,7 @@ function rename(){
   NEW=$2
   while IFS= read -r old <&3 && IFS= read -r new <&4; do
 	  mv -i -- "$old" "$new"
-  done 3< $OLD 4< $NEW
+  done 3< "$OLD" 4< "$NEW"
   rm -f $OLD $NEW
 }
 
@@ -19,4 +19,4 @@ cat OLD | grep -E "Episode [0-9][^0-9]" | awk -v season="$1" -F"Episode " '{ pri
 cat OLD | grep -E "Episode [0-9]{2}" | awk -v season="$1" -F"Episode " '{ print "S0"season "E"$2 }' >> NEW
 
 rename OLD NEW
-exa --group-directories-first -l --icons
+eza --no-quotes --group-directories-first -l --icons

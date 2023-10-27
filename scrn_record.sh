@@ -5,7 +5,7 @@
 prevent_multiple_instances() {
   if pgrep "wf-recorder";
   then
-    dunstify -t 3000 -u critical "Killing recording."
+    notify-send -t 3000 -u critical "Killing recording."
     pgrep "wf-recorder" |xargs kill -2
   else 
     start_recording
@@ -19,7 +19,7 @@ start_recording ()
 {
   file="$HOME/Videos/recordings/$(date '+%Y-%m-%d_%H:%M:%S').mp4"
   [[ -d "$(dirname "$file")" ]] || mkdir -p "$(dirname "$file")"
-  dunstify -u normal "Starting recording!"
+  notify-send -u normal "Starting recording!"
   wf-recorder -g "$(slurp)" --file=$file
 }
 

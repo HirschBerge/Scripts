@@ -17,9 +17,6 @@ in
         ./wayland.nix
         ./configs/gaming.nix 
     ];
-    nixpkgs.config.permittedInsecurePackages = [
-      "openssl-1.1.1w"
-    ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -49,10 +46,6 @@ in
         }
         {
           command = "/run/current-system/sw/bin/nixos-rebuild";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.sublime4}/bin/subl";
           options = [ "NOPASSWD" ];
         }
         {
@@ -176,7 +169,6 @@ in
       wget
       git
       home-manager
-      sublime4
       traceroute
       python311
       python311Packages.pip

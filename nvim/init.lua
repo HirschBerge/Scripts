@@ -16,6 +16,15 @@ if not vim.loop.fs_stat(lazypath) then
   require("core.bootstrap").lazy(lazypath)
 end
 
+vim.opt.nu = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.undofile = true
+vim.opt.wrap = false
+vim.opt.smartindent = true
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
 require "plugins"

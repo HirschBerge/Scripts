@@ -19,6 +19,7 @@
     "mpd",
     "pulseaudio",
     "memory",
+    "custom/temp",
     "cpu",
     "network",
     "clock",
@@ -43,6 +44,12 @@
       "focused": "",
       "default": ""
     }
+  },
+  "custom/temp": {
+    "tooltip": false,
+    "layer": "bottom",
+    "format": " {} ",
+    "exec": "~/.scripts/temp.sh"
   },
   "custom/notifs": {
     "tooltip": false,
@@ -74,7 +81,7 @@
   },
   "custom/weather": {
     "format": " {} ",
-    "exec": "/home/hirschy/projects/Weather_app/target/debug/weather_app --polybar",
+    "exec": "/home/hirschy/projects/Weather_app/target/release/weather_app --polybar",
     "interval": 60
   },
   "hyprland/window": {  

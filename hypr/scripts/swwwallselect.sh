@@ -4,7 +4,7 @@
 ScrDir=`dirname $(realpath $0)`
 source $ScrDir/globalcontrol.sh
 RofiConf="$HOME/.config/rofi/themeselect.rasi"
-WallPath="$HOME/.config/swww/$gtkTheme"
+WallPath="$HOME/Pictures"
 
 
 # scale for monitor x res

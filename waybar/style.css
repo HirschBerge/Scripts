@@ -203,3 +203,9 @@ tooltip label {
   border-bottom-right-radius: 10px;
   color: #490DCD;
 }
+#custom-temp{
+  background-color: rgba(0,0,0, 0.4);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 00px;
+  color: #D8188D;
+}

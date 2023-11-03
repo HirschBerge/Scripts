@@ -20,7 +20,8 @@ in
 		starship
 		fzf
 		fd
-    bat
+        bat
+        youtube-music
 		axel
 		# exa # Stable Channel
 		eza # Unstable Channel
@@ -53,10 +54,10 @@ in
 		pavucontrol
 		autojump
 		discord
-		spotify
 		mpv
 		wf-recorder
 		eww-wayland
+        mpvScripts.sponsorblock
 	];
 	gtk = {
 		enable = true;
@@ -117,8 +118,9 @@ in
 			{ id = "hdokiejnpimakedhajhdlcegeplioahd";} # Last Pass
 			{ id = "ponfpcnoihfmfllpaingbgckeeldkhle";} # Enhancer for Youtube
 			{ id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
+            { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
 			{ id = "gebbhagfogifgggkldgodflihgfeippi";} # Return YouTube Dislike Button
-      { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
+			{ id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # Sponsorblock
 		];
 	};
 	programs.brave = {
@@ -133,6 +135,7 @@ in
 			{ id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
 			{ id = "gebbhagfogifgggkldgodflihgfeippi";} # Return YouTube Dislike Button
             { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
+			{ id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # Sponsorblock
 		];
 	};
 	

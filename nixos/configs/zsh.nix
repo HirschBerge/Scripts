@@ -29,6 +29,7 @@
             export NIX_PAGER=cat
             export PROMPT_EOL_MARK=" "
             [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
+            source ${pkgs.autojump}/share/zsh/site-functions/autojump.zsh
       '';
         shellAliases = {
             "-s {jpg,png,jpeg}" = "kitty +kitten icat";
@@ -44,6 +45,7 @@
             "777" = "chmod -R 777";
             "8" = "cd -8";
             "9" = "cd -9";
+            "htop" = "btop";
             D = "cd ~/Downloads && eza -a";
             G = "| grep -i --color=auto";
             YT = "youtube-viewer";

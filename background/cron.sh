@@ -12,11 +12,11 @@ if [ -n "$1" ]; then
   folder="$1"
 fi
 
-
-echo $folder
-
-img1=$(find "$folder" -type f | shuf -n 1)
-img2=$(find "$folder" -type f | shuf -n 1)
+randomize(){
+  echo $folder
+  img1=$(find "$folder" -type f | shuf -n 1)
+  img2=$(find "$folder" -type f | shuf -n 1)
+}
 
 
 function stopprocess {
@@ -29,6 +29,7 @@ function stopprocess {
 }
 
 sets_background() {
+  randomize
   current_time=$(date +"%m-%d-%y %H:%M:%S")
   echo -en "$current_time\n" >> $HOME/.cache/background.log
   echo -en "One: $img1\n" >> $HOME/.cache/background.log

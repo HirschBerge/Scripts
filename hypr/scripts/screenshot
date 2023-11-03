@@ -2,21 +2,23 @@
 
 ## Script to take screenshots with grim, slurp (in Wayland)
 
-iDIR="$HOME/.config/hypr/mako/icons"
 
 time=$(date +%Y-%m-%d-%H-%M-%S)
 dir="$HOME/Pictures/Screenshots"  # need 
 file="Screenshot_${time}_${RANDOM}.png"
+screenie="${dir}/${file}"
 
-# notify and view screenshot
-notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i ${iDIR}/picture.png"
+# notify and view screenshoti
+notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i ${screenie}"
 notify_view () {
 	${notify_cmd_shot} "Copied to clipboard."
-	sxiv ${dir}/"$file"
-	if [[ -e "$dir/$file" ]]; then
+	sxiv ${screenie}
+    keep=$(echo -en "Delete\nSave" | rofi -dmenu -i -config ~/.config/rofi/steam/gamelauncher_4.rasi)
+	if [[ "$keep" == "Save" ]]; then
 		${notify_cmd_shot} "Screenshot Saved."
 	else
 		${notify_cmd_shot} "Screenshot Deleted."
+        rm -f "$screenie"
 	fi
 }
 

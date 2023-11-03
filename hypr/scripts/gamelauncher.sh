@@ -49,7 +49,7 @@ do
     appid=`echo $acf | cut -d '|' -f 2`
     game=`echo $acf | cut -d '|' -f 1`
     echo -en "$game\x00icon\x1f${SteamThumb}/${appid}_library_600x900.jpg\n"
-done | rofi -dmenu -theme-str "${r_override}" -config $RofiConf)
+done | rofi -dmenu -i -theme-str "${r_override}" -config $RofiConf)
 
 
 # launch game
@@ -63,7 +63,7 @@ if [ ! -z "$RofiSel" ] ; then
     sleep 5
     notify-send "Launching a game!" "${RofiSel}..." -i ${SteamThumb}/${launchid}_header.jpg -r 91190 -t 2200
     sleep 15
-    ps aux | grep [d]irectx | awk '{ print $2 }'| xargs kill
+    ps aux | grep [D]XSETUP | awk '{ print $2 }'| xargs kill
     wait
 fi
 

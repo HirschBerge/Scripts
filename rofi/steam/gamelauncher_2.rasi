@@ -24,12 +24,33 @@ window {
     border-color:                transparent;
     background-color:            transparent;
 }
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     80px 60px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    orientation:                 horizontal;
+    children:                    [ "entry" ];
+}
 mainbox {
     enabled:                     true;
-    children:                    [ "listview" ];
+    children:                    [ "listview", "inputbar" ];
     background-color:            @main-bg;
 }
 
+entry {
+    enabled:                     true;
+    expand:                      false;
+    width:                       250px;
+    padding:                     12px 16px;
+    border-radius:               100%;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search";
+    placeholder-color:           inherit;
+}
 
 // Lists //
 listview {

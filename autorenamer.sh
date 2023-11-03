@@ -14,7 +14,7 @@ function rename(){
 }
 
 
-exa -1 |grep -E "Episode" > OLD
+exa --no-quotes -1 |grep -E "Episode" > OLD
 cat OLD | grep -E "Episode [0-9][^0-9]" | awk -v season="$1" -F"Episode " '{ print "S0"season "E0"$2 }' > NEW
 cat OLD | grep -E "Episode [0-9]{2}" | awk -v season="$1" -F"Episode " '{ print "S0"season "E"$2 }' >> NEW
 

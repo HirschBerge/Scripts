@@ -67,9 +67,6 @@ def sort_dict(d):
     return dict(sorted(d.items(), key=lambda item: int(item[1]), reverse=True))
 
 
-# def sort_dict(d):
-#     return dict(sorted(d.items(), key=lambda item: item[1], reverse=True))
-
 
 def prettify(d):
     stars = {

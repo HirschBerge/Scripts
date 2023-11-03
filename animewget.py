@@ -156,7 +156,7 @@ def get_anime_title():
 
 def notify_send():
     ani_title = get_anime_title()
-    os.system(f"""dunstify -u normal \"Downloaded an episode from {ani_title}\"""")
+    os.system(f"""notify-send -u normal \"Downloaded an episode from {ani_title}\"""")
 
 
 def main():

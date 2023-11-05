@@ -108,21 +108,21 @@ in
 		enable = true;
 		enableZshIntegration = true;
 	};
-	programs.chromium = {
-		enable = true;
-		extensions = [
-			{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
-			{ id = "aapbdbdomjkkjkaonfhkkikfgjllcleb";} # Google Translate
-			{ id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";} # Dark Reader
-			{ id = "bmnlcjabgnpnenekpadlanbbkooimhnj";} # Honey
-			{ id = "hdokiejnpimakedhajhdlcegeplioahd";} # Last Pass
-			{ id = "ponfpcnoihfmfllpaingbgckeeldkhle";} # Enhancer for Youtube
-			{ id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
-            { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
-			{ id = "gebbhagfogifgggkldgodflihgfeippi";} # Return YouTube Dislike Button
-			{ id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # Sponsorblock
-		];
-	};
+	# programs.chromium = {
+	# 	enable = true;
+	# 	extensions = [
+	# 		{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
+	# 		{ id = "aapbdbdomjkkjkaonfhkkikfgjllcleb";} # Google Translate
+	# 		{ id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";} # Dark Reader
+	# 		{ id = "bmnlcjabgnpnenekpadlanbbkooimhnj";} # Honey
+	# 		{ id = "hdokiejnpimakedhajhdlcegeplioahd";} # Last Pass
+	# 		{ id = "ponfpcnoihfmfllpaingbgckeeldkhle";} # Enhancer for Youtube
+	# 		{ id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";} # Grammarly
+ #            { id = "amaaokahonnfjjemodnpmeenfpnnbkco";} # Grepper
+	# 		{ id = "gebbhagfogifgggkldgodflihgfeippi";} # Return YouTube Dislike Button
+	# 		{ id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # Sponsorblock
+	# 	];
+	# };
 	programs.brave = {
 		enable = true;
 		extensions = [

@@ -190,7 +190,7 @@ in
       traceroute
       python311
       python311Packages.pip
-      chromium
+      # chromium
       ripgrep
       cmake
       lm_sensors

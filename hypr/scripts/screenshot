@@ -13,7 +13,7 @@ notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-noti
 notify_view () {
 	${notify_cmd_shot} "Copied to clipboard."
 	sxiv ${screenie}
-    keep=$(echo -en "Delete\nSave" | rofi -dmenu -i -config ~/.config/rofi/steam/gamelauncher_4.rasi)
+    keep=$(echo -en "Delete\nSave" | rofi -dmenu -i -config ~/.config/rofi/screenshot.rasi)
 	if [[ "$keep" == "Save" ]]; then
 		${notify_cmd_shot} "Screenshot Saved."
 	else

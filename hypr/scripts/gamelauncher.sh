@@ -18,7 +18,7 @@ fi
 
 declare -A game_opts
 game_opts["ELDEN RING"]="python er-patcher --rate 144 --all --"
-
+game_opts["ARMORED CORE™ VI FIRES OF RUBICON™"]="mangohud"
 # check steam mount paths
 SteamPaths=`grep '"path"' $SteamLib | awk -F '"' '{print $4}'`
 ManifestList=`find $SteamPaths/steamapps/ -type f -name "appmanifest_*.acf" 2>/dev/null`
@@ -42,7 +42,6 @@ do
     fi
 done | sort)
 
-
 # launch rofi menu
 RofiSel=$( echo "$GameList" | while read acf
 do
@@ -64,6 +63,7 @@ if [ ! -z "$RofiSel" ] ; then
     notify-send "Launching a game!" "${RofiSel}..." -i ${SteamThumb}/${launchid}_header.jpg -r 91190 -t 2200
     sleep 15
     ps aux | grep [D]XSETUP | awk '{ print $2 }'| xargs kill
+    ps aux | grep [D]XSetup | awk '{ print $2 }'| xargs kill
     wait
 fi
 

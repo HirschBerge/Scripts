@@ -14,10 +14,10 @@ local options = {
     categories = "sponsor,intro,outro,interaction,selfpromo,filler",
 
     -- Categories to skip automatically
-    skip_categories = "sponsor",
+    skip_categories = "sponsor,intro,outro,interaction,selfpromo",
 
     -- If true, sponsored segments will only be skipped once
-    skip_once = true,
+    skip_once = false,
 
     -- Note that sponsored segments may ocasionally be inaccurate if this is turned off
     -- see https://blog.ajay.app/voting-and-pseudo-randomness-or-sponsorblock-or-youtube-sponsorship-segment-blocker
@@ -34,7 +34,7 @@ local options = {
     user_id = "",
 
     -- Name to display on the stats page https://sponsor.ajay.app/stats/ leave blank to keep current name
-    display_name = "",
+    display_name = "Sexay Hirschay",
 
     -- Tell the server when a skip happens
     report_views = true,
@@ -49,7 +49,7 @@ local options = {
     make_chapters = true,
 
     -- Minimum duration for sponsors (in seconds), segments under that threshold will be ignored
-    min_duration = 1,
+    min_duration = 3,
 
     -- Fade audio for smoother transitions
     audio_fade = false,

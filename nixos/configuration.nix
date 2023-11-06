@@ -38,14 +38,14 @@ in
     efi.canTouchEfiVariables = true;
     timeout = 1;
   };
-  systemd.services.remaps = {
-    description = "...";
-    # serviceConfig.PassEnvironment = "DISPLAY";
-    script = ''
-      /run/wrappers/bin/sudo /home/hirschy/.local/bin/xremap --watch /home/hirschy/my-dotfiles/xremap_config.yml
-    '';
-    wantedBy = [ "multi-user.target" ]; # starts after login
-  };
+  # systemd.services.remaps = {
+  #   description = "...";
+  #   # serviceConfig.PassEnvironment = "DISPLAY";
+  #   script = ''
+  #     /run/wrappers/bin/sudo /home/hirschy/.local/bin/xremap --watch /home/hirschy/my-dotfiles/xremap_config.yml
+  #   '';
+  #   wantedBy = [ "multi-user.target" ]; # starts after login
+  # };
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
       inherit pkgs;
@@ -83,10 +83,10 @@ in
           command = "/run/current-system/sw/bin/nix-channel";
           options = [ "NOPASSWD" ];
         }
-        {
-          command = "/home/hirschy/.local/bin/xremap";
-          options = [ "NOPASSWD" ];
-        }
+      #   {
+      #     command = "/home/hirschy/.local/bin/xremap";
+      #     options = [ "NOPASSWD" ];
+      #   }
       ];
       groups = [ "wheel" ];
     }];
@@ -166,7 +166,7 @@ in
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Hirschy";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "keyd" ];
     packages = with pkgs; [
       firefox
     #  thunderbird
@@ -217,11 +217,19 @@ in
   # };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
+  services.keyd = {
     enable = true;
-    enableSSHSupport = true;
-  };
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(meta, esc)";
+          };
+        };
+      };
+    };
+  }; 
   services.openssh = {
     enable = true;
     settings = {

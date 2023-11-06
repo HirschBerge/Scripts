@@ -33,7 +33,8 @@
       '';
         shellAliases = {
             "-s {jpg,png,jpeg}" = "kitty +kitten icat";
-            "-s {mp4,mkv,mp3}" = "mpv"; 
+            "-s {mp4,mkv,mp3}" = "mpv";
+            "-s gif" = "sxiv -a";
             ".." = "cd ..";
             "..." = "cd ..; cd ..";
             "600" = "chmod -R 600";
@@ -47,7 +48,6 @@
             "9" = "cd -9";
             "htop" = "btop";
             D = "cd ~/Downloads && eza -a";
-            G = "| grep -i --color=auto";
             YT = "youtube-viewer";
             _="sudo ";
             "rust_dev" = "nix develop";

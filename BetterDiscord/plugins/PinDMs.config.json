@@ -96,7 +96,7 @@
 			},
 			"groups": {
 				"enabled": true,
-				"collapsed": true
+				"collapsed": false
 			}
 		},
 		"recentOrder": {

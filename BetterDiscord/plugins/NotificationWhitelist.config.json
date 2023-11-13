@@ -9,7 +9,8 @@
         "channelWhitelist": [
             "752006850337046529",
             "1085380200059113563",
-            "804792468448084038"
+            "804792468448084038",
+            "669365743208366090"
         ],
         "enableWhitelisting": true,
         "allowNonMessageNotifications": false

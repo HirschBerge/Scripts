@@ -19,4 +19,6 @@ rofi \
     -show drun \
     -modi run \
     -show run \
+    -modi window \
+    -show window \
     -theme ${dir}/${theme}.rasi

@@ -51,6 +51,11 @@ in
       inherit pkgs;
     };
   };
+  security.pam.services.swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
   security.sudo = {
     enable = true;
     extraRules = [{

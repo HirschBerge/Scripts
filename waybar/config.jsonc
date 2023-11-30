@@ -82,7 +82,9 @@
   "custom/weather": {
     "format": " {} ",
     "exec": "/home/hirschy/projects/Weather_app/target/release/weather_app --polybar",
-    "interval": 60
+    "interval": 60,
+    "tooltip": false,
+    "on-click": "/home/hirschy/.scripts/weather.sh"
   },
   "hyprland/window": {  
     //"format": "{}"   // <--- these is the default value  

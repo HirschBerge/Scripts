@@ -10,6 +10,6 @@ else
   echo "No URL found"
 fi
 
-mpv --ao=pulse --no-config --script-opts=ytdl_hook-ytdl_path=yt-dlp --msg-level=all=no,ytdl_hook=trace --fs=yes $url >/dev/null 2>&1 &
+mpv --ao=pulse --script-opts=ytdl_hook-ytdl_path=yt-dlp --msg-level=all=no,ytdl_hook=trace --fs=yes $url >/dev/null 2>&1 &
 clear
 exit

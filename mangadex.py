@@ -63,15 +63,23 @@ def notify_send(title, new_chapters, cover_url=None):
     else:
         d.send_message(f"No new chapters of ***{title}*** from MangaDex")
 
+def time_it(func):
+    def wrapper(*args, **kwargs):
+        start_time = datetime.now()
+        result = func(*args, **kwargs)
+        end_time = datetime.now()
+        taken = str(end_time - start_time)
+        message = "Time taken: "
+        print(f"{colored(0,0,255, message)}{colored(0,255,0,taken[:10])}")
+    return wrapper
 
 class Hirschy_MangaDex:
     def __init__(self, manga_id: str = "", title="", start: float = 0, end: float = -1):
         self.cli = MangaDexPy.MangaDex()
         self.manga_id = manga_id
         self.title = title
-
+    @time_it
     def download_manga_en(self):
-        start = datetime.now()
         # Asking the API about that manga with uuid 'manga_id'
         try:
             manga = self.cli.get_manga(self.manga_id)
@@ -100,10 +108,6 @@ class Hirschy_MangaDex:
             return 1
         sorted_chapters = sort_chapters(chapters)
         new_chapters, name_manga = download_chapters(sorted_chapters, manga)
-        end = datetime.now()
-        taken = str(end - start)
-        message = "Time taken: "
-        print(f"{colored(0,0,255, message)}{colored(0,255,0,taken[:10])}")
         if new_chapters >= 1:
             notify_send(name_manga, new_chapters, cover)
 
@@ -150,11 +154,11 @@ class Hirschy_MangaDex:
         print(f"Now Downloading:")
         search_dl(manga_id=results[download_this - 1].id)
 
+    @time_it
     def chapter_dl(self):
         self.manga_id = self.search()
         start_chapter = float(input("Choose starting chapter: "))
         end_chapter = float(input("Choose ending chapter: "))
-        start_time = datetime.now()
         # Asking the API about that manga with uuid 'manga_id'
         try:
             manga = self.cli.get_manga(self.manga_id)
@@ -182,10 +186,6 @@ class Hirschy_MangaDex:
             if float(x.chapter) <= end_chapter and float(x.chapter) >= start_chapter
         ]
         download_chapters(new_chapters, manga)
-        end_time = datetime.now()
-        taken = str(end_time - start_time)
-        message = "Time taken: "
-        print(f"{colored(0,0,255, message)}{colored(0,255,0,taken[:10])}")
 
     def search_dl(self):
         self.manga_id = self.search()

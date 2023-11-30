@@ -64,7 +64,7 @@ sets_background() {
     /run/current-system/sw/bin/swww img /mnt/NAS/Pictures/lewd2.png
     send_discord_message "<@215327353423921159> SURPRISEEEEE" 
   else 
-    $(which swww) img -t random -o eDP-1 ~/.config/wallwide.png 
+    $(which swww) img -t random -o eDP-1 "${imgnorm}" 
     # $(which swww) img -t random -o DP-2 ~/.config/wallwide2.png 
   fi
 }

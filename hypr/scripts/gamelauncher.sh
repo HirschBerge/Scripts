@@ -18,6 +18,7 @@ fi
 
 declare -A game_opts
 game_opts["ELDEN RING"]="python er-patcher --rate 144 --all --"
+game_opts["Apex Legends"]="-eac_launcher_settings SettingsDX12.json +fps_max 200 PROTON_EAC_RUNTIME=1 --"
 game_opts["ARMORED CORE™ VI FIRES OF RUBICON™"]="mangohud"
 # check steam mount paths
 SteamPaths=`grep '"path"' $SteamLib | awk -F '"' '{print $4}'`
@@ -54,11 +55,13 @@ done | rofi -dmenu -i -theme-str "${r_override}" -config $RofiConf)
 # launch game
 if [ ! -z "$RofiSel" ] ; then
     launchid=`echo "$GameList" | grep "$RofiSel" | cut -d '|' -f 2`
-    if [[ ${game_opts["$game"]+exists}} ]]; then
-        steam -applaunch "${launchid} [ $game_opts[$game] gamemoderun %command%]" &
-      else
-        steam -applaunch "${launchid} [gamemoderun %command%]" &
-      fi 
+    if [[ "${RofiSel}" == "Apex Legends" ]]; then
+      steam -applaunch "${launchid} [$game_opts[$game]]" &
+    elif [[ ${game_opts["$game"]+exists}} ]]; then
+      steam -applaunch "${launchid} [ $game_opts[$game] gamemoderun %command%]" &
+    else
+      steam -applaunch "${launchid} [gamemoderun %command%]" &
+    fi 
     sleep 5
     notify-send "Launching a game!" "${RofiSel}..." -i ${SteamThumb}/${launchid}_header.jpg -r 91190 -t 2200
     sleep 15

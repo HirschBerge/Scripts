@@ -17,6 +17,10 @@ local plugins = {
     version = false,
   },
   {
+    "arnamak/stay-centered.nvim",
+    version = false,
+  },
+  {
     "elkowar/yuck.vim",
     version = false,
   },

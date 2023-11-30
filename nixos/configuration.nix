@@ -51,11 +51,6 @@ in
       inherit pkgs;
     };
   };
-  security.pam.services.swaylock = {
-      text = ''
-        auth include login
-      '';
-    };
   security.sudo = {
     enable = true;
     extraRules = [{
@@ -199,9 +194,11 @@ in
       home-manager
       traceroute
       python311
+      obs-studio
       python311Packages.pip
       # chromium
       ripgrep
+      du-dust
       cmake
       lm_sensors
       ffmpeg
@@ -215,11 +212,20 @@ in
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+    swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   services.keyd = {
@@ -243,6 +249,7 @@ in
       PermitRootLogin = "no";    
     };
   };
+  services.pcscd.enable = true;
   # List services that you want to enable:
   services.dbus.packages = [
     pkgs.dbus.out

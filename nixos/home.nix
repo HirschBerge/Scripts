@@ -29,6 +29,7 @@ in
 		xfce.thunar
 		xfce.tumbler
 		nerdfonts
+        xwaylandvideobridge
 		unzip
 		rnnoise-plugin
 		sxiv

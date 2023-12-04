@@ -179,3 +179,4 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 */
 }
+@theme "/nix/store/awhg0213k2p0rqjkjirw8110pnb54dbc-rofi-1.7.5+wayland2/share/rofi/themes/iggy.rasi"

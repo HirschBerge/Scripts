@@ -10,6 +10,13 @@
 ## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
+# Doesn't work, lol
+# if pgrep -x rofi ;
+# then
+#  pgrep rofi |xargs kill
+  # exit 0
+# fi
+
 dir="$HOME/.config/rofi/powermenu/type-5"
 theme='style-1'
 
@@ -67,6 +74,8 @@ run_cmd() {
 			systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
+		elif [[ $1 == '--lock' ]]; then
+			~/.config/hypr/scripts/locker.sh
 		elif [[ $1 == '--hibernate' ]]; then
 			systemctl hibernate
 		elif [[ $1 == '--suspend' ]]; then
@@ -82,6 +91,8 @@ run_cmd() {
 				i3-msg exit
 			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+      elif [[ "$DESKTOP_SESSION" == 'hyprland' ]]; then
+        hyprctl dispatch exit
 			fi
 		fi
 	else
@@ -102,11 +113,7 @@ case ${chosen} in
 		run_cmd --hibernate
         ;;
     $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
-		fi
+      sleep 1; ~/.config/hypr/scripts/locker.sh
         ;;
     $suspend)
 		run_cmd --suspend

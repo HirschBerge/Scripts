@@ -7,75 +7,63 @@
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
-  # Make sure opengl is enabled
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
 
-  # NVIDIA drivers are unfree.
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-    ];
-
-  # Tell Xorg to use the nvidia driver
-  services.xserver.videoDrivers = ["nvidia"];
-  services.xserver.enable = true;
-  # Enable the KDE Greeter
-  hardware.nvidia = {
-
-    # Modesetting is needed for most wayland compositors
-    modesetting.enable = true;
-
-    # Use the open source version of the kernel module
-    # Only available on driver 515.43.04+
-    open = true;
-
-    # Enable the nvidia settings menu
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  hardware.nvidia.forceFullCompositionPipeline = true;
+  
+# NVIDIA Drivers are Unfree
+  #nixpkgs.config.allowUnfree = pkgs.lib.mkForce true;
+   nixpkgs.config.allowUnfreePredicate = pkg:
+   builtins.elem (lib.getName pkg) [
+     "nvidia-x11"
+   ];
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+# boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7cd52afe-f20d-4364-b527-5b557ae4dcd5";
-      fsType = "ext4";
-    };
-  fileSystems."/mnt/NAS" = {
+fileSystems."/mnt/storage" =
+  { device = "/dev/disk/by-uuid/ef223ecb-2d19-40a7-a458-9ec536d9a9a2";
+    fsType = "btrfs";
+  };
+fileSystems."/mnt/NAS" = {
     device = "srv-prod-nas.home.hirschykiss.net:/mnt/Main Storage/Hirschy/hirschy";
     fsType = "nfs";
   };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/4b58a53c-d9bb-457b-992f-c7310b282c2e";
+      fsType = "ext4";
+    };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0A6C-6113";
+    { device = "/dev/disk/by-uuid/C286-40B4";
       fsType = "vfat";
     };
-
-  fileSystems."/mnt/storage" =
-    { device = "/dev/disk/by-uuid/ef223ecb-2d19-40a7-a458-9ec536d9a9a2";
-      fsType = "btrfs";
+  hardware = {
+    opengl.enable = true;
+    opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
+    nvidia = {
+      modesetting.enable = true;
+      # open = false;
+      # powerManagement.enabled = true;
+      open = true;
+      nvidiaSettings = true;
+      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/dc6d14d5-df52-475c-966a-ebe751896366"; }
-    ];
+  };
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
+  networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 

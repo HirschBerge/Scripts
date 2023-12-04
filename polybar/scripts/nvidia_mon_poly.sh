@@ -9,12 +9,14 @@
 # BIPurple='\033[1;95m'     # Purple
 # BICyan='\033[1;96m'       # Cyan
 # BIWhite='\033[1;97m'      # White
-
-output=$(nvidia-smi --query-gpu=memory.used,utilization.gpu,temperature.gpu --format=csv,noheader,nounits | awk -F"," '{ print $1 $2 $3}')
+get_info ()
+{
+  output=$(nvidia-smi --query-gpu=memory.used,utilization.gpu,temperature.gpu --format=csv,noheader,nounits | awk -F"," '{ print $1 $2 $3}')
 # echo $output
-mem=$(echo $output |awk '{ print $1 }')
-util=$(echo $output |awk '{ print $2 }')
-temp=$(echo $output |awk '{ print $3 }')
+  mem=$(echo $output |awk '{ print $1 }')
+  util=$(echo $output |awk '{ print $2 }')
+  temp=$(echo $output |awk '{ print $3 }')
+}
 
 function color_mem() {
 	if [ $mem -le "1000" ]
@@ -58,7 +60,13 @@ function color_temp() {
 		temp="%{F#FF0000}$temp"
 	fi
 }
-color_mem
-color_temp
-color_util
-echo "%{F#00ffff}RTX 3060ti ${mem}Mb ${util}% ${temp}°C"
+# color_mem
+# color_temp
+# color_util
+# echo "%{F#00ffff}RTX 3060ti ${mem}Mb ${util}% ${temp}°C"
+while true;
+do
+  get_info
+  echo "RTX 3060ti ${mem}Mb ${util}% ${temp}°C"
+  sleep 3
+done

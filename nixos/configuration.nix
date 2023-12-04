@@ -2,83 +2,96 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-
+{ config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  themes = pkgs.callPackage  ./configs/themes.nix {};
 in
 
 {
-  # Remove sound.enable or turn it off if you had it set previously, it seems to cause conflicts with pipewire
-  #sound.enable = false;
-  #  systemd.services = {
-  #   background = {
-  #     wantedBy = [ "multi-user.target" ]; 
-  #     after = [ "network.target" ];
-  #     description = "Background changer.";
-  #     enable = true;
-  #     serviceConfig = {
-  #       Type = "simple";
-  #       User = "hirschy";
-  #       ExecStartPost= "/run/current-system/sw/bin/sleep 15";
-  #       ExecStart = ''/home/hirschy/.scripts/background/cron.sh /home/hirschy/Pictures/Sci-Fi'';         
-  #       ExecStop = ''ps aux |rg "[b]ackground" | awk \'{ print $2 }\' | xargs kill '';
-  #     };
-  #   };
-  #   remaps = {
-  #     wantedBy = [ "multi-user.target" ]; 
-  #     after = [ "network.target" ];
-  #     description = "Keyboard remaps.";
-  #     enable = true;
-  #     serviceConfig = {
-  #       Type = "simple";
-  #       User = "hirschy";
-  #       # ExecStartPost= "/run/current-system/sw/bin/sleep 15";
-  #       ExecStart = ''/run/current-system/sw/bin/bash /home/hirschy/.local/bin/remaps'';         
-  #       # ExecStop = ''ps aux |rg "[r]emaps" | awk \'{ print $2 }\' | xargs kill'';
-  #     };
-  #   };
-  #   displaysetup = {
-  #     wantedBy = [ "multi-user.target" ]; 
-  #     after = [ "network.target" ];
-  #     before = [ "getty.target" ];
-  #     description = "Sets correct screen settings";
-  #     enable = true;
-  #     serviceConfig = {
-  #       Type = "simple";
-  #       User = "hirschy";
-  #       ExecStart = ''/run/current-system/sw/bin/nvidia-settings --assign CurrentMetaMode="DP-2: nvidia-auto-select @2560x1080 +0+0 {ForceCompositionPipeline=On}, DP-0: nvidia-auto-select @2560x1080 +0+1080 {ForceCompositionPipeline=On}"; /run/current-system/sw/bin/xrandr --output DP-2 --mode 2560x1080 --rate 200 --pos 0x1080 --output DP-0 --mode 2560x1080 --rate 200 --pos 0x0'';         
-  #       # ExecStop = ''ps aux |rg "[s]xhkd" | awk \'{ print $2 }\' | xargs kill '';
-  #     };
-  #   };
-  # };
-
-
-  # rtkit is optional but recommended
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
-
   imports =
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
         <home-manager/nixos>
         ./8bitdo.nix
+        ./wayland.nix
+        ./configs/gaming.nix 
     ];
-
-  environment.pathsToLink = [ "/libexec"];
-
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
+  };
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "yoitsu"; # Define your hostname.
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    timeout = 1;
+  };
+  # systemd.services.remaps = {
+  #   description = "...";
+  #   # serviceConfig.PassEnvironment = "DISPLAY";
+  #   script = ''
+  #     /run/wrappers/bin/sudo /home/hirschy/.local/bin/xremap --watch /home/hirschy/my-dotfiles/xremap_config.yml
+  #   '';
+  #   wantedBy = [ "multi-user.target" ]; # starts after login
+  # };
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+      commands = [
+        {
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/reboot";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/poweroff";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.neovim}/bin/nvim";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/systemctl";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/nix-channel";
+          options = [ "NOPASSWD" ];
+        }
+      #   {
+      #     command = "/home/hirschy/.local/bin/xremap";
+      #     options = [ "NOPASSWD" ];
+      #   }
+      ];
+      groups = [ "wheel" ];
+    }];
+  };
+  networking.hostName = "hyprtest"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -105,131 +118,98 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  # services.xserver.windowManager.i3.package = pkgs.i3-gaps;
+
+  # Enable the X11 windowing system.
+   services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+   services.xserver.displayManager.sddm = {
+      enable = true;
+      enableHidpi = true;
+      theme = "abstractguts-themes";
+    };
   # Configure keymap in X11
   services.xserver = {
-    enable = true;
     layout = "us";
     xkbVariant = "";
-    
-    desktopManager = {
-     xterm.enable = false;
-     };
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm = {
-        enable = true;
-        background = /home/hirschy/Pictures/nier.jpg;
-        };
-      };
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-        i3blocks
-        polybar
-      ];
-    };
   };
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.hirschy = {
-    isNormalUser = true;
-    description = "Hirschy";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+
+  # Enable CUPS to print documents.
+
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
   };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     users.hirschy = import ./home.nix;
   };
+  programs.zsh.enable = true;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.hirschy = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    description = "Hirschy";
+    extraGroups = [ "networkmanager" "wheel" "keyd" ];
+    packages = with pkgs; [
+      firefox
+    #  thunderbird
+    ];
+  };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-  ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    brave
-    git
-    home-manager
-    sublime4
-    traceroute
-    python311
-    python311Packages.pip
-    pavucontrol
-    autojump
-    discord
-    spotify
-    steam
-    picom
-    sweet
-    mpv
-    yt-dlp
-    chromium
-    ripgrep
-    cmake
-    lm_sensors
-    zip
-    lutris
-    wineWowPackages.full
-    gimp
-    rtorrent
-    ffmpeg
-    aria
-    p7zip
-    pciutils
+  nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
+    })
   ];
+  environment.systemPackages = with pkgs; [
+      kitty
+      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      gcc
+      wget
+      git
+      home-manager
+      traceroute
+      python311
+      obs-studio
+      python311Packages.pip
+      # chromium
+      ripgrep
+      du-dust
+      cmake
+      lm_sensors
+      ffmpeg
+      pciutils
+      themes.abstractguts-themes
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-  security.sudo = {
-    enable = true;
-    extraRules = [{
-      commands = [
-        {
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/reboot";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/poweroff";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.sublime4}/bin/subl";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.neovim}/bin/nvim";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/systemctl";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/nix-channel";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-      groups = [ "wheel" ];
-    }];
-  };
+  # XDG portal
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
@@ -237,6 +217,30 @@ in
     enable = true;
     enableSSHSupport = true;
   };
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+    swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
+  };
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(meta, esc)";
+          };
+        };
+      };
+    };
+  }; 
   services.openssh = {
     enable = true;
     settings = {
@@ -245,6 +249,7 @@ in
       PermitRootLogin = "no";    
     };
   };
+  services.pcscd.enable = true;
   # List services that you want to enable:
   services.dbus.packages = [
     pkgs.dbus.out
@@ -257,6 +262,8 @@ in
       "*/30 * * * *      hirschy    /home/hirschy/.scripts/.venv/bin/python3 /home/hirschy/.scripts/manga_update.py"
     ];
   };
+  # List services that you want to enable:
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
@@ -266,7 +273,6 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -274,6 +280,5 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
 
 }

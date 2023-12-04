@@ -6,8 +6,9 @@
     "ClearVision": false,
     "T1": false,
     "Frosted Glass": false,
-    "Translucence": true,
+    "Translucence": false,
     "Holo": false,
     "Alexis Modern Discord Theme": false,
-    "AMOLED-Cord": false
+    "AMOLED-Cord": false,
+    "Catppuccin": true
 }

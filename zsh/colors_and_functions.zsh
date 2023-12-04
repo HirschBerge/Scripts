@@ -152,8 +152,9 @@
             }
 
             rebuild (){
+              sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
               sudo nix-channel --update
-              sudo nixos-rebuild switch
+              sudo nixos-rebuild --upgrade switch
             }
 
             ex ()
@@ -207,7 +208,12 @@
               public=$(curl -s api.ipify.org)
               printf "${Green}[+]${NoColor} Switching complete. Your new local IP is ${Green}$LOCAL${NoColor}  and new public IP is ${Green}$public${NoColor} \n"
             }
-
+            keyword_kill(){
+              input_string="$1"
+              first="${input_string[1,1]}"
+              ending="${input_string[2,-1]}"
+              ps aux| grep [$first]$ending | awk '{ print $2 }'| xargs kill
+            }
             dotfileBUp(){
                 for j in zsh-syntax-highlighting/ zsh-git-prompt/ zsh-autosuggestions/ powerlevel10k/ .config/ .zsh_history .fonts.conf
                 do
@@ -238,4 +244,9 @@
 
             mn(){
                 man -k . | dmenu -fn "MeslosLGS NF" -l 30 | awk '{print $1}' | xargs -r man -Tpdf | zathura -
+            }
+            swap_files(){
+              \mv "$1" "$1.old"
+              \mv "$2" "$1"
+              \mv "$1.old" "$2"
             }

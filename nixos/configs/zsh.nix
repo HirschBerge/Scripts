@@ -1,10 +1,10 @@
 {config, pkgs, ...}:
 {
 	programs.zsh = {
-		enable = true;
+        enable = true;    
 		enableCompletion = true;
 		enableAutosuggestions = true;
-		enableSyntaxHighlighting = true;
+		syntaxHighlighting.enable = true;
         initExtra = ''
             setopt autocd # auto cd when only path is entered
             setopt nomatch # throw an error on glob matching nothing
@@ -29,10 +29,12 @@
             export NIX_PAGER=cat
             export PROMPT_EOL_MARK=" "
             [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
+            source ${pkgs.autojump}/share/zsh/site-functions/autojump.zsh
       '';
         shellAliases = {
             "-s {jpg,png,jpeg}" = "kitty +kitten icat";
-            "-s {mp4,mkv,mp3}" = "mpv"; 
+            "-s {mp4,mkv,mp3}" = "mpv";
+            "-s gif" = "sxiv -a";
             ".." = "cd ..";
             "..." = "cd ..; cd ..";
             "600" = "chmod -R 600";
@@ -44,12 +46,14 @@
             "777" = "chmod -R 777";
             "8" = "cd -8";
             "9" = "cd -9";
-            D = "cd ~/Downloads && exa -a";
-            G = "| grep -i --color=auto";
+            "time" = "${pkgs.hyperfine}/bin/hyperfine --runs 1";
+            "benchmark" = "${pkgs.hyperfine}/bin/hyperfine";
+            "htop" = "btop";
+            D = "cd ~/Downloads && eza --no-quotes -l -a";
             YT = "youtube-viewer";
             _="sudo ";
-            "rust_dev" = "nix develop";
-            "rustinit" = "nix flake init --template github:the-nix-way/dev-templates#rust";
+            "rust_dev" = "nix develop -c zsh";
+            "rustinit" = "nix flake init --template github:HirschBerge/dev-templates#rust";
             awg="animewget";
             bat="bat --paging=never";
             bd = "nvim ~/.config/directories";
@@ -58,7 +62,7 @@
             c="clear";
             cat="bat --paging=never";
             ccat="highlight --out-format=ansi";
-            cf="cd ~/.config && exa -a";
+            cf="cd ~/.config && eza --no-quotes -a";
             cfa="nvim ~/.config/aliasrc";
             cfb="nvim ~/.config/i3blocks/config";
             cfd="nvim ~/.Xdefaults";
@@ -73,12 +77,12 @@
             cfz="nvim /.zshrc";
             traceroute="grc traceroute";
             cp="rsync -rah --info=progress2";
-            d="cd ~/Documents && exa -a";
+            d="cd ~/Documents && eza --no-quotes -a";
             dd="dd status=progress";
             diff="diff --color=auto";
             dload="python3 /home/$USER/downloader-cli/download.py";
             dloads="cd ~/Downloads";
-            dtop="cd ~/Desktop && exa --group-directories-first -l";
+            dtop="cd ~/Desktop && eza --no-quotes --group-directories-first -l";
             du="~/.scripts/dudu.sh";
             e="nvim";
             egrep="grep -E --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
@@ -198,14 +202,14 @@
             intensemap="grc nmap --open -n -A -T4 -v";
             ka="killall";
             l="ls -lah";
-            la="clear && exa --group-directories-first -la --icons";
-            ll="clear && exa --group-directories-first -l --icons";
-            ls="clear && exa --icons";
+            la="clear && eza --no-quotes --group-directories-first -la --icons=always";
+            ll="clear && eza --no-quotes --group-directories-first -l --icons=always";
+            ls="clear && eza --no-quotes  --icons";
             lsa="ls -lah";
             lsblk="clear && lsblk";
-            m="cd ~/Music && exa -a";
+            m="cd ~/Music && eza --no-quotes -a";
             magit="nvim -c MagitOnly";
-            manga="exa --group-directories-first -lah --icons /mnt/NAS/Manga";
+            manga="eza --no-quotes --group-directories-first -lah --icons /mnt/NAS/Manga";
             md="mkdir -p";
             mp3convert="sh ~/.scripts/mp3convert";
             mp4renm="~/.scripts/setname";
@@ -233,7 +237,7 @@
             npmst="npm start";
             npmt="npm test";
             pip="pip3";
-            pp="cd ~/Pictures && exa -a";
+            pp="cd ~/Pictures && eza --no-quotes -a";
             publicip="curl api.ipify.org";
             python="python3";
             r="ranger";
@@ -243,23 +247,23 @@
             removeurl="find /mnt/NAS/Anime -type f -name \"*url*\" -exec rm -f {} \; -print";
             renames="~/.scripts/rename";
             restartpipewire="systemctl --user restart wireplumber pipewire pipewire-pulse";
-            rm="rm -iv";
+            # rm="rm -iv";
             rmv="rsync -rahvz --info=progress2 --remove-source-files";
             rscp="rsync -rah --info=progress2 --ignore-existing";
             run-help="man";
-            sc="cd ~/.local/bin && exa -a";
+            sc="cd ~/.local/bin && eza --no-quotes -a";
             scripts="cd ~/.scripts/";
             sdn="sudo shutdown -h now";
             shutdown="umount -R /mnt/ ; sudo shutdown -h now";
             sorts="sort | uniq -c | sort -n";
             speedtest="speedtest-cli";
             ssh="kitty +kitten ssh";
-            tree="exa -lah --tree --icons";
+            tree="eza --no-quotes -lah --tree --icons";
             v="nvim";
             vi="vim";
             vim="nvim";
             vimdiff="nvim -d";
-            vv="cd ~/Videos && exa -a";
+            vv="cd ~/Videos && eza --no-quotes -a";
             weath="less -S ~/.local/share/weatherreport";
             web="~/.scripts/yt";
             x="exit";
@@ -279,6 +283,8 @@
                 "npm"
                 "brew"
                 "history-substring-search"
+                "git"
+                "web-search"
             ];
         };
     };

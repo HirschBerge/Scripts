@@ -46,12 +46,13 @@
             "777" = "chmod -R 777";
             "8" = "cd -8";
             "9" = "cd -9";
-            "time" = "${pkgs.hyperfine}/bin/hyperfine";
+            "time" = "${pkgs.hyperfine}/bin/hyperfine --runs 1";
+            "benchmark" = "${pkgs.hyperfine}/bin/hyperfine";
             "htop" = "btop";
             D = "cd ~/Downloads && eza --no-quotes -l -a";
             YT = "youtube-viewer";
             _="sudo ";
-            "rust_dev" = "nix develop";
+            "rust_dev" = "nix develop -c zsh";
             "rustinit" = "nix flake init --template github:HirschBerge/dev-templates#rust";
             awg="animewget";
             bat="bat --paging=never";
@@ -246,7 +247,7 @@
             removeurl="find /mnt/NAS/Anime -type f -name \"*url*\" -exec rm -f {} \; -print";
             renames="~/.scripts/rename";
             restartpipewire="systemctl --user restart wireplumber pipewire pipewire-pulse";
-            rm="rm -iv";
+            # rm="rm -iv";
             rmv="rsync -rahvz --info=progress2 --remove-source-files";
             rscp="rsync -rah --info=progress2 --ignore-existing";
             run-help="man";

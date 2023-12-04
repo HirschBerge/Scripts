@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.5.4
+ * @version 3.5.5
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -195,6 +195,7 @@ module.exports = (_ => {
 					}, timeout);
 					let response = null, isFallback = false;
 					return (config.bdVersion && BdApi && BdApi.Net && BdApi.Net.fetch ? BdApi.Net.fetch : fetch)(url, config).catch(error => {
+						BDFDB.TimeUtils.clear(timeoutObj);
 						if (!config.bdVersion) return requestFunction(url, Object.assign({}, config, {bdVersion: true}), callback);
 						else callback(new Error(error), {
 							aborted: false,
@@ -213,9 +214,16 @@ module.exports = (_ => {
 						response.statusCode = response.status;
 						if (response.headers) response.headers["content-type"] = response.headers.get("content-type");
 						BDFDB.TimeUtils.clear(timeoutObj);
-						return config.toBuffer ? response.arrayBuffer() : response.text();
-					}).then(body => {
-						if (!killed && response) callback(response.status != 200 ? new Error(response.statusText || "Fetch Failed") : null, response, body);
+						return config.toBase64 ? response.blob() : config.toBuffer ? response.arrayBuffer() : response.text();
+					}).then(result => {
+						if (!killed && response) {
+							if (!config.toBase64 || response.status != 200) callback(response.status != 200 ? new Error(response.statusText || "Fetch Failed") : null, response, result);
+							else {
+								let reader = new FileReader();
+								reader.onload = _ => callback(null, response, reader.result);
+								reader.readAsDataURL(result);
+							}
+						}
 					});
 				}
 			};
@@ -1184,7 +1192,8 @@ module.exports = (_ => {
 					Internal.getWebModuleReq = function () {
 						if (!Internal.getWebModuleReq.req) {
 							const id = "BDFDB-WebModules_" + Math.floor(Math.random() * 10000000000000000);
-							const req = webpackChunkdiscord_app.push([[id], {}, req => req]);
+							let req;
+							webpackChunkdiscord_app.push([[id], {}, r => {if (r.c) req = r;}]);
 							delete req.m[id];
 							delete req.c[id];
 							Internal.getWebModuleReq.req = req;

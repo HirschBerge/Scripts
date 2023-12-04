@@ -245,3 +245,8 @@
             mn(){
                 man -k . | dmenu -fn "MeslosLGS NF" -l 30 | awk '{print $1}' | xargs -r man -Tpdf | zathura -
             }
+            swap_files(){
+              \mv "$1" "$1.old"
+              \mv "$2" "$1"
+              \mv "$1.old" "$2"
+            }

@@ -22,6 +22,8 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+# boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+
 
 fileSystems."/mnt/storage" =
   { device = "/dev/disk/by-uuid/ef223ecb-2d19-40a7-a458-9ec536d9a9a2";
@@ -44,11 +46,15 @@ fileSystems."/mnt/NAS" = {
     opengl.enable = true;
     opengl.driSupport = true;
     opengl.driSupport32Bit = true;
-    nvidia.modesetting.enable = true;
-    nvidia.open = true;
-    nvidia.nvidiaSettings = true;
+    nvidia = {
+      modesetting.enable = true;
+      # open = false;
+      # powerManagement.enabled = true;
+      open = true;
+      nvidiaSettings = true;
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
   swapDevices = [ ];
 

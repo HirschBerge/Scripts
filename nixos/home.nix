@@ -47,6 +47,7 @@ in
         html-tidy
 		ani-cli
 		zip
+        yuzu-mainline
 		rtorrent
 		lutris
 		wineWowPackages.full

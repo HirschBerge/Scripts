@@ -20,6 +20,7 @@ declare -A game_opts
 game_opts["ELDEN RING"]="python er-patcher --rate 144 --all --"
 game_opts["Apex Legends"]="-eac_launcher_settings SettingsDX12.json +fps_max 200 PROTON_EAC_RUNTIME=1 --"
 game_opts["ARMORED CORE™ VI FIRES OF RUBICON™"]="mangohud"
+game_opts["Overwatch® 2"]="MANGOHUD=1"
 # check steam mount paths
 SteamPaths=`grep '"path"' $SteamLib | awk -F '"' '{print $4}'`
 ManifestList=`find $SteamPaths/steamapps/ -type f -name "appmanifest_*.acf" 2>/dev/null`
@@ -51,7 +52,8 @@ do
     echo -en "$game\x00icon\x1f${SteamThumb}/${appid}_library_600x900.jpg\n"
 done | rofi -dmenu -i -theme-str "${r_override}" -config $RofiConf)
 
-
+echo $RofiSel
+# exit 0
 # launch game
 if [ ! -z "$RofiSel" ] ; then
     launchid=`echo "$GameList" | grep "$RofiSel" | cut -d '|' -f 2`

@@ -11,11 +11,17 @@ Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
 TARGET="$HOME/.config/"
+printf "${Green}What would you like your username to be? ${NoColor}"
+read username
+script_dir="$(dirname "$(readlink -f "$0")")"
+find "$script_dir/nixos/" -type f -exec sed -i "s/hirschy/$username/g" {} +
+
+exit 1
 
 [[ -d "$TARGET" ]] && printf "${Green}[+]${Blue} Configs folder exists. Propigating...${NoColor}\n" || mkdir $TARGET
 sleep 1
 printf "${Green}[+] ${Blue}Copying program config files to ${Yellow}~/.config${NoColor}\n"
-rsync -rahi  --exclude ".git/" --exclude "nixos/" --exclude "bin" --exclude "setup.sh" $PWD/ $TARGET >/dev/null
+rsync -rahi  --exclude ".git/" --exclude "nixos/" --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $PWD/ $TARGET >/dev/null
 printf "${Green}[+] ${Blue}Copying NixOS files to ${Purple}/etc/nixos${NoColor}\n"
 sleep 1
 #TARGET="/etc/nixos/"

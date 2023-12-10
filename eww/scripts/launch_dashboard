@@ -8,7 +8,7 @@ CFG="$HOME/.config/eww/dashboard"
 if [[ ! -f "$FILE" ]]; then
 	touch "$FILE"
 	eww --config "$CFG" open dashboard
- else
+ else 
  	eww --config "$CFG" close dashboard
  	rm "$FILE"
  fi

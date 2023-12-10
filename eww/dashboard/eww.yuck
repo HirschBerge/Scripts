@@ -119,7 +119,7 @@
 
 
 ;; ******** DASHBOARD ********************************************************************
-(defwidget dashboard []
+(defwidget dashboard []  :monitor 1
   (box :class "background" :space-evenly "false" :orientation "v" :spacing 15 :width 400
     (system)
     (music)

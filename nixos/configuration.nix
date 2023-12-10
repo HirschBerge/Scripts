@@ -32,6 +32,9 @@ in
         };
     };
   };
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   # Bootloader.
   boot.loader = {
     systemd-boot.enable = true;

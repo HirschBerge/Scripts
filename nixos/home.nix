@@ -36,6 +36,7 @@ in
 		swaynotificationcenter# dunst# mako
         swaylock-effects
 		swayidle
+        jq
         betterdiscordctl
 		nmap
 		grc

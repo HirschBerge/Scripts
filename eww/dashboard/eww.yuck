@@ -119,7 +119,7 @@
 
 
 ;; ******** DASHBOARD ********************************************************************
-(defwidget dashboard []  :monitor 1
+(defwidget dashboard []
   (box :class "background" :space-evenly "false" :orientation "v" :spacing 15 :width 400
     (system)
     (music)
@@ -127,5 +127,5 @@
 
 ;; ** Windows *************************************************************************
 
-(defwindow dashboard :namespace "dashboard" :stacking "fg" :focusable "false" :monitor 1 :geometry (geometry :anchor "bottom right" :x 5 :y 5)
+(defwindow dashboard :namespace "dashboard" :monitor 1 :stacking "fg" :focusable "false" :geometry (geometry :anchor "bottom right" :x 5 :y 5)
   (dashboard))

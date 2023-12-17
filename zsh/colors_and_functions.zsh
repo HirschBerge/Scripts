@@ -154,6 +154,7 @@
             rebuild (){
               sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
               sudo nix-channel --update
+              rm -f ~/.mozilla/firefox/hirschy/search.json.mozlz4
               sudo nixos-rebuild --upgrade switch
             }
 
@@ -244,6 +245,12 @@
 
             mn(){
                 man -k . | dmenu -fn "MeslosLGS NF" -l 30 | awk '{print $1}' | xargs -r man -Tpdf | zathura -
+            }
+            versions(){
+              kernel="$(uname -r)"
+              echo -en "Kernel:   $kernel\n"
+              nvidia-settings --version |grep version |awk -F"version " '{ print "NVIDIA:   " $2}'
+              hyprctl version |grep commit |awk '{print "Hyprland: " $7}'
             }
             swap_files(){
               \mv "$1" "$1.old"

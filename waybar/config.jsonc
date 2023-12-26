@@ -111,9 +111,9 @@
   },
   "custom/launcher": {
     "format": "\uf313 ",
-    "on-click": "brave https://search.nixos.org/packages",
-    "on-click-middle": "brave https://search.nixos.org/options",
-    "on-click-right": "brave https://mipmip.github.io/home-manager-option-search/",
+    "on-click": "firefox https://search.nixos.org/packages",
+    "on-click-middle": "firefox https://search.nixos.org/options",
+    "on-click-right": "firefox https://mipmip.github.io/home-manager-option-search/",
     "tooltip": false
   },
   "custom/powermenu": {

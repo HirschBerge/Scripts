@@ -38,7 +38,7 @@ no=''
 # Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
-		-p " $USER@$host" \
+      -p "Goodbye, $(echo $USER| python3 -c "import sys; print(sys.stdin.read().title())")!" \
 		-mesg " Last Login: $lastlogin |  Uptime: $uptime" \
 		-theme ${dir}/${theme}.rasi
 }

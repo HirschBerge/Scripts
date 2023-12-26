@@ -53,7 +53,7 @@ mainbox {
     enabled:                     true;
     spacing:                     0px;
     background-color:            transparent;
-    orientation:                 horizontal;
+    orientation:                 vertical;
     children:                    [ "imagebox", "listbox" ];
 }
 

@@ -11,10 +11,10 @@
 
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/type-4"
-theme='style-5'
+theme='style-4'
 
 # CMDs
-uptime="`uptime -p | sed -e 's/up //g'`"
+uptime="`w |grep tty |awk '{ print $4 }'`"
 host=`hostname`
 
 # Options

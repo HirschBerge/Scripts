@@ -175,7 +175,7 @@
             }
             {
               name = "CMU Workday";
-              url = "https://wd5.myworkday.com/cmu/d/home.htmld"
+              url = "https://wd5.myworkday.com/cmu/d/home.htmld";
             }
           ];
         }

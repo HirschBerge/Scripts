@@ -66,9 +66,72 @@
             ];
             }
             {
-              name = "AniWave";
-              # toolbar = true;
-              url = "https://aniwave.to/home";
+              name = "Homelab";
+              bookmarks = [
+              {
+                name = "Plex";
+                url = "http://srv-prod-plex.home.hirschykiss.net:32400/web/index.html#!";
+              }
+              {
+                name = "Proxmox";
+                url = "https://srv-prod-proxmox.home.hirschykiss.net:8006/#v1:0:18:4:::::::";
+              }
+              {
+                name = "Home Assistant";
+                url = "http://srv-prod-hac.home.hirschykiss.net:8123/lovelace/HPCA";
+              }
+              {
+                name = "Router";
+                url = "https://router.home.hirschykiss.net/network/default/dashboard";
+              }
+               {
+                name = "Docker";
+                url = "http://srv-prod-docker.home.hirschykiss.net:9000";
+              }
+             {
+                name = "";
+                url = "";
+              }
+
+              ];
+            }
+            {
+              name = "Learn Rust";
+              bookmarks = [
+              {
+                name = "Comprehensive Rust";
+                url = "https://google.github.io/comprehensive-rust";
+              }
+              {
+                name = "The Book";
+                url = "https://doc.rust-lang.org/book/";
+              }
+              ];
+            }
+            {
+              name = "Github Links";
+              bookmarks = [
+              {
+                name = "Home";
+                url = "https://github.hirschykiss.net/";
+              }
+              {
+                name = "Advent of Code";
+                url = "https://github.com/HirschBerge/AdventOfCode";
+              }
+              {
+                name = "Anilyzer";
+                url = "https://github.com/HirschBerge/anilyzer";
+              }
+              {
+                name = "Dots";
+                url = "https://github.com/HirschBerge/my-dotfiles";
+              }
+              {
+                name = "Scripts";
+                url = "https://github.com/HirschBerge/Scripts";
+              }
+              ];
             }
             {
               name = "Pathfinder";
@@ -91,6 +154,28 @@
                   url = "https://drive.google.com/drive/folders/1uce9hs9MrRcIZebNvdQbvYLi-6vbkV9m";
                 }
               ];
+            }
+            {
+              name = "All Anime";
+              # toolbar = true;
+              url = "https://allanime.to/search-anime?tr=sub&cty=ALL";
+            }
+            {
+              name = "YouTube";
+              url = "https://youtube.com";
+            }
+            {
+              name = "AniWave";
+              # toolbar = true;
+              url = "https://aniwave.to/home";
+            }
+            {
+              name = "ProtonDB";
+              url = "https://www.protondb.com/";
+            }
+            {
+              name = "CMU Workday";
+              url = "https://wd5.myworkday.com/cmu/d/home.htmld"
             }
           ];
         }

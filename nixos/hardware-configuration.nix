@@ -48,9 +48,9 @@ fileSystems."/mnt/NAS" = {
     opengl.driSupport32Bit = true;
     nvidia = {
       modesetting.enable = true;
-      # open = false;
       # powerManagement.enabled = true;
-      open = true;
+      open = false;
+      # open = true;
       nvidiaSettings = true;
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
       package = config.boot.kernelPackages.nvidiaPackages.stable;

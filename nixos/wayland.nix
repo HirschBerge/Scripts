@@ -2,7 +2,8 @@
 {
   programs.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
+    # No longer exists as it is not necessary.
+    # enableNvidiaPatches = true;
     xwayland.enable = true;
   };
 

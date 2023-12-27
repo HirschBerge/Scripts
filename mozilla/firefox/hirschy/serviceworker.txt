@@ -131,3 +131,15 @@ true
 0
 true
 #
+
+https://zombiefox.github.io/awesomeSheet/
+https://zombiefox.github.io/awesomeSheet/service-worker.js
+true
+{c6fbfa51-d5ea-47f4-b515-2a227a5a7b63}
+0
+1703645129676897
+1703645129677549
+1703645128833395
+0
+true
+#

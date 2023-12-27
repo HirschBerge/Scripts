@@ -23,6 +23,7 @@
         sponsorblock
         enhancer-for-youtube
         return-youtube-dislikes
+        nighttab
       ];
       search = {
         engines = {

@@ -21,11 +21,12 @@ exit 1
 [[ -d "$TARGET" ]] && printf "${Green}[+]${Blue} Configs folder exists. Propigating...${NoColor}\n" || mkdir $TARGET
 sleep 1
 printf "${Green}[+] ${Blue}Copying program config files to ${Yellow}~/.config${NoColor}\n"
-rsync -rahi  --exclude ".git/" --exclude "nixos/" --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $PWD/ $TARGET >/dev/null
+rsync -rahi --exclude ".git/" --exclude "nixos/" --exclude ".mozilla" --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $script_dir/ $TARGET >/dev/null
+rsync -rahi "$script_dir/.mozilla ~/"
 printf "${Green}[+] ${Blue}Copying NixOS files to ${Purple}/etc/nixos${NoColor}\n"
 sleep 1
-#TARGET="/etc/nixos/"
-#sudo rsync -rahi ./nixos/ $TARGET >/dev/null
+TARGET="/etc/nixos/"
+sudo rsync -rahi "$script_dir/nixos/" $TARGET >/dev/null
 
 results=""
 

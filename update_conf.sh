@@ -13,10 +13,10 @@ do
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}/etc/$fixed ${BYellow}to ${BCyan}$dots${NoColor}\n"
       rsync -rah --progress -i /etc/nixos/* nixos/ >/dev/null
     elif
-      [ "$fixed" == ".mozilla" ]
+      [ "$fixed" == "mozilla" ]
     then
-      printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/$fixed ${BYellow}to ${BCyan}$dots${NoColor}\n"
-      rsync -rah --progress -i "$HOME/fixed/" "$dots/$fixed" >/dev/null
+      printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.$fixed ${BYellow}to ${BCyan}$dots${NoColor}\n"
+      rsync -rah --progress -i "$HOME/.$fixed/" "$dots/$fixed" >/dev/null
     else
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.config/$fixed ${BYellow}to ${BCyan}$dots${NoColor}\n"
       rsync -rah --progress -i "$HOME/.config/$fixed/" "$dots/$fixed/" >/dev/null

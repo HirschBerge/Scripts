@@ -11,7 +11,7 @@ do
     if [ "$fixed" == "nixos" ]
     then
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}/etc/$fixed ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
-      rsync -rah --progress -i /etc/nixos/* nixos/ >/dev/null
+      rsync -rah --progress -i /etc/nixos/* $dots/nixos/ >/dev/null
     elif
       [ "$fixed" == "mozilla" ]
     then

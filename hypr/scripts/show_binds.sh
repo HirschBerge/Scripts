@@ -1,6 +1,31 @@
 #!/usr/bin/env bash
-config_file=~/.config/hypr/binds.conf
+list=""
 
-keybinds=$(grep -oP '(?<=bind = ).*' $config_file)
-keybinds=$(echo "$keybinds" | sed 's/$mainMod/SUPER/g'|  sed 's/,\([^,]*\)$/ = \1/' | sed 's/, exec//g' | sed 's/^,//g')
-rofi -dmenu -replace -p "Keybinds" -config ~/.config/rofi/launchers/type-1/style-3.rasi <<< "$keybinds"
+while read -r i; do
+    dispatcher=$(jq --raw-output '.dispatcher' <<< "$i")
+    modmask=$(jq --raw-output '.modmask' <<< "$i")
+    key=$(jq --raw-output '.key' <<< "$i")
+    arg=$(jq --raw-output '.arg' <<< "$i")
+
+    # Check and update modmask value
+    if [ "$modmask" = "64" ]; then
+        modmask="SUPER"
+    elif [ "$modmask" = "65" ]; then
+        modmask="SUPER_SHIFT"
+    fi
+
+    combo="$modmask + $key"
+    action="$dispatcher $arg"
+
+    # Append to the list with a delimiter
+    list+="$combo: $action|"
+done < <(jq -c '.[]' test.json)
+
+# Pass the list to rofi and set the delimiter
+bind=$(rofi -dmenu -replace -p "Keybinds" -sep "|" -format "s" -config ~/.config/rofi/launchers/type-1/style-3.rasi <<< "$list")
+command=$(echo $bind | awk -F":" '{ print $2 }')
+combo=$(echo $bind | awk -F":" '{ print $1 }')
+echo -en "comb:$combo\ncmd:$command\n"
+# [ -z "$command" ] && command="Empty"
+notify-send "$combo" "$command" --icon ~/Pictures/hypr.png
+echo "$command" |wl-copy

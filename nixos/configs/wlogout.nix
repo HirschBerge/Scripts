@@ -1,6 +1,7 @@
 {config, pkgs, ...}:
 let 
   lockAction = "sleep 0.5;${pkgs.swaylock-effects}/bin/swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --grace 2 --fade-in 0.2 -f";
+  
 in
 {
   programs.wlogout = {
@@ -36,12 +37,57 @@ button {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20%;
+  box-shadow: none;
+  text-shadow: none;
+  animation: gradient_f 20s ease-in infinite;
+}
+button:focus {
+    background-color: @wb-act-bg;
+    background-size: 15%;
+}
+
+button:hover {
+    background-color: @wb-hvr-bg;
+    background-size: 30%;
+    border-radius: 10px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
+}
+
+button:hover#lock {
+    border-radius: 10px;
+    margin : 5px 0px 5px 6px;
+}
+
+button:hover#logout {
+    border-radius: 10px;
+    margin : 5px 0px 5px 0px;
+}
+
+button:hover#suspend {
+    border-radius: 10px;
+    margin : 5px 0px 5px 0px;
+}
+
+button:hover#shutdown {
+    border-radius: 10px;
+    margin : 5px 0px 5px 0px;
+}
+
+button:hover#hibernate {
+    border-radius: 10px;
+    margin : 5px 0px 5px 0px;
+}
+
+button:hover#reboot {
+    border-radius: 10px;
+    margin : 5px 6px 5px 0px;
 }
 
 button:focus,
 button:active,
 button:hover {
-  background-color: #ab47bc;
+  background-color: #2c114f;
   outline-style: none;
 }
 

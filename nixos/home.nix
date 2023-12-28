@@ -9,7 +9,13 @@ let
   	themes = pkgs.callPackage  ./configs/themes.nix {};
 in
 {
-	imports = [ ./configs/firefox.nix ./configs/zsh.nix ./configs/hypr.nix ./configs/kitty.nix ./configs/starship.nix ];
+	imports = [ ./configs/firefox.nix
+    ./configs/zsh.nix 
+    ./configs/hypr.nix 
+    ./configs/kitty.nix 
+    ./configs/starship.nix 
+    ./configs/wlogout.nix
+    ];
 	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
 	home.username = "hirschy";
 	home.homeDirectory = "/home/hirschy";

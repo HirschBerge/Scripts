@@ -24,6 +24,8 @@
         enhancer-for-youtube
         return-youtube-dislikes
         nighttab
+        behind-the-overlay-revival
+        betterttv
       ];
       search = {
         engines = {

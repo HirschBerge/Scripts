@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+json_path="$HOME/.cache/hypr_binds.json"
+[ -e "$json_path" ] || touch "$json_path"
+hyprctl binds -j > "$json_path"
+
 list=""
 
 while read -r i; do
@@ -19,7 +24,7 @@ while read -r i; do
 
     # Append to the list with a delimiter
     list+="$combo: $action|"
-done < <(jq -c '.[]' test.json)
+done < <(jq -c '.[]' "$json_path")
 
 # Pass the list to rofi and set the delimiter
 bind=$(rofi -dmenu -replace -p "Keybinds" -sep "|" -format "s" -config ~/.config/rofi/launchers/type-1/style-3.rasi <<< "$list")

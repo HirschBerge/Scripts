@@ -59,6 +59,7 @@
             bd = "nvim ~/.config/directories";
             bf="nvim ~/.config/files";
             bw="nvim ~/.config/bookmarks";
+            filesys="${pkgs.duf}/bin/duf";
             c="clear";
             cat="bat --paging=never";
             ccat="highlight --out-format=ansi";

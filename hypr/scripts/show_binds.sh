@@ -32,5 +32,5 @@ command=$(echo $bind | awk -F":" '{ print $2 }')
 combo=$(echo $bind | awk -F":" '{ print $1 }')
 echo -en "comb:$combo\ncmd:$command\n"
 # [ -z "$command" ] && command="Empty"
-notify-send "$combo" "$command" --icon ~/Pictures/hypr.png
+notify-send "$combo" "$command" --icon ~/.config/hypr/hypr.png
 echo "$command" |wl-copy

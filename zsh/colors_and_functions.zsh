@@ -112,13 +112,6 @@
               find $1 -type d -empty -print -delete
             }
 
-            filesys(){
-                clear
-            #   echo -n "Drive:\t\t     FileSystem:   Size: Used: Avl:  Use:  Mount Point\n"
-              sudo df -hT |grep FileSystem |tac |tac
-                sudo df -hT |grep -v tmp | grep "ext4\|btrfs"| sort -nrk 6
-            }
-
             ips(){
                 ip a |grep enp |grep inet |sed 's,/24.*noprefixroute,,' |awk '{ print $3": " $2}'  
                 [[ `ip a | grep "tun\|nord"` ]] && ip a | grep "inet" |grep "tun\|nord" | awk '{ print "You are connected to VPN and your Alternate ip is: " $2 }'

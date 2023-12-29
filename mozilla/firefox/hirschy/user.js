@@ -1,1 +1,1 @@
-/nix/store/j8s3b7817ypw1b4gwb12vgcmvcfrrx29-home-manager-files/.mozilla/firefox/hirschy/user.js
+/nix/store/vzfrl95a8sqbgd0f3yf2wq4aspmhywnj-home-manager-files/.mozilla/firefox/hirschy/user.js

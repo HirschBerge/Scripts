@@ -17,6 +17,8 @@ while read -r i; do
         modmask="SUPER"
     elif [ "$modmask" = "65" ]; then
         modmask="SUPER_SHIFT"
+      elif [ "$modmask" = "8" ]; then
+        modmask="ALT"
     fi
 
     combo="$modmask + $key"
@@ -32,5 +34,5 @@ command=$(echo $bind | awk -F":" '{ print $2 }')
 combo=$(echo $bind | awk -F":" '{ print $1 }')
 echo -en "comb:$combo\ncmd:$command\n"
 # [ -z "$command" ] && command="Empty"
-notify-send "$combo" "$command" --icon ~/.config/hypr/hypr.png
+notify-send "$combo" "$command" --icon ~/.config/hypr/.hypr.png
 echo "$command" |wl-copy

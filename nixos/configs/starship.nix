@@ -1,20 +1,18 @@
   {config, pkgs, ...}:
- 
- {
+    let
+      flavour = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
+    in
+  {
   programs.starship = {
       enable = true;
       settings = {
-        # "$schema" = "https://starship.rs/config-schema.json";
-        add_newline = true;
-        command_timeout = 500;
-        continuation_prompt = "[∙](bright-black) ";
-        format = "[](0xCBA6F7)$username$hostname$localip$shlvl$singularity$kubernetes[](fg:0x9A348E bg:0xDA627D)$directory$vcsh[](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch[](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf[](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$azure$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery[](fg:0x06969A bg:0x33658A)$time$status$shell$character";
-        right_format = "";
-        scan_timeout = 30;
+        # Other config here
+        # format = "$all"; # Remove this line to disable the default prompt format
+        format = "[](0x9A348E)$username$hostname$localip$shlvl$singularity$kubernetes[](fg:0x9A348E bg:0xDA627D)$directory$vcsh[](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch[](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf[](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$azure$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery[](fg:0x06969A bg:0x33658A)$time$status$shell$character";
         aws = {
           format = "[$symbol($profile )(($region) )([$duration] )]($style)";
           symbol = "🅰 ";
-          style = "#cba6f7";
+          style = "bold mauve";
           disabled = false;
           expiration_symbol = "X";
           force_display = false;
@@ -24,7 +22,7 @@
         azure = {
           format = "[$symbol($subscription)([$duration])]($style) ";
           symbol = "ﴃ ";
-          style = "#89b4fa";
+          style = "blue bold";
           disabled = true;
         };
         battery = {
@@ -37,7 +35,7 @@
           disabled = false;
           display = [
             {
-              style = "#f38ba8";
+              style = "red bold";
               threshold = 10;
             }
           ];
@@ -46,7 +44,7 @@
           format = "[$symbol ($version)]($style)";
           version_format = "v$raw";
           symbol = "";
-          style = "#89b4fa";
+          style = "bold blue";
           disabled = false;
           detect_extensions = [];
           detect_files = [
@@ -71,16 +69,16 @@
         };
         character = {
           format = "$symbol ";
-          vicmd_symbol = "[❮](#D2F7A6)";
+          vicmd_symbol = "[❮](bold green)";
           disabled = false;
-          success_symbol = "[➜](#D2F7A6) ";
-          error_symbol = "[✗](#f38ba8) ";
+          success_symbol = "[➜](bold green) ";
+          error_symbol = "[✗](bold red) ";
         };
         cmake = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "△ ";
-          style = "#89b4fa";
+          style = "bold blue";
           disabled = false;
           detect_extensions = [];
           detect_files = [
@@ -92,7 +90,7 @@
         cmd_duration = {
           min_time = 2000;
           format = "⏱ [$duration]($style) ";
-          style = "#cba6f7";
+          style = "mauve bold";
           show_milliseconds = false;
           disabled = false;
           show_notifications = false;
@@ -102,7 +100,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "⚙️ ";
-          style = "#89b4fa";
+          style = "bold blue";
           disabled = false;
           detect_extensions = [
             "cbl"
@@ -117,21 +115,21 @@
           truncation_length = 1;
           format = "[$symbol$environment]($style) ";
           symbol = " ";
-          style = "#D2F7A6";
+          style = "green bold";
           ignore_base = true;
           disabled = false;
         };
         container = {
           format = "[$symbol [$name]]($style) ";
           symbol = "⬢";
-          style = "#f38ba8 dimmed";
+          style = "red bold dimmed";
           disabled = false;
         };
         crystal = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🔮 ";
-          style = "#f38ba8";
+          style = "bold red";
           disabled = false;
           detect_extensions = ["cr"];
           detect_files = ["shard.yml"];
@@ -141,7 +139,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🎯 ";
-          style = "#89b4fa";
+          style = "bold blue";
           disabled = false;
           detect_extensions = ["dart"];
           detect_files = [
@@ -155,7 +153,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🦕 ";
-          style = "#D2F7A6";
+          style = "green bold";
           disabled = false;
           detect_extensions = [];
           detect_files = [
@@ -176,7 +174,7 @@
           read_only = " ";
           read_only_style = "red";
           repo_root_format = "[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) ";
-          style = "#74c7ec bg:0xDA627D";
+          style = "sky bold bg:0xDA627D";
           truncate_to_repo = true;
           truncation_length = 3;
           truncation_symbol = "…/";
@@ -199,7 +197,7 @@
         };
         docker_context = {
           format = "[$symbol$context]($style) ";
-          style = "#89b4fa bg:0x06969A";
+          style = "blue bold bg:0x06969A";
           symbol = " ";
           only_with_files = true;
           disabled = false;
@@ -215,7 +213,7 @@
           format = "[$symbol($version )(🎯 $tfm )]($style)";
           version_format = "v$raw";
           symbol = "🥅 ";
-          style = "#89b4fa";
+          style = "blue bold";
           heuristic = true;
           disabled = false;
           detect_extensions = [
@@ -235,7 +233,7 @@
         elixir = {
           format = "[$symbol($version (OTP $otp_version) )]($style)";
           version_format = "v$raw";
-          style = "#cba6f7 bg:0x86BBD8";
+          style = "bold mauve bg:0x86BBD8";
           symbol = " ";
           disabled = false;
           detect_extensions = [];
@@ -245,7 +243,7 @@
         elm = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          style = "#74c7ec bg:0x86BBD8";
+          style = "sky bold bg:0x86BBD8";
           symbol = " ";
           disabled = false;
           detect_extensions = ["elm"];
@@ -276,7 +274,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = " ";
-          style = "#f38ba8";
+          style = "bold red";
           disabled = false;
           detect_extensions = [];
           detect_files = [
@@ -293,7 +291,7 @@
         gcloud = {
           format = "[$symbol$account(@$domain)(($region))(($project))]($style) ";
           symbol = "☁️ ";
-          style = "#89b4fa";
+          style = "bold blue";
           disabled = false;
         };
         gcloud.project_aliases = {};
@@ -301,7 +299,7 @@
         git_branch = {
           format = "[$symbol$branch(:$remote_branch)]($style) ";
           symbol = " ";
-          style = "#cba6f7 bg:0xFCA17D";
+          style = "bold mauve bg:0xFCA17D";
           truncation_length = 9223372036854775807;
           truncation_symbol = "…";
           only_attached = false;
@@ -312,15 +310,15 @@
         git_commit = {
           commit_hash_length = 7;
           format = "[($hash$tag)]($style) ";
-          style = "#D2F7A6";
+          style = "green bold";
           only_detached = true;
           disabled = false;
           tag_symbol = " 🏷  ";
           tag_disabled = true;
         };
         git_metrics = {
-          added_style = "#D2F7A6";
-          deleted_style = "#f38ba8";
+          added_style = "bold green";
+          deleted_style = "bold red";
           only_nonzero_diffs = true;
           format = "([+$added]($added_style) )([-$deleted]($deleted_style) )";
           disabled = false;
@@ -329,13 +327,13 @@
           am = "AM";
           am_or_rebase = "AM/REBASE";
           bisect = "BISECTING";
-          cherry_pick = "🍒PICKING(#f38ba8)";
+          cherry_pick = "🍒PICKING(bold red)";
           disabled = false;
           format = "([$state( $progress_current/$progress_total)]($style)) ";
           merge = "MERGING";
           rebase = "REBASING";
           revert = "REVERTING";
-          style = "#cba6f7";
+          style = "bold mauve";
         };
         git_status = {
           ahead = "🏎💨$count";
@@ -350,7 +348,7 @@
           renamed = "👅";
           staged = "[++($count)](green)";
           stashed = "📦";
-          style = "#f38ba8 bg:0xFCA17D";
+          style = "red bold bg:0xFCA17D";
           untracked = "🤷";
           up_to_date = "✓";
         };
@@ -358,7 +356,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = " ";
-          style = "#74c7ec bg:0x86BBD8";
+          style = "bold sky bg:0x86BBD8";
           disabled = false;
           detect_extensions = ["go"];
           detect_files = [
@@ -375,7 +373,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "λ ";
-          style = "#cba6f7 bg:0x86BBD8";
+          style = "bold mauve bg:0x86BBD8";
           disabled = false;
           detect_extensions = [
             "hs"
@@ -403,7 +401,7 @@
         };
         hg_branch = {
           symbol = " ";
-          style = "#cba6f7";
+          style = "bold mauve";
           format = "on [$symbol$branch]($style) ";
           truncation_length = 9223372036854775807;
           truncation_symbol = "…";
@@ -411,9 +409,9 @@
         };
         hostname = {
           disabled = false;
-          format = "[$ssh_symbol](#89b4fa dimmed bold)[$hostname]($style) ";
+          format = "[$ssh_symbol](blue dimmed bold)[$hostname]($style) ";
           ssh_only = false;
-          style = "#D2F7A6";
+          style = "green dimmed bold";
           trim_at = ".";
         };
         java = {
@@ -447,13 +445,13 @@
           number_threshold = 2;
           format = "[$symbol$number]($style) ";
           symbol = "✦";
-          style = "#89b4fa";
+          style = "bold blue";
           disabled = false;
         };
         julia = {
           disabled = false;
           format = "[$symbol($version )]($style)";
-          style = "#cba6f7 bg:0x86BBD8";
+          style = "bold mauve bg:0x86BBD8";
           symbol = " ";
           version_format = "v$raw";
           detect_extensions = ["jl"];
@@ -467,7 +465,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🅺 ";
-          style = "#89b4fa";
+          style = "bold blue";
           kotlin_binary = "kotlin";
           disabled = false;
           detect_extensions = [
@@ -480,7 +478,7 @@
         kubernetes = {
           disabled = false;
           format = "[$symbol$context( ($namespace))]($style) in ";
-          style = "#74c7ec";
+          style = "sky bold";
           symbol = "⛵ ";
         };
         kubernetes.context_aliases = {};
@@ -491,13 +489,13 @@
           disabled = false;
           format = "[@$localipv4]($style) ";
           ssh_only = false;
-          style = "#cba6f7";
+          style = "mauve bold";
         };
         lua = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🌙 ";
-          style = "#89b4fa";
+          style = "bold blue";
           lua_binary = "lua";
           disabled = false;
           detect_extensions = ["lua"];
@@ -514,7 +512,7 @@
         };
         nim = {
           format = "[$symbol($version )]($style)";
-          style = "#cba6f7 bg:0x86BBD8";
+          style = "mauve bold bg:0x86BBD8";
           symbol = " ";
           version_format = "v$raw";
           disabled = false;
@@ -529,15 +527,15 @@
         nix_shell = {
           format = "[$symbol$state( ($name))]($style) ";
           disabled = false;
-          impure_msg = "[impure](#f38ba8)";
-          pure_msg = "[pure](#D2F7A6)";
-          style = "#89b4fa";
+          impure_msg = "[impure](bold red)";
+          pure_msg = "[pure](bold green)";
+          style = "bold blue";
           symbol = " ";
         };
         nodejs = {
           format = "[$symbol($version )]($style)";
-          not_capable_style = "#f38ba8";
-          style = "#D2F7A6 bg:0x86BBD8";
+          not_capable_style = "bold red";
+          style = "bold green bg:0x86BBD8";
           symbol = " ";
           version_format = "v$raw";
           disabled = false;
@@ -560,7 +558,7 @@
           format = "[$symbol($version )(($switch_indicator$switch_name) )]($style)";
           global_switch_indicator = "";
           local_switch_indicator = "*";
-          style = "#cba6f7";
+          style = "bold mauve";
           symbol = "🐫 ";
           version_format = "v$raw";
           disabled = false;
@@ -586,13 +584,13 @@
         openstack = {
           format = "[$symbol$cloud(($project))]($style) ";
           symbol = "☁️  ";
-          style = "#cba6f7";
+          style = "bold mauve";
           disabled = false;
         };
         package = {
           format = "[$symbol$version]($style) ";
           symbol = "📦 ";
-          style = "#fab387";
+          style = "208 bold";
           display_private = false;
           disabled = false;
           version_format = "v$raw";
@@ -658,7 +656,7 @@
           ];
           pyenv_prefix = "pyenv ";
           pyenv_version_name = true;
-          style = "#cba6f7";
+          style = "mauve bold";
           symbol = "🐍 ";
           version_format = "v$raw";
           disabled = false;
@@ -678,7 +676,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🔺 ";
-          style = "#f38ba8";
+          style = "red bold";
           disabled = false;
           detect_extensions = [
             "red"
@@ -690,7 +688,7 @@
         rlang = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          style = "#89b4fa";
+          style = "blue bold";
           symbol = "📐 ";
           disabled = false;
           detect_extensions = [
@@ -707,7 +705,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "💎 ";
-          style = "#f38ba8";
+          style = "bold red";
           disabled = false;
           detect_extensions = ["rb"];
           detect_files = [
@@ -724,7 +722,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🦀 ";
-          style = "#f38ba8 bg:0x86BBD8";
+          style = "bold red bg:0x86BBD8";
           disabled = false;
           detect_extensions = ["rs"];
           detect_files = ["Cargo.toml"];
@@ -734,7 +732,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           disabled = false;
-          style = "#f38ba8";
+          style = "red bold";
           symbol = "🆂 ";
           detect_extensions = [
             "sbt"
@@ -760,7 +758,7 @@
           tcsh_indicator = "tsh";
           unknown_indicator = "mystery shell";
           xonsh_indicator = "xsh";
-          zsh_indicator = "zsh";
+          zsh_indicator = "💤";
           disabled = false;
         };
         shlvl = {
@@ -768,12 +766,12 @@
           format = "[$symbol$shlvl]($style) ";
           symbol = "↕️  ";
           repeat = false;
-          style = "#cba6f7";
+          style = "bold mauve";
           disabled = true;
         };
         singularity = {
           format = "[$symbol[$env]]($style) ";
-          style = "#89b4fa";
+          style = "blue bold dimmed";
           symbol = "📦 ";
           disabled = false;
         };
@@ -781,7 +779,7 @@
           truncation_length = 1;
           format = "[$symbol$environment]($style) ";
           symbol = "🅢 ";
-          style = "#89b4fa";
+          style = "blue bold";
           disabled = false;
         };
         status = {
@@ -794,7 +792,7 @@
           pipestatus_separator = "|";
           recognize_signal_code = true;
           signal_symbol = "⚡";
-          style = "#f38ba8 bg:#89b4fa";
+          style = "bold red bg:blue";
           success_symbol = "🟢 SUCCESS";
           symbol = "🔴 ";
           disabled = true;
@@ -802,7 +800,7 @@
         sudo = {
           format = "[as $symbol]($style)";
           symbol = "🧙 ";
-          style = "#89b4fa";
+          style = "bold blue";
           allow_windows = false;
           disabled = true;
         };
@@ -832,7 +830,7 @@
         };
         time = {
           format = "[$symbol $time]($style) ";
-          style = "#cba6f7 bg:0x33658A";
+          style = "bold mauve bg:0x33658A";
           use_12hr = false;
           disabled = false;
           utc_time_offset = "local";
@@ -843,15 +841,15 @@
         username = {
           format = " [$user]($style) ";
           show_always = true;
-          style_root = "#f38ba8 bg:0x9A348E";
-          style_user = "#cba6f7 bg:0x9A348E";
+          style_root = "red bold bg:0x9A348E";
+          style_user = "mauve bold bg:0x9A348E";
           disabled = false;
         };
         vagrant = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "⍱ ";
-          style = "#74c7ec";
+          style = "sky bold";
           disabled = false;
           detect_extensions = [];
           detect_files = ["Vagrantfile"];
@@ -859,7 +857,7 @@
         };
         vcsh = {
           symbol = "";
-          style = "#cba6f7";
+          style = "bold mauve";
           format = "[$symbol$repo]($style) ";
           disabled = false;
         };
@@ -867,7 +865,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "V ";
-          style = "#89b4fa";
+          style = "blue bold";
           disabled = false;
           detect_extensions = ["v"];
           detect_files = [
@@ -881,14 +879,20 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "↯ ";
-          style = "#cba6f7";
+          style = "bold mauve";
           disabled = false;
           detect_extensions = ["zig"];
           detect_files = [];
           detect_folders = [];
         };
-        custom = {
-        };
-      };
+        palette = "catppuccin_${flavour}";
+      } // builtins.fromTOML (builtins.readFile
+        (pkgs.fetchFromGitHub
+          {
+            owner = "catppuccin";
+            repo = "starship";
+            rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f"; # Replace with the latest commit hash
+            sha256 = "1bdm1vzapbpnwjby51dys5ayijldq05mw4wf20r0jvaa072nxi4y";
+          } + /palettes/${flavour}.toml));
     };
 }

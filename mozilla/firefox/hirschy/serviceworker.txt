@@ -167,3 +167,15 @@ true
 0
 true
 #
+
+https://imagecolorpicker.com/
+https://imagecolorpicker.com/serviceWorker.js
+true
+{4b1f9315-42ef-4cc6-b07b-51395bf4cc72}
+0
+1703956148381214
+1703956148381328
+1703956148356800
+0
+true
+#

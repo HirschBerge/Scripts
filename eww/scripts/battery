@@ -22,7 +22,7 @@ get_icon() {
     if [[ "$BATSTATUS" == "Discharging" ]];then
       name="🖱️"
       if [ "$BATVAL" -gt 90 ];then
-        echo "${name}"
+        echo ""
       elif [ "$BATVAL" -ge 80 ];then
         echo ""
       elif [ "$BATVAL" -ge 70 ];then

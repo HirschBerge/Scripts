@@ -41,11 +41,16 @@ local default_plugins = {
   },
   {
     "NvChad/nvim-colorizer.lua",
+    opts = function(_, opts)
+      css = {rgb_fn = true;}
+    end,
     init = function()
       require("core.utils").lazy_load "nvim-colorizer.lua"
+      require("plugins.configs.colorizer")
     end,
     config = function(_, opts)
       require("colorizer").setup(opts)
+      
 
       -- execute colorizer as soon as possible
       vim.defer_fn(function()

@@ -179,3 +179,15 @@ true
 0
 true
 #
+
+https://myanimelist.net/
+https://myanimelist.net/service-worker.js
+false
+{6afdb1cf-174e-4ebb-98c1-7bf715d3d7df}
+0
+1704054387614694
+1704054387614775
+1704054387591747
+0
+true
+#

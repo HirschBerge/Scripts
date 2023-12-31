@@ -69,9 +69,9 @@
         };
         character = {
           format = "$symbol ";
-          vicmd_symbol = "[❮](bold green)";
+          vicmd_symbol = "[❮](#D2F7A6)";
           disabled = false;
-          success_symbol = "[➜](bold green) ";
+          success_symbol = "[➜](#D2F7A6) ";
           error_symbol = "[✗](bold red) ";
         };
         cmake = {
@@ -115,7 +115,7 @@
           truncation_length = 1;
           format = "[$symbol$environment]($style) ";
           symbol = " ";
-          style = "green bold";
+          style = "#D2F7A6";
           ignore_base = true;
           disabled = false;
         };
@@ -153,7 +153,7 @@
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           symbol = "🦕 ";
-          style = "green bold";
+          style = "#D2F7A6";
           disabled = false;
           detect_extensions = [];
           detect_files = [
@@ -310,14 +310,14 @@
         git_commit = {
           commit_hash_length = 7;
           format = "[($hash$tag)]($style) ";
-          style = "green bold";
+          style = "#D2F7A6";
           only_detached = true;
           disabled = false;
           tag_symbol = " 🏷  ";
           tag_disabled = true;
         };
         git_metrics = {
-          added_style = "bold green";
+          added_style = "#D2F7A6";
           deleted_style = "bold red";
           only_nonzero_diffs = true;
           format = "([+$added]($added_style) )([-$deleted]($deleted_style) )";
@@ -346,7 +346,7 @@
           ignore_submodules = false;
           modified = "📝";
           renamed = "👅";
-          staged = "[++($count)](green)";
+          staged = "[++($count)](#D2F7A6)";
           stashed = "📦";
           style = "red bold bg:0xFCA17D";
           untracked = "🤷";
@@ -411,7 +411,7 @@
           disabled = false;
           format = "[$ssh_symbol](blue dimmed bold)[$hostname]($style) ";
           ssh_only = false;
-          style = "green dimmed bold";
+          style = "#D2F7A6";
           trim_at = ".";
         };
         java = {
@@ -528,14 +528,14 @@
           format = "[$symbol$state( ($name))]($style) ";
           disabled = false;
           impure_msg = "[impure](bold red)";
-          pure_msg = "[pure](bold green)";
+          pure_msg = "[pure](#D2F7A6)";
           style = "bold blue";
           symbol = " ";
         };
         nodejs = {
           format = "[$symbol($version )]($style)";
           not_capable_style = "bold red";
-          style = "bold green bg:0x86BBD8";
+          style = "#D2F7A6 bg:0x86BBD8";
           symbol = " ";
           version_format = "v$raw";
           disabled = false;

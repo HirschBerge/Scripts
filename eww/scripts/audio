@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 ## Get Volume
+BRed='\033[1;31m'
+BPurple='\033[1;35m'      # Purple
+NoColor="\033[0m"
+BGreen='\033[1;32m'       # Green
+
 output_dev=$(wpctl status |sed -n '/├─ Sinks/,/├─/p'|grep "\*" |awk '{print $3 }' |sed 's/\.//g')
 input_dev=$(wpctl status |grep Audio -A 10|grep Sources -A 6 |grep "\*" |awk '{print $3 }' |sed 's/\.//g')
 # echo $output_dev $input_dev
 get_vol() {
 	while true; do
-  	wpctl get-volume $output_dev | grep '^Volume:' |sed 's/\.//g' | grep -oE '[0-9]{2,3}' 
+  	wpctl get-volume $output_dev | grep '^Volume:' |sed -e 's/0\.//g' -e's/\.//g' | grep -oE '[0-9]{2,3}' 
 	sleep 1
 	done
 }
@@ -85,4 +90,7 @@ elif [[ "$1" == "--get-mic" ]]; then
 	get_mic
 elif [[ "$1" == "--set-mic" ]]; then
 	set_mic "$2"
+else
+  printf "${BRed}[ERROR]${BPurple} Please use one of the following flags ${BGreen}\n--set-vol, --get-vol, --toggle-vol,\n--get-volicon, --get-micicon, --toggle-mic,\n--get-mic, --set-mic${BPurple}. Thank you.${NoColor}"
 fi
+

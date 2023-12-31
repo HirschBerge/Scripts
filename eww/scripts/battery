@@ -2,6 +2,11 @@
 
 
 ## Get Battery 
+BRed='\033[1;31m'
+BPurple='\033[1;35m'      # Purple
+NoColor="\033[0m"
+BGreen='\033[1;32m'       # Green
+
 get_percentage() {
   while true; do
     # BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1) #For laptop
@@ -54,5 +59,8 @@ if [[ "$1" == "--perc" ]]; then
 	get_percentage
 elif [[ "$1" == "--icon" ]]; then
 	get_icon taco
+else
+  printf "${BRed}[ERROR]${BPurple} Please use one of the following flags ${BGreen}\n--set-vol, --get-vol${BPurple} Thank you!${NoColor}"
 fi
+
 

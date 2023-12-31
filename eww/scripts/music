@@ -3,6 +3,10 @@
 ## Get data
 STATUS="$(playerctl status)"
 
+BRed='\033[1;31m'
+BPurple='\033[1;35m'      # Purple
+NoColor="\033[0m"
+BGreen='\033[1;32m'       # Green
 ## Get status
 get_status() {
 	while true; do
@@ -14,7 +18,9 @@ get_status() {
 		sleep 1
 	done
 }
-
+get_source() {
+  echo $(playerctl metadata |awk '/trackid/ { print $1 }')
+}
 ## Get song
 get_song() {
 	while true; do
@@ -45,18 +51,20 @@ get_artist() {
 
 ## Get cover
 get_cover() {
-	while true; do
-	  if [ "$STATUS" = "Playing" ] || [ "$STATUS" == "Paused" ];then
-	    echo "$(playerctl metadata mpris:artUrl| awk '{split($0,a,"//"); print a[2]}')"
+	  if [ "$(playerctl status)" = "Playing" ] || [ "$(playerctl status)" == "Paused" ];then
+        path_img="$(playerctl metadata mpris:artUrl 2>/dev/null | sed 's/file:\/\///g')"
+        if echo "$path_img" |grep -q "this command";then
+          echo "$HOME/.config/eww/dashboard/img/music"
+        else
+          echo $path_img
+        fi
 	  else
-	    echo "img/music"
+	    echo "$HOME/.config/eww/dashboard/img/music"
 	  fi
 		sleep 1
-	done
 }
 dl_cover(){
   base_dir="$HOME/.cache"
-  while true; do
     if [ "$(playerctl status)" = "Playing" ]; then
       # Get album art URL using D-Bus
       album_art_url=$(playerctl metadata mpris:artUrl)
@@ -82,10 +90,18 @@ dl_cover(){
       fi
     fi
   echo "${base_dir}/image.jpg"
-  sleep 1
+}
+cover_logic() {
+  while true; do
+    if [ "$(playerctl status)" = "Playing" ] || [ "$(playerctl status)" = "Paused" ] ;then 
+      if playerctl metadata mpris:trackid |rg -q spotify; then dl_cover; else get_cover;fi
+    else
+      echo hello
+      echo "$HOME/.config/eww/dashboard/img/music"
+    fi
+    sleep 1
   done
 }
-
 ## Toggle status
 toggle() {
   playerctl play-pause
@@ -109,11 +125,15 @@ elif [[ "$1" == "--artist" ]]; then
 elif [[ "$1" == "--status" ]]; then
 	get_status
 elif [[ "$1" == "--cover" ]]; then
-	dl_cover
+  cover_logic	
 elif [[ "$1" == "--toggle" ]]; then
 	toggle
+elif [[ "$1" == "--source" ]]; then
+    get_source
 elif [[ "$1" == "--next" ]]; then
 	next
 elif [[ "$1" == "--prev" ]]; then
 	previous
+else
+  printf "${BRed}[ERROR]${BPurple} Please use one of the following flags ${BGreen}\n--song, --artist, --status,\n--cover, --toggle, --source,\n--next, --prev${BPurple}. Thank you.${NoColor}"
 fi

@@ -28,8 +28,8 @@ $color13: #bc83e3;
 $mauve: #cba6f7;
 $color15: #4e40d4;
 $color16: #1e66f5;
-$color17: #89b4fa;
-$color18: #74c7ec;
+$blue: #89b4fa;
+$sapphire: #74c7ec;
 $color19: #d6ffff;
 $color20: #1a1b26;
 $color21: #0D0E19;
@@ -73,7 +73,7 @@ tooltip {
 	padding: 1px 5px 1px 5px;
 }
 .workspace-button {
-	color: $color18;
+	color: $sapphire;
 }
 .workspace-active {
 	color:$color12;
@@ -119,7 +119,7 @@ tooltip {
 .sys_icon_mem {
 	font-size: 20;
 	margin: 22px;
-    color: $color17;
+    color: $blue;
 }
 .sys_cpu_box {
     border-radius: 16px;
@@ -132,7 +132,7 @@ tooltip {
     padding-right: 20px;
 }
 .mem_perc {
-	color: $color18;
+	color: $sapphire;
 	padding-top: 6px;
 }
 .cpu_perc {
@@ -143,7 +143,7 @@ tooltip {
 	padding: 5px 0px 5px 0px;
 }
 .network-label {
-	color: $color18;
+	color: $sapphire;
 	font-size: 16px;
 	font-weight: bold;
 	padding: 10px 0px 4px 0px;
@@ -153,7 +153,7 @@ tooltip {
   font-size: 22px;
 }
 .network-down {
-  color: $color17;
+  color: $blue;
   font-size: 22px;
 }
 .network-graph-up {
@@ -162,7 +162,7 @@ tooltip {
 	background-color: rgba(203, 166, 247, 0.2);
 }
 .network-graph-down {
-	color: $color17;
+	color: $blue;
 	padding-bottom: 10px;
 	background-color: rgba(122, 162, 247, 0.2);
 }
@@ -192,7 +192,7 @@ tooltip {
 		color: $color10;
 }
 .date {
-	color: $color17;
+	color: $blue;
 	font-size: 14px;
 	font-weight: bold;
 	border-radius: 10px;
@@ -217,7 +217,7 @@ calendar.button {
 	color: $gray;
 }
 calendar.highlight {
-	color: $color18;
+	color: $sapphire;
 	font-weight: bold;
 	padding: 10px;
 	margin: 10px;
@@ -227,7 +227,7 @@ calendar.highlight {
 }
 .app-label {
 	font-size: 18px;
-	color: $color17;
+	color: $blue;
 }
 .app-box {
 	font-size: 32px;
@@ -250,7 +250,7 @@ calendar.highlight {
 }
 .function-label {
 	font-size: 18px;
-	color: $color17;
+	color: $blue;
 }
 .function-box {
 	font-size: 32px;
@@ -269,13 +269,13 @@ calendar.highlight {
 	padding-top: 2px;
 }
 .weather-icon {
-	color: $color18;
+	color: $sapphire;
 	font-size: 32px;
 	font-weight: bold;
 	padding-right: 14px;
 }
 .weather-temp {
-	color: $color18;
+	color: $sapphire;
 	font-size: 30px;
 	font-weight: bold;
 }
@@ -318,7 +318,7 @@ calendar.highlight {
 }
 .player-bar scale trough highlight {
 	all: unset;
-    background-image: linear-gradient(to right, $color17, $color12);
+    background-image: linear-gradient(to right, $blue, $color12);
 	border-radius: 24px;
 }
 .player-bar scale trough {

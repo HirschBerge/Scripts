@@ -9,7 +9,7 @@
 (defpoll wm :interval "12h" "echo $XDG_CURRENT_DESKTOP")
 (defpoll shell :interval "1h" "echo $SHELL | awk -F'/' '{print $NF}'")
 (defpoll term :interval "1h" "notify-send $(echo $TERM | awk -F'-' '{print $NF}')")
-(defpoll uptime :interval "1m" "w |grep tty |awk '{ print $4 }'")
+(defpoll uptime :interval "1m" "w |grep -m 1 tty |awk '{ print $4 }'")
 ;; (defpoll packages :interval "15m" "nix-store --query --requisites /run/current-system/sw |wc -l")
 (defpoll updates_poll :initial "..." :interval "10m" "nix-store --query --requisites /run/current-system/sw |wc -l") 
 ;; MUSIC VARS
@@ -327,9 +327,9 @@
                 :onclick "~/.config/eww/scripts/idle_inhib.sh"
 		    "${idle_state}")
             (button :class "screenshot"
-                :onclick "bash $HOME/.config/hypr/scripts/screenshot --area 2> /dev/null"
+                :onclick "sleep 0.1; bash $HOME/.config/hypr/scripts/screenshot --area 2> /dev/null"
+                :timeout "500ms"
                 :tooltip "Screenshot"
-                :timeout "50000ms"
             (label :text "󰹑" :class "tooltip"))
             (button :class "wallpaper"
                 :onclick "bash $HOME/.config/hypr/scripts/wayground.sh 2> /dev/null"
@@ -406,9 +406,9 @@
 (defwindow sidebar
     :monitor 0
     :geometry (geometry :x "2px"
-                        :y "30px"
-                        :width "140px"
-                        :height "96%"
+                        :y "3px"
+                        :width "100px"
+                        :height "97%"
                         :anchor "right center")
     :stacking "fg"
     :windowtype "dock"

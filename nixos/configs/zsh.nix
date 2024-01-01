@@ -23,7 +23,7 @@
             zstyle ':completion:*' menu select # select completions with arrow keys
             zstyle ':completion:*' group-name \'\' # group results by category
             zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
-	    source /home/hirschy/.scripts/.venv/bin/activate
+	    # source /home/hirschy/.scripts/.venv/bin/activate
 	    #source /home/hirschy/.local/bin/.venv/bin/activate
             export PATH=$PATH:/home/hirschy/.local/bin:/home/hirschy/.cargo/bin:/home/hirschy/.spicetify
             export NIX_PAGER=cat

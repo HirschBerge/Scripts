@@ -73,7 +73,7 @@
               bookmarks = [
               {
                 name = "Plex";
-                url = "http://srv-prod-plex.home.hirschykiss.net:32400/web/index.html#!";
+                url = "http://srv-prod-nas.home.hirschykiss.net:32400/web/index.html#!";
               }
               {
                 name = "Proxmox";
@@ -92,9 +92,14 @@
                 url = "http://srv-prod-docker.home.hirschykiss.net:9000";
               }
              {
+                name = "NAS";
+                url = "https://srv-prod-nas.home.hirschykiss.net/ui/dashboard";
+              }
+             {
                 name = "";
                 url = "";
               }
+
 
               ];
             }

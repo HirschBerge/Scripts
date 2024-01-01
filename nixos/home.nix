@@ -45,6 +45,8 @@ in
         html-tidy
 		nmap
 		grc
+        lazygit
+        ydotool
 		autojump
 		neofetch
 		fd

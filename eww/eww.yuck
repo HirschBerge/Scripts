@@ -11,7 +11,7 @@
 (defpoll term :interval "1h" "notify-send $(echo $TERM | awk -F'-' '{print $NF}')")
 (defpoll uptime :interval "1m" "w |grep -m 1 tty |awk '{ print $4 }'")
 ;; (defpoll packages :interval "15m" "nix-store --query --requisites /run/current-system/sw |wc -l")
-(defpoll updates_poll :initial "..." :interval "10m" "nix-store --query --requisites /run/current-system/sw |wc -l") 
+(defpoll updates_poll :initial "..." :interval "10m" "bash $HOME/.config/eww/scripts/packages.sh") 
 ;; MUSIC VARS
 (defpoll music-art :interval "1s" "$HOME/.config/eww/scripts/mediacontrol coverloc")
 (defpoll music-title :interval "1s" "$HOME/.config/eww/scripts/mediacontrol title")
@@ -57,9 +57,9 @@
 
 (defpoll quote :interval "24h" "$HOME/.config/eww/scripts/quotes --quote-and-quotee")
 
-(defpoll IP_ADDR :interval "1h" "ip -br address | grep UP | awk '{ print $3 }'")
+(defpoll IP_ADDR :interval "1m" "ip -br a |rg UP | awk '/enp6/ {print $3 }'")
 
-(defvar idle_state "")
+(defvar idle_state "󱄅")
 
 (defpoll window :interval "0.5s" "$HOME/.config/eww/scripts/window-title.sh")
 
@@ -111,14 +111,20 @@
         (box :class "info-box-top" :orientation "v" :space-evenly false
             (box :class "info-box-inner" :orientation "h" :space-evenly false
                 (box :class "info-box-left" :orientation "v" :space-evenly false
+
                     (label :class "info-icon" :text " :")
                     (label :class "info-icon" :text "󰅐 :")
-                    (label :class "info-icon" :text " :")
-                )
+                    (button :class "info-icon-2"
+                      :onclick "kitty $HOME/.scripts/rebuild.sh"
+                      :timeout "999999999"
+                      :tooltip "Click to Rebuild."
+                      (label :text " :")))
+
+
                 (box :class "info-box-right" :orientation "v" :space-evenly false
                     (label :class "info-text" :halign "start" :text "${wm}")
                     (label :class "info-text" :halign "start" :text "${uptime}")
-                    (label :class "info-text" :halign "start" :text "${updates_poll}")
+                    (label :class "info-text-2" :halign "start" :text "${updates_poll}")
                 )
             )
         )
@@ -277,6 +283,7 @@
                     :value cpu
                     :class "sys_cpu"
                     :thickness 8
+                    :tooltip "${EWW_TEMPS.ASUSEC_CPU}°C"
                 (label :text "󰻠"
                     :class "sys_icon_cpu"
                     :limit-width 4
@@ -324,7 +331,9 @@
     (label :text "Functions" :class "function-label")
         (box :class "function-box" :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false" :spacing 10
             (button :class "idle"
-                :onclick "~/.config/eww/scripts/idle_inhib.sh"
+                :onclick "firefox https://search.nixos.org/packages"
+                :onmiddleclick "firefox https://search.nixos.org/options"
+                :onrightclick "firefox https://mipmip.github.io/home-manager-option-search/"
 		    "${idle_state}")
             (button :class "screenshot"
                 :onclick "sleep 0.1; bash $HOME/.config/hypr/scripts/screenshot --area 2> /dev/null"

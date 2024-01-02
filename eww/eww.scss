@@ -89,10 +89,19 @@ tooltip {
 	padding: 4px;
 }
 .info-icon {
+    padding-top: 3px;
+	color: $mauve;
+}
+.info-icon-2 {
 	color: $mauve;
 }
 .info-text {
 	color: $color19;
+    padding-top: 3px;
+}
+.info-text-2 {
+	color: $color19;
+    padding-top: 6px;
 }
 
 .sys_win {
@@ -452,4 +461,20 @@ calendar.highlight {
 .keybind {
 	color: $color5;
 }
+.notifications {
+    min-height: 0px;
+    background-color: transparent;
+}
 
+.notif {
+    background-color: #282828;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 2;
+    border-color: #fabd2f;
+}
+
+.notif image {
+    padding-right: 10px;
+}

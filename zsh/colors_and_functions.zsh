@@ -245,6 +245,15 @@
               nvidia-settings --version |grep version |awk -F"version " '{ print "NVIDIA:   " $2}'
               hyprctl version |grep commit |awk '{print "Hyprland: " $7}'
             }
+            function Get-PubIP {
+              pubip=$(curl -s http://ifconfig.me/ip)
+              request=$(curl -s "http://ip-api.com/json/$pubip")
+              ip=$(echo "$request" | jq -r '.query')
+              city=$(echo "$request" | jq -r '.city')
+              country=$(echo "$request" | jq -r '.country')
+              isp=$(echo "$request" | jq -r '.isp')
+              printf "${BPurple}IP: $ip ${BGreen}City: $city ${BBlue}Country: $country ${BRed}ISP: $isp${NoColor}"
+            }
             swap_files(){
               \mv "$1" "$1.old"
               \mv "$2" "$1"

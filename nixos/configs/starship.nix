@@ -758,7 +758,7 @@
           tcsh_indicator = "tsh";
           unknown_indicator = "mystery shell";
           xonsh_indicator = "xsh";
-          zsh_indicator = "💤";
+          zsh_indicator = "󱄅";
           disabled = false;
         };
         shlvl = {

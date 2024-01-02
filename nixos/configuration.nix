@@ -8,10 +8,15 @@
 #  ██║ ╚████║██║██╔╝ ██╗╚██████╔╝███████║
 #  ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 #                                        
-{ config, pkgs, ... }:
+{ config,lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   themes = pkgs.callPackage  ./configs/themes.nix {};
+
+  # For outputting list of packages.
+  packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+  sortedUnique = builtins.sort builtins.lessThan (lib.unique packages);
+  formatted = builtins.concatStringsSep "\n" sortedUnique;
 in
 
 {
@@ -290,5 +295,5 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
+  # environment.etc."current-packages".text = formatted;
 }

@@ -58,6 +58,8 @@ in
         youtube-music
 		eza 
 		playerctl
+        pywal
+        sass
 #  ████████╗██╗  ██╗██╗   ██╗███╗   ██╗ █████╗ ██████╗ 
 #  ╚══██╔══╝██║  ██║██║   ██║████╗  ██║██╔══██╗██╔══██╗
 #     ██║   ███████║██║   ██║██╔██╗ ██║███████║██████╔╝
@@ -147,13 +149,6 @@ in
     	name = "candy-icons";
     	package = themes.candy-icons;
     	};
-		# iconTheme = {
-		# 	package = pkgs.catppuccin-papirus-folders.override {
-		# 		flavor = "mocha";
-		# 	 	accent = "mauve";
-		# 	};
-		# 	name = "Papirus-Dark";
-		# };
 		cursorTheme = {
 			package = pkgs.catppuccin-cursors.mochaMauve;
 			name = "Catppuccin-Mocha-Mauve-Cursors";

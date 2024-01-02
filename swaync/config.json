@@ -53,9 +53,9 @@
 	},
   "scripts": {
     "example-script": {
-    "exec": "~/.config/hypr/scripts/wayground.sh",
+    "exec": "thunar ~/.rtorrent/download/",
     "app-name": "*",
-    "summary": "*",
+    "summary": ".*Torrent.*",
     "body": "*"
   }
 }

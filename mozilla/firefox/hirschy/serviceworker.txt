@@ -215,3 +215,15 @@ true
 0
 true
 #
+
+https://forums.freebsd.org/
+https://forums.freebsd.org/service_worker.js
+true
+{69aaecc5-6984-451a-a4df-4b0dba751959}
+0
+1704165503457793
+1704165503458460
+1704165503237281
+0
+true
+#

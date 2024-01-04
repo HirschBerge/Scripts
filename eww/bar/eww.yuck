@@ -39,7 +39,7 @@
 (defpoll term :interval "1h" "notify-send $(echo $TERM | awk -F'-' '{print $NF}')")
 (defpoll uptime :interval "1m" "w |grep -m 1 tty |awk '{ print $4 }'")
 ;; (defpoll packages :interval "15m" "nix-store --query --requisites /run/current-system/sw |wc -l")
-(defpoll updates_poll :initial "..." :interval "10m" "nix-store --query --requisites /run/current-system/sw |wc -l") 
+(defpoll pkgs_uniq :initial "..." :interval "10m" "bash $HOME/.config/eww/scripts/packages.sh") 
 
 (defpoll time :interval "5s" "date '+%H:%M'")
 (defpoll date :interval "1m" "date '+%D'")
@@ -81,7 +81,7 @@
                   :timeout "999999999"
                   :tooltip "Click to Rebuild."
                   (label :text " :"))
-          (label :class "info-text" :halign "start" :text "${updates_poll}")
+          (label :class "info-text" :halign "start" :text "${pkgs_uniq}")
         )
         (box :class "info-box-right" :orientation "v" :space-evenly false
           (label :class "info-icon" :text "󰅐 :")
@@ -107,8 +107,8 @@
 )
 (defwidget system []
     (box :class "sys_win" :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false" 
-        (box :class "sys_cpu_box" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false"
-            (box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false"
+        (box :class "sys_cpu_box" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "true"
+            (box :orientation "h" :space-evenly "false" :hexpand "true" :vexpand "true"
                 (circular-progress 
                     :value cpu
                     :class "sys_cpu"
@@ -116,12 +116,12 @@
                     :tooltip "${EWW_TEMPS.ASUSEC_CPU}°C"
                     (label :text "󰻠"
                         :class "sys_icon_cpu"
-                        :limit-width 4
+                        :limit-width 6
                         :show_truncated false
                         :wrap false
-                        :halign "left"
+                        :halign "start"
                     ))
-                (label :class "cpu_perc" :valign "left" :halign "left" :text " ${cpu}%")
+                (label :class "cpu_perc" :valign "center" :halign "start" :text " ${cpu}%")
             )
         )
         (box :class "sys_mem_box" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false"
@@ -138,16 +138,20 @@
                         :angle 0.0
                         :halign "center"
                     ))
-                (label :class "mem_perc" :valign "left" :halign "left" :text " ${memory}%")
+                (label :class "mem_perc" :valign "center" :halign "start" :text " ${memory}%")
             )
         )
     )
 )
+
 (defwidget clock []
-            (box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false"
-            (label :class "time" :text time :valign "center")
-            (label :class "date" :text date :valign "center")
-            )
+  ( box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "true" :halign "end"
+    (label :class "time" :text time :valign "center" :halign "start" )
+    (button
+      :onclick "bash $HOME/.config/eww/scripts/launch_dashboard"
+      :tooltip "Open Dashboard."
+      (label :class "date" :text "${date} " :valign "center" :halign "center"))
+    )
 )
 
 

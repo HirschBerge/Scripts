@@ -46,11 +46,12 @@ $border_col: rgba(#cccccc,0.18);
 $best_so_far: rgba(255,255,255,0.1); 
 
 .main-container {
-	background-color: $color23;
-	border-radius: 14px;
-	margin: 0px 8px 8px 0px;
-	box-shadow: 8px 8px 5px rgba(13, 14, 25, 0.7);
+    background-color: $color23;
+    border-radius: 14px;
+    margin: 8px 8px 8px 0px;
+    // box-shadow: 0px 8px 2px rgba(13, 14, 25, 0.6); /* Adjusted box-shadow to make it go above */
 }
+
 
 .workspaces {
 	background-color: $bg;
@@ -102,7 +103,6 @@ $best_so_far: rgba(255,255,255,0.1);
     margin-top:2px;
 
 }
-
 .time_battery {
 	background: $bg;
 	border-radius: 10px;
@@ -234,7 +234,7 @@ tooltip {
     color: $blue;
 }
 .sys_cpu_box {
-    border-radius: 16px;
+    border-radius: 25px;
     margin: 10px 10px 10px 10px;
     padding-left: 20px;
 }
@@ -255,7 +255,7 @@ tooltip {
 	padding: 5px 0px 5px 0px;
 }
 .network-label {
-	color: $color5;
+	color: $color3;
 	font-size: 16px;
 	font-weight: bold;
 	padding: 10px 0px 4px 0px;

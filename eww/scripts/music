@@ -25,8 +25,8 @@ get_source() {
 get_song() {
 	while true; do
 	  song="$(playerctl metadata xesam:title)"
-		if [[ -z "$song" ]]; then
-			echo "Offline"
+		if [[ -z "$song" ]] || [[ "Plex" = "$song" ]]; then
+			echo "Play something."
       song="Offline"
 		else
 			echo "$song"
@@ -40,7 +40,7 @@ get_artist() {
 	while true; do
 		artist="$(playerctl metadata xesam:artist)"
 		if [[ -z "$artist" ]]; then
-			echo ""
+			echo "Nothing Playing."
 		else
 			echo "$artist"
 		fi
@@ -53,7 +53,7 @@ get_artist() {
 get_cover() {
 	  if [ "$(playerctl status)" = "Playing" ] || [ "$(playerctl status)" == "Paused" ];then
         path_img="$(playerctl metadata mpris:artUrl 2>/dev/null | sed 's/file:\/\///g')"
-        if echo "$path_img" |grep -q "this command";then
+        if [ -z "$path_img" ]; then
           echo "$HOME/.config/eww/dashboard/img/music"
         else
           echo $path_img

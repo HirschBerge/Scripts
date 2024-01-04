@@ -49,7 +49,7 @@
 (defwidget battery []
   (box :class "genwin" :vexpand "false" :hexpand "false" :width 65
     (box :class "battery" :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
-		(label :class "baticon" :text "🖱${BATTERYICON}")
+		(label :class "baticon" :text "${BATTERYICON}")
         (label :text "${BATTERY}%"))))
 
 

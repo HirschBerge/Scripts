@@ -227,3 +227,15 @@ true
 0
 true
 #
+
+https://www.vpnmentor.com/~partytown/
+https://www.vpnmentor.com/~partytown/partytown-sw.js
+true
+{29b227f2-7f55-421a-84a1-d880892cc8d8}
+0
+1704245939491065
+1704245939491263
+1704245939451700
+0
+true
+#

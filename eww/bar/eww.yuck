@@ -140,6 +140,7 @@
                         :wrap false
                         :angle 0.0
                         :halign "center"
+                    :tooltip "${round((EWW_RAM.used_mem / 1024 / 1024 / 1000), 1)}GB"
                     ))
                 (label :class "mem_perc" :valign "center" :halign "start" :text " ${memory}%")
             )

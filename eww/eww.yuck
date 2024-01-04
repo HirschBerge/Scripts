@@ -30,22 +30,23 @@
 (deflisten volume `bash ./scripts/audio --get-vol`)
 
 ;; WEATHER VARS
-(defpoll weather_temp :interval "30m" :initial "0"
-	"$HOME/.config/eww/scripts/Weather.sh current_temp")
-(defpoll weather_desc :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh weather_desc")
-(defpoll weather_feels_like :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh feels_like")
-(defpoll weather_humidity :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh humidity")
-(defpoll weather_icon :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh icon")
-(defpoll weather_wind :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh wind")
-(defpoll sun_rise :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh rise")
-(defpoll sun_set :interval "30m"
-	"$HOME/.config/eww/scripts/Weather.sh set")
+(defpoll weather_json :interval "1m" "$HOME/.config/eww/scripts/Weather.sh")
+;; (defpoll weather_temp :interval "30m" :initial "0"
+;; 	"$HOME/.config/eww/scripts/Weather.sh current_temp")
+;; (defpoll weather_desc :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh weather_desc")
+;; (defpoll weather_feels_like :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh feels_like")
+;; (defpoll weather_humidity :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh humidity")
+;; (defpoll weather_icon :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh icon")
+;; (defpoll weather_wind :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh wind")
+;; (defpoll sun_rise :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh rise")
+;; (defpoll sun_set :interval "30m"
+;; 	"$HOME/.config/eww/scripts/Weather.sh set")
 
 (defpoll memory :interval "5s"
     "$HOME/.config/eww/scripts/memory")
@@ -213,19 +214,19 @@
 (defwidget weather []
     (box :class "weather-container" :orientation "v" :space-evenly "false" :halign "center"
         (box :class "weather-box" :orientation "h" :space-evenly "false" :halign "center" :spacing 10
-            (label :class "weather-icon" :text {weather_icon != "" ? "${weather_icon}" : ""})
-            (label :class "weather-temp" :text "${weather_temp}°F")
+            (label :class "weather-icon" :text {weather_json.icon != "" ? "${weather_json.icon}" : ""})
+            (label :class "weather-temp" :text "${weather_json.current_temp}°F")
         )
         (box :class "weather-window" :orientation "v" :space-evenly "false" :spacing 2
-            (label :class "weather-feel" :text "${weather_desc}"
+            (label :class "weather-feel" :text "${weather_json.weather_desc}"
                                         :limit-width 32
                                         :justify "center"
                                         :wrap "true")
-            (label :class "weather-desc" :text "Feels Like: ${weather_feels_like}°F")
-            (label :class "weather-desc" :halign "center" :text "󰖝 ${weather_wind} mph")
-            (label :class "weather-desc" :halign "center" :text "  ${weather_humidity} %")
-            (label :class "weather-desc" :halign "center" :text "☀ ${sun_rise}")
-            (label :class "weather-desc" :halign "center" :text "☾ ${sun_set}")
+            (label :class "weather-desc" :text "Feels Like: ${weather_json.feels_like}°F")
+            (label :class "weather-desc" :halign "center" :text "󰖝 ${weather_json.wind} mph")
+            (label :class "weather-desc" :halign "center" :text "  ${weather_json.humidity} %")
+            (label :class "weather-desc" :halign "center" :text "☀ ${weather_json.rise}")
+            (label :class "weather-desc" :halign "center" :text "☾ ${weather_json.set}")
         )
     )
 )
@@ -296,6 +297,7 @@
                     :value memory
                     :class "sys_mem"
                     :thickness 8
+                    :tooltip "${round((EWW_RAM.used_mem / 1024 / 1024 / 1000), 1)}GB"
               (label :text ""
                     :class "sys_icon_mem"
                     :limit-width 4

@@ -38,4 +38,5 @@ git clone https://github.com/HirschBerge/my-dotfiles.git
 cd my-dotfiles
 chmod +x setup.sh
 # It will ask you a few questions. Please Select the nixos-unstable branch.
+./setup.sh
 ```

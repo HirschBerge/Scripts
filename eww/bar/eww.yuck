@@ -10,6 +10,7 @@
 
 (deflisten nvidia `$HOME/.scripts/nvidia_mon_poly.sh`)
 ;; System
+(defpoll used_per :interval "1m" `eww get EWW_DISK |jq .'["/"]'.used_perc`)
 (defpoll memory :interval "5s"
     "$HOME/.config/eww/scripts/memory")
 (defpoll cpu :interval "5s"
@@ -107,6 +108,7 @@
 )
 (defwidget system []
     (box :class "sys_win" :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false" 
+        ;; CPU Box
         (box :class "sys_cpu_box" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "true"
             (box :orientation "h" :space-evenly "false" :hexpand "true" :vexpand "true"
                 (circular-progress 
@@ -124,6 +126,7 @@
                 (label :class "cpu_perc" :valign "center" :halign "start" :text " ${cpu}%")
             )
         )
+        ;; Memory Box
         (box :class "sys_mem_box" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false"
             (box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false"
                 (circular-progress 
@@ -141,8 +144,27 @@
                 (label :class "mem_perc" :valign "center" :halign "start" :text " ${memory}%")
             )
         )
+        ;; ;; Disk Box
+        ;; (box :class "sys_disk_box" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false"
+        ;;     (box :orientation "h" :space-evenly "false" :hexpand "true" :vexpand "true"
+        ;;         (circular-progress 
+        ;;             :value "${used_per})"
+        ;;             :class "sys_disk"
+        ;;             :thickness 8
+        ;;             ;; Adjust the tooltip according to your system variable for disk temperature
+        ;;             (label :text ""
+        ;;                 :class "sys_icon_disk"
+        ;;                 :limit-width 4
+        ;;                 :wrap false
+        ;;                 :angle 0.0
+        ;;                 :halign "center"
+        ;;             ))
+        ;;         (label :class "disk_perc" :valign "center" :halign "start" :text " ${round(used_per, 0)}%")
+            ;; )
+        ;; )
     )
 )
+
 
 (defwidget clock []
   ( box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "true" :halign "end"

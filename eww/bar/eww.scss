@@ -207,6 +207,29 @@ tooltip {
     font-weight: bold;
 }
 
+.sys_disk {
+  color: $color2;
+  background-color: $color22; // Adjust the background color as needed
+  border-radius: 5px; // Adjust the border-radius if necessary
+}
+
+
+.sys_icon_disk {
+  font-size: 12; // Adjust the font size as needed
+  margin: 15px; // Adjust the margin as needed
+  color: $color2; // Assuming you want to use the same color as the disk widget
+}
+
+.sys_disk_box {
+  border-radius: 16px; // Adjust the border-radius if necessary
+  margin: 10px 10px 10px 10px; // Adjust the margin as needed
+  // Adjust padding as needed
+}
+
+.disk_perc {
+  color: $color2;
+  padding-left: 6px; // Adjust padding as needed
+}
 .sys_win {
     border-radius: 5px;
 }
@@ -234,7 +257,7 @@ tooltip {
     color: $blue;
 }
 .sys_cpu_box {
-    border-radius: 25px;
+    border-radius: 16px;
     margin: 10px 10px 10px 10px;
     padding-left: 20px;
 }

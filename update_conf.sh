@@ -17,6 +17,11 @@ do
     then
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.$fixed ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
       rsync -rah --progress -i "$HOME/.$fixed/" "$dots/$fixed" >/dev/null
+    elif
+      [ "$fixed" == "rtorrent" ]
+    then
+      printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.$fixed.rc ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
+      rsync -rah --progress -i "$HOME/.rtorrent.rc" "$dots/$fixed/" >/dev/null
     else
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.config/$fixed ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
       rsync -rah --progress -i "$HOME/.config/$fixed/" "$dots/$fixed/" >/dev/null

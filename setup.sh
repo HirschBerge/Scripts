@@ -21,12 +21,20 @@ exit 1
 [[ -d "$TARGET" ]] && printf "${Green}[+]${Blue} Configs folder exists. Propigating...${NoColor}\n" || mkdir $TARGET
 sleep 1
 printf "${Green}[+] ${Blue}Copying program config files to ${Yellow}~/.config${NoColor}\n"
-rsync -rahi --exclude ".git/" --exclude "nixos/" --exclude ".mozilla" --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $script_dir/ $TARGET >/dev/null
+rsync -rahi --exclude ".git/" --exclude "nixos/" --exclude ".mozilla" --exclude rtorrent --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $script_dir/ $TARGET >/dev/null
 rsync -rahi "$script_dir/.mozilla ~/"
 printf "${Green}[+] ${Blue}Copying NixOS files to ${Purple}/etc/nixos${NoColor}\n"
 sleep 1
 TARGET="/etc/nixos/"
-sudo rsync -rahi "$script_dir/nixos/" $TARGET >/dev/null
+rsync -rahi "$script_dir/nixos/" $TARGET >/dev/null
+printf "${Green}[+] ${Blue}Copying Mozilla files to ${Purple}~/.mozilla${NoColor}\n"
+sleep 1
+TARGET="$HOME/.mozilla"
+rsync -rahi "$script_dir/mozilla/" "$TARGET"
+printf "${Green}[+] ${Blue}Copying .rtorrent.rc to ${Purple}~/${NoColor}\n"
+sleep 1
+TARGET="$HOME/"
+rsync -rahi "$script_dir/rtorrent/.rtorrent.rc" "$TARGET"
 
 results=""
 

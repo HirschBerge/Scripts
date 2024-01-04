@@ -1,5 +1,8 @@
 {
 	"all": {
+		"general": {
+			"hideBlocked": false
+		},
 		"notifcations": {
 			"messages": true,
 			"voiceChat": true

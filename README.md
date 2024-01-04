@@ -1,4 +1,5 @@
-[![GitHub repo size](https://img.shields.io/github/repo-size/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles) [![GitHub stars](https://img.shields.io/github/stars/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles/stargazers) [![GitHub issues](https://img.shields.io/github/issues/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles/pulls)
+[![GitHub repo size](https://img.shields.io/github/repo-size/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles) [![GitHub stars](https://img.shields.io/github/stars/HirschBerge/my-dotfiles
+)](https://github.com/HirschBerge/my-dotfiles/stargazers) [![GitHub issues](https://img.shields.io/github/issues/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/HirschBerge/my-dotfiles.svg)](https://github.com/HirschBerge/my-dotfiles/pulls)
 
 # My Dotfiles
 

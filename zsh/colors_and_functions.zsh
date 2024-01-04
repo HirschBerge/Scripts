@@ -245,7 +245,7 @@
               nvidia-settings --version |grep version |awk -F"version " '{ print "NVIDIA:   " $2}'
               hyprctl version |grep commit |awk '{print "Hyprland: " $7}'
             }
-            function Get-PubIP {
+            Get-PubIP() {
               pubip=$(curl -s http://ifconfig.me/ip)
               request=$(curl -s "http://ip-api.com/json/$pubip")
               ip=$(echo "$request" | jq -r '.query')
@@ -253,6 +253,18 @@
               country=$(echo "$request" | jq -r '.country')
               isp=$(echo "$request" | jq -r '.isp')
               printf "${BPurple}IP: $ip ${BGreen}City: $city ${BBlue}Country: $country ${BRed}ISP: $isp${NoColor}"
+            }
+            ping_mon() {
+              while true;
+              do
+                if $(ping -c 1 "$1");
+                then
+                  notify-send - $HOME/.config/swaync/low.png "Sever Back up\!" "$1 is online."
+                  exit 0
+                else
+                  sleep 30
+                fi
+              done
             }
             swap_files(){
               \mv "$1" "$1.old"

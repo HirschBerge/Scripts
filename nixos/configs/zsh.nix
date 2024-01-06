@@ -202,7 +202,7 @@
             ifc="sudo ifconfig";
             intensemap="grc nmap --open -n -A -T4 -v";
             ka="killall";
-            l="ls -lah";
+            l="lazygit";
             la="clear && eza --no-quotes --group-directories-first -la --icons=always";
             ll="clear && eza --no-quotes --group-directories-first -l --icons=always";
             ls="clear && eza --no-quotes  --icons";

@@ -17,6 +17,15 @@ local plugins = {
     version = false,
   },
   {
+    'goolord/alpha-nvim',
+    cmd = "Alpha",
+    init = function()
+      if vim.fn.argc() == 0 then
+        require("alpha").setup(require("alpha.themes.startify").config)
+      end
+    end,
+  },
+  {
     "arnamak/stay-centered.nvim",
     version = false,
   },

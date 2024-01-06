@@ -145,10 +145,7 @@
             }
 
             rebuild (){
-              sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-              sudo nix-channel --update
-              rm -f ~/.mozilla/firefox/hirschy/search.json.mozlz4
-              sudo nixos-rebuild --upgrade switch
+              bash $HOME/.scripts/rebuild.sh
             }
 
             ex ()

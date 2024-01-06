@@ -16,6 +16,8 @@
           disabled = false;
           expiration_symbol = "X";
           force_display = false;
+          scan_timeout = "120";
+          command_timeout = "1000";
         };
         aws.region_aliases = {};
         aws.profile_aliases = {};

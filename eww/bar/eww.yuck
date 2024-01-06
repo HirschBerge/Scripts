@@ -70,7 +70,7 @@
 
 (defwidget info []
   (box :class "info-box-outer" :orientation "h" :space-evenly true :halign "center"
-    (box :class "info-box-top" :orientation "v" :space-evenly false
+    (box :class "info-box-top" :orientation "v" :space-evenly false :valign "center"
       (box :class "info-box-inner" :orientation "h" :space-evenly false
         (box :class "info-box-left" :orientation "v" :space-evenly false
           (label :class "info-icon" :text " :")
@@ -168,12 +168,12 @@
 
 
 (defwidget clock []
-  ( box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "true" :halign "end"
+  ( box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false" :halign "end"
     (label :class "time" :text time :valign "center" :halign "start" )
     (button
       :onclick "bash $HOME/.config/eww/scripts/launch_dashboard"
       :tooltip "Open Dashboard."
-      (label :class "date" :text "${date} " :valign "center" :halign "center"))
+      (label :class "date" :text "${date} " :valign "center" :halign "start"))
     )
 )
 
@@ -218,7 +218,7 @@
 )
 
 (defwidget volume []
-    (box :class "metric" :orientation "h" :space-evenly "false" :halign "center"
+    (box :class "metric" :orientation "h" :space-evenly "false" :halign "start"
         (label :class "vol-label" :orientation "h" :space-evenly "false" :text "")
         (scale :min 0
             :max 150
@@ -232,7 +232,7 @@
 )
 (defwidget functions []
     (box :class "function-container" :orientation "v" :space-evenly "true" :halign "center"
-      (box :class "function-box" :orientation "h" :space-evenly "true" :hexpand "true" :vexpand "false" :spacing 10
+      (box :class "function-box" :orientation "h" :space-evenly "false" :hexpand "true" :vexpand "false" :spacing 5
             (button :class "idle"
                 :onclick "firefox https://search.nixos.org/packages"
                 :onmiddleclick "firefox https://search.nixos.org/options"
@@ -265,7 +265,7 @@
 )
 
 (defwidget network [] 
-	(box :class "network-label" :orientation "h" :space-evenly "false" :spacing 10 :halign "center"
+	(box :class "network-label" :orientation "h" :space-evenly "false" :spacing 1 :halign "center"
         (label :text "${IP_ADDR}")
     )
 )

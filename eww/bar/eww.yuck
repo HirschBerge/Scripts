@@ -38,7 +38,7 @@
 (defpoll wm :interval "12h" "echo $XDG_CURRENT_DESKTOP")
 (defpoll shell :interval "1h" "echo $SHELL | awk -F'/' '{print $NF}'")
 (defpoll term :interval "1h" "notify-send $(echo $TERM | awk -F'-' '{print $NF}')")
-(defpoll uptime :interval "1m" "w |grep -m 1 tty |awk '{ print $4 }'")
+(defpoll uptime :interval "1m" "../scripts/better_uptime.sh $(cut -f1 -d. /proc/uptime)")
 ;; (defpoll packages :interval "15m" "nix-store --query --requisites /run/current-system/sw |wc -l")
 (defpoll pkgs_uniq :initial "..." :interval "10m" "bash $HOME/.config/eww/scripts/packages.sh") 
 
@@ -192,7 +192,7 @@
                     :max 1010
                     :dynamic "true"
                     :line-style "round"
-                    :tooltip "${round((EWW_NET.enp7s0.NET_UP / (1024 * 1024)), 1)}MB/s"
+                    :tooltip "${round((EWW_NET.enp7s0.NET_UP / (1024 * 1024) * 8), 1)}Mb/s"
             )
 	    )
     )
@@ -211,7 +211,7 @@
                     :max 1010
                     :dynamic "true"
                     :line-style "round"
-                    :tooltip "${round((EWW_NET.enp7s0.NET_DOWN / (1024 * 1024)), 1)}MB/s"
+                    :tooltip "${round((EWW_NET.enp7s0.NET_DOWN / (1024 * 1024) * 8), 1)}Mb/s"
             )
 	    )
     )

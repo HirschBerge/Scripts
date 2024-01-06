@@ -1,11 +1,26 @@
 #!/usr/bin/env bash
-get_uniq_pkgs () {
-  echo "$(nix-store -qR "$1" | cut -d '-' -f 2 | sort | uniq | wc -l)"
+get_uniq_pkg_name () {
+  echo "$(nix-store -qR "$1" |awk -F '-' '{print substr($0, index($0,$2))}' | sort -u)"
 }
 
-current_system=$(get_uniq_pkgs "/run/current-system/sw")
-per_user=$(get_uniq_pkgs "/etc/profiles/per-user/$USER")
-nix_profile=$(get_uniq_pkgs "$HOME/.nix-profile/")
+show_count() {
+  all_packages=$(get_uniq_pkg_name "/run/current-system/sw")
+  all_packages+=$(get_uniq_pkg_name "/etc/profiles/per-user/$USER")
+  all_packages+=$(get_uniq_pkg_name "$HOME/.nix-profile/")
+  result=$(echo "$all_packages" | sort -u |wc -l)
+  echo "$result"
+}
+show_names() {
+  all_packages=$(get_uniq_pkg_name "/run/current-system/sw")
+  all_packages+=$(get_uniq_pkg_name "/etc/profiles/per-user/$USER")
+  all_packages+=$(get_uniq_pkg_name "$HOME/.nix-profile/")
+  result=$(echo "$all_packages" | sort -u)
+  echo "$result"
+}
 
-result=$((current_system + per_user + nix_profile))
-echo $result
+if [ "$1" = "--names" ];
+then
+  show_names
+else
+  show_count
+fi

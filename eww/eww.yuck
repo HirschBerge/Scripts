@@ -9,7 +9,7 @@
 (defpoll wm :interval "12h" "echo $XDG_CURRENT_DESKTOP")
 (defpoll shell :interval "1h" "echo $SHELL | awk -F'/' '{print $NF}'")
 (defpoll term :interval "1h" "notify-send $(echo $TERM | awk -F'-' '{print $NF}')")
-(defpoll uptime :interval "1m" "w |grep -m 1 tty |awk '{ print $4 }'")
+(defpoll uptime :interval "1m" "./scripts/better_uptime.sh $(cut -f1 -d. /proc/uptime)")
 ;; (defpoll packages :interval "15m" "nix-store --query --requisites /run/current-system/sw |wc -l")
 (defpoll updates_poll :initial "..." :interval "10m" "bash $HOME/.config/eww/scripts/packages.sh") 
 ;; MUSIC VARS
@@ -31,23 +31,7 @@
 
 ;; WEATHER VARS
 (defpoll weather_json :interval "1m" "$HOME/.config/eww/scripts/Weather.sh")
-;; (defpoll weather_temp :interval "30m" :initial "0"
-;; 	"$HOME/.config/eww/scripts/Weather.sh current_temp")
-;; (defpoll weather_desc :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh weather_desc")
-;; (defpoll weather_feels_like :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh feels_like")
-;; (defpoll weather_humidity :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh humidity")
-;; (defpoll weather_icon :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh icon")
-;; (defpoll weather_wind :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh wind")
-;; (defpoll sun_rise :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh rise")
-;; (defpoll sun_set :interval "30m"
-;; 	"$HOME/.config/eww/scripts/Weather.sh set")
-
+;; Sys Vars
 (defpoll memory :interval "5s"
     "$HOME/.config/eww/scripts/memory")
 (defpoll cpu :interval "5s"
@@ -206,6 +190,7 @@
             :orientation "h"
             :tooltip "Volume: ${volume}%"
             :onclick "$HOME/.config/eww/scripts/volume --toggle-vol"
+            :onrightclick "pavucontrol &"
             :onchange "bash ./scripts/audio --set-vol {}")
         (label :class "vol-text" :text "${volume}%")
     )
@@ -217,7 +202,7 @@
             (label :class "weather-icon" :text {weather_json.icon != "" ? "${weather_json.icon}" : ""})
             (label :class "weather-temp" :text "${weather_json.current_temp}°F")
         )
-        (box :class "weather-window" :orientation "v" :space-evenly "false" :spacing 2
+        (box :class "weather-window" :orientation "v" :space-evenly "false" :spacing 2 :vexpand "true"
             (label :class "weather-feel" :text "${weather_json.weather_desc}"
                                         :limit-width 32
                                         :justify "center"
@@ -252,7 +237,7 @@
                     :max 1010
                     :dynamic "true"
                     :line-style "round"
-                    :tooltip "${round((EWW_NET.enp6s0.NET_UP / (1024 * 1024)), 1)}MB/s"
+                    :tooltip "${round((EWW_NET.enp6s0.NET_UP / (1024 * 1024) * 8), 1)}Mb/s"
             )
 	    )
     )
@@ -271,7 +256,7 @@
                     :max 1010
                     :dynamic "true"
                     :line-style "round"
-                    :tooltip "${round((EWW_NET.enp6s0.NET_DOWN / (1024 * 1024)), 1)}MB/s"
+                    :tooltip "${round((EWW_NET.enp6s0.NET_DOWN / (1024 * 1024) * 8), 1)}Mb/s"
             )
 	    )
     )

@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{inputs, outputs, lib, config, pkgs, ...}:
 #  ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ 
 #  ██║  ██║██╔═══██╗████╗ ████║██╔════╝    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝██╔══██╗
 #  ███████║██║   ██║██╔████╔██║█████╗      ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██████╔╝
@@ -170,27 +170,27 @@ in
 		eEDITOR = "nvim";    
   };
 
-	programs.git = {
-		enable = true;
-		userName = "HirschBerge";
-		userEmail = "hskirkwo@geneva.edu";
-	};
-	programs.fzf = {
-		enable = true;
-		enableZshIntegration = true;
-	};
-    programs.eza = {
-      enable = true;
-      enableAliases = true;
-      git = true;
-      icons = true;
-      extraOptions = [
-      "--group-directories-first"
-      "--header"
-      "-o"
-      "--no-permissions"
-      ];
-    };
+  programs.git = {
+	  enable = true;
+	  userName = "HirschBerge";
+	  userEmail = "hskirkwo@geneva.edu";
+  };
+  programs.fzf = {
+	  enable = true;
+	  enableZshIntegration = true;
+  };
+  programs.eza = {
+    enable = true;
+    enableAliases = true;
+    git = true;
+    icons = true;
+    extraOptions = [
+    "--group-directories-first"
+    "--header"
+    "-o"
+    "--no-permissions"
+    ];
+  };
 	# programs.chromium = {
 	# 	enable = true;
 	# 	extensions = [

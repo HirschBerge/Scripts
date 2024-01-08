@@ -8,7 +8,7 @@
 #  ██║ ╚████║██║██╔╝ ██╗╚██████╔╝███████║
 #  ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 #                                        
-{ config,lib, pkgs, ... }:
+{ inputs,outputs,config,lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   themes = pkgs.callPackage  ./configs/themes.nix {};
@@ -23,7 +23,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
-        <home-manager/nixos>
+        inputs.home-manager.nixosModules.home-manager
         ./8bitdo.nix
         ./wayland.nix
         ./configs/gaming.nix 

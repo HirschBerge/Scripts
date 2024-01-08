@@ -10,7 +10,6 @@
 #                                        
 { inputs,outputs,config,lib, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   themes = pkgs.callPackage  ./configs/themes.nix {};
 
   # For outputting list of packages.
@@ -23,7 +22,6 @@ in
   imports =
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
-        inputs.home-manager.nixosModules.home-manager
         ./8bitdo.nix
         ./wayland.nix
         ./configs/gaming.nix 
@@ -169,11 +167,6 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.hirschy = import ./home.nix;
-  };
   programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.hirschy = {

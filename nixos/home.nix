@@ -133,8 +133,8 @@ in
 		wineWowPackages.full
         yuzu-mainline
 	];
-	gtk = {
-		enable = true;
+  gtk = {
+	enable = true;
 		# theme.package = pkgs.sweet;
 		# theme.name = "Sweet-Dark";
     theme = {
@@ -153,7 +153,12 @@ in
 	cursorTheme = {
 	  package = pkgs.catppuccin-cursors.mochaMauve;
 	  name = "Catppuccin-Mocha-Mauve-Cursors";
-	};
+      size = 40;
+      };
+    font = {
+      name = "TerminaTest-Demi";
+      size = 12;
+    };
   };
   xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
 		[General]

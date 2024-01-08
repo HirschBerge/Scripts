@@ -22,6 +22,7 @@ in
     ./configs/kitty.nix 
     ./configs/starship.nix 
     ./configs/wlogout.nix
+    # ./configs/nixvim.nix
     ];
 	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
 	home.username = "hirschy";
@@ -146,19 +147,18 @@ in
       };
     };
     iconTheme = {
-    	name = "candy-icons";
-    	package = themes.candy-icons;
-    	};
-		cursorTheme = {
-			package = pkgs.catppuccin-cursors.mochaMauve;
-			name = "Catppuccin-Mocha-Mauve-Cursors";
-		};
+      name = "candy-icons";
+      package = themes.candy-icons;
+    };
+	cursorTheme = {
+	  package = pkgs.catppuccin-cursors.mochaMauve;
+	  name = "Catppuccin-Mocha-Mauve-Cursors";
 	};
-
-	xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+  };
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
 		[General]
 		theme=Sweet-Dark
-	'';
+  '';
   home.sessionVariables = {
     # QT_STYLE_OVERRIDE = "kvantum";
     GTK_USE_PORTAL = 1;
@@ -174,6 +174,18 @@ in
 		enable = true;
 		enableZshIntegration = true;
 	};
+    programs.eza = {
+      enable = true;
+      enableAliases = true;
+      git = true;
+      icons = true;
+      extraOptions = [
+      "--group-directories-first"
+      "--header"
+      "-o"
+      "--no-permissions"
+      ];
+    };
 	# programs.chromium = {
 	# 	enable = true;
 	# 	extensions = [

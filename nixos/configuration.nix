@@ -66,6 +66,47 @@ in
   #     inherit pkgs;
   #   };
   # };
+  programs.firefox.policies = ''
+    {"policies": {
+    "ExtensionSettings": {
+      "*": {
+        "blocked_install_message": "Custom error message.",
+        "install_sources": ["https://yourwebsite.com/*"],
+        "installation_mode": "blocked",
+        "allowed_types": ["extension"]
+      },
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      },
+      "darkreaderapp@gmail.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi"
+      },
+      "support@lastpass.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/lastpass-password-manager/latest.xpi"
+      },
+      "dev@ajay.app": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi"
+      },
+      "nathanf571@gmail.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/youtube-enhancer-vc/latest.xpi"
+      },
+      "123@gmail.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/nighttab/latest.xpi"
+      },
+      "nightdev@gmail.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/betterttv/latest.xpi"
+      },
+    }
+  }
+}
+    '';
 
   security.sudo = {
     enable = true;

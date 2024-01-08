@@ -16,16 +16,16 @@
         PasswordManagerEnabled = false;
       };
       isDefault = true;
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-        lastpass-password-manager
-        ublock-origin
-        sponsorblock
-        enhancer-for-youtube
-        return-youtube-dislikes
-        nighttab
-        behind-the-overlay-revival
-        betterttv
-      ];
+      # extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      #   lastpass-password-manager
+      #   ublock-origin
+      #   sponsorblock
+      #   enhancer-for-youtube
+      #   return-youtube-dislikes
+      #   nighttab
+      #   behind-the-overlay-revival
+      #   betterttv
+      # ];
       search = {
         engines = {
           "Nix Packages" = {

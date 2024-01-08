@@ -38,8 +38,7 @@
               useUserPackages = true;
               users.hirschy = import ./nixos/home.nix;
               extraSpecialArgs = {
-                inherit inputs; 
-                inherit system;
+                inherit inputs system; 
               };
             };
           }

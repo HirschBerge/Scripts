@@ -59,7 +59,10 @@ in
   #   wantedBy = [ "multi-user.target" ]; # starts after login
   # };
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+    nur = import (builtins.fetchTarball { 
+      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+      sha256 = "0i9fbyshnbwvdh49zxl195rngkpgah3y1wamknqbk85xrxw5h6rq";
+      }) {
       inherit pkgs;
     };
   };

@@ -179,26 +179,6 @@
               pssh -i -H $1 -A -l $2 $3 
             }
 
-            vpn_swap(){
-              printf "${Green}[+]${NoColor} Checking for NFS mounts...\n"
-              sleep 1
-              mount > ~/.cache/mounts
-              grep hirschykiss ~/.cache/mounts >/dev/null&& printf "${Red}[+]${NoColor} NFS mount found. Please unmount first.\n"
-              grep hirschykiss ~/.cache/mounts >/dev/null&& return|| printf "${Green}[+]${NoColor} No NFS mount found.\n"
-              printf "${Green}[+]${NoColor} Checking devices....\n"
-              sleep 1
-              up=$(nmcli device status | grep "enp" | grep -v dis | awk '{ print $1 }') >/dev/null
-              down=$(nmcli device status | grep "enp" | grep dis | awk '{ print $1 }') >/dev/null
-              printf "${Green}[+]${NoColor} Switching to/from a VPN connection.\n"
-              sleep 1
-              printf "${Green}[+]${NoColor} Remounting your NFS share.\n"
-              sh ~/.scripts/mounting.sh
-              nmcli device disconnect $up >/dev/null; nmcli device connect $down>/dev/null
-              newup=$(nmcli device status | grep "enp" | grep -v dis | awk '{ print $1 }')
-              LOCAL=$(ip -f inet addr show $newup | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-              public=$(curl -s api.ipify.org)
-              printf "${Green}[+]${NoColor} Switching complete. Your new local IP is ${Green}$LOCAL${NoColor}  and new public IP is ${Green}$public${NoColor} \n"
-            }
             keyword_kill(){
               input_string="$1"
               first="${input_string[1,1]}"
@@ -267,4 +247,7 @@
               \mv "$1" "$1.old"
               \mv "$2" "$1"
               \mv "$1.old" "$2"
+            }
+            search_font(){
+              fc-list | rg -o '[^/]*$[^:]*' | awk -F':' '{print $1}' |grep "$1"
             }

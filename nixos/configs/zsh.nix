@@ -203,6 +203,7 @@
             intensemap="grc nmap --open -n -A -T4 -v";
             ka="killall";
             l="lazygit";
+            move_ani="cd \"$(fd -td . /mnt/NAS/Anime |fzf)\"";
             la="clear && eza --no-quotes --group-directories-first -la --icons=always";
             ll="clear && eza --no-quotes --group-directories-first -l --icons=always";
             ls="clear && eza --no-quotes  --icons";

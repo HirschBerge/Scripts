@@ -12,19 +12,22 @@
 (defpoll uptime :interval "1m" "./scripts/better_uptime.sh $(cut -f1 -d. /proc/uptime)")
 ;; (defpoll packages :interval "15m" "nix-store --query --requisites /run/current-system/sw |wc -l")
 (defpoll updates_poll :initial "..." :interval "10m" "bash $HOME/.config/eww/scripts/packages.sh") 
+
+
 ;; MUSIC VARS
-(defpoll music-art :interval "1s" "$HOME/.config/eww/scripts/mediacontrol coverloc")
-(defpoll music-title :interval "1s" "$HOME/.config/eww/scripts/mediacontrol title")
-(defpoll music-artist :interval "1s" "$HOME/.config/eww/scripts/mediacontrol artist")
-(defpoll music-toggle :interval "1s" "$HOME/.config/eww/scripts/mediacontrol statusicon")
-(defpoll music-status :interval "1s" "$HOME/.config/eww/scripts/mediacontrol status")
-(defpoll music-position :interval "1s" "$HOME/.config/eww/scripts/mediacontrol position")
-(defpoll music-length :interval "1s" "$HOME/.config/eww/scripts/mediacontrol length")
-(defpoll music-positions :interval "1s" "$HOME/.config/eww/scripts/mediacontrol positions")
-(defpoll music-lengths :interval "1s" "$HOME/.config/eww/scripts/mediacontrol lengths")
-(defpoll music-shuffle-color :interval "1s" "$HOME/.config/eww/scripts/mediacontrol shufflecolor")
-(defpoll music-loop-icon :interval "1s" "$HOME/.config/eww/scripts/mediacontrol loopicon")
-(defpoll music-loop-color :interval "1s" "$HOME/.config/eww/scripts/mediacontrol loopcolor")
+(defpoll music_json :interval "1s" "./scripts/mediacontrol --json")
+;; (defpoll music-art :interval "1s" "$HOME/.config/eww/scripts/mediacontrol coverloc")
+;; (defpoll music-title :interval "1s" "$HOME/.config/eww/scripts/mediacontrol title")
+;; (defpoll music-artist :interval "1s" "$HOME/.config/eww/scripts/mediacontrol artist")
+;; (defpoll music-toggle :interval "1s" "$HOME/.config/eww/scripts/mediacontrol statusicon")
+;; (defpoll music-status :interval "1s" "$HOME/.config/eww/scripts/mediacontrol status")
+;; (defpoll music-position :interval "1s" "$HOME/.config/eww/scripts/mediacontrol position")
+;; (defpoll music-length :interval "1s" "$HOME/.config/eww/scripts/mediacontrol length")
+;; (defpoll music-positions :interval "1s" "$HOME/.config/eww/scripts/mediacontrol positions")
+;; (defpoll music-lengths :interval "1s" "$HOME/.config/eww/scripts/mediacontrol lengths")
+;; (defpoll music-shuffle-color :interval "1s" "$HOME/.config/eww/scripts/mediacontrol shufflecolor")
+;; (defpoll music-loop-icon :interval "1s" "$HOME/.config/eww/scripts/mediacontrol loopicon")
+;; (defpoll music-loop-color :interval "1s" "$HOME/.config/eww/scripts/mediacontrol loopcolor")
 (defvar music-rev false)
 
 (deflisten volume `bash ./scripts/audio --get-vol`)
@@ -135,34 +138,33 @@
 
 (defwidget player []
 	(box :class "player-art" :orientation "h" :space-evenly true 
-		(box :class "player-info" :orientation "v" :space-evenly false :style "background-image: url('${music-art}')"
+		(box :class "player-info" :orientation "v" :space-evenly false :style "background-image: url('${music_json.cover}')"
 			(box :class "player-tint" :space-evenly false :orientation "v" 
                 (box :class "player-controls" :space-evenly false :spacing 6
                 (button 
                     :class "player-shuffle" 
                     :onclick "$HOME/.config/eww/scripts/mediacontrol --shuffle" 
-                    :style "color:${music-shuffle-color}" 
+                    :style "color:${music_json.shufflecolor}" 
                     ""
                     )
                     (button :class "player-previous" :onclick "$HOME/.config/eww/scripts/mediacontrol --previous" "")
-                    (button :class "player-toggle" :onclick "$HOME/.config/eww/scripts/mediacontrol --toggle" music-toggle)
+                    (button :class "player-toggle" :onclick "$HOME/.config/eww/scripts/mediacontrol --toggle" "${music_json.statusicon}")
                     (button :class "player-next" :onclick "$HOME/.config/eww/scripts/mediacontrol --next" "")
                     (button 
                         :class "player-loop" 
                         :onclick "$HOME/.config/eww/scripts/mediacontrol --loop" 
-                        :style "color:${music-loop-color}" 
-                        music-loop-icon
+                        :style "color:${music_json.loopcolor}" "${music_json.loopicon}"
                     )                
                 )
 				(box :space-evenly false :orientation "h" :spacing 10
 						(box :space-evenly false :orientation "v" 
 							(label :class "player-title" :halign "start" 
-									:text music-title 
+									:text "${music_json.title}"
 									:justify "center"
                                     :wrap "true"
 									:limit-width 40)
 							(label :class "player-artist" :halign "center" 
-									:text music-artist 
+									:text "${music_json.artist}" 
 									:justify "center"
 									:limit-width 15)
 					)
@@ -170,11 +172,11 @@
 				(box :class "player-bar" :halign "center"
 					(scale :onchange "playerctl position {}"
 							:min 0 
-							:max music-lengths 
-							:value music-positions)
+							:max "${music_json.length}"
+							:value "${music_json.position}")
 				)
 				(box :class "player-position" :space-evenly false :valign "start" :halign "center"
-					(label :class "player-time":text "${music-position} / ${music-length}")	
+					(label :class "player-time":text "${music_json.position} / ${music_json.length}")	
 				)
 			)
 		)

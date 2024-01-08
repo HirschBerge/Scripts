@@ -1,29 +1,5 @@
 #!/usr/bin/env bash
 
-# ╔╦╗ ╦ ╦ ╔═╗ ╦ ╔═╗
-# ║║║ ║ ║ ╚═╗ ║ ║
-# ╩ ╩ ╚═╝ ╚═╝ ╩ ╚═╝
-
-# author	Niraj
-# github	niraj998
-
-# ┌─┐┌─┐┌┐┌┌─┐┬┌─┐┬ ┬┬─┐┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
-# │  │ ││││├┤ ││ ┬│ │├┬┘├─┤ │ ││ ││││└─┐
-# └─┘└─┘┘└┘└  ┴└─┘└─┘┴└─┴ ┴ ┴ ┴└─┘┘└┘└─┘
-
-# uncomment your music players below.
-#
-
-# [ -n "$(pgrep firefox)" ] && Control="firefox"
-# [ -n $(ps aux |grep -m 1 "[y]outube-music" |awk '{ print $2 }') ] && Control="chromium"
-# [ -n "$(pgrep spotify)" ] && Control="spotify"
-# [ -n "$(pgrep spotify_player)" ] && Control="spotify_player"
-# [ -n "$(pgrep brave-bin)" ] && Control="brave-bin"
-# [ -n "$(pgrep rhythmbox)" ] && Control="rhythmbox"
-# [ -n "$(pgrep audacious)" ] && Control="audacious"
-# [ -n "$(pgrep clementine)" ] && Control="clementine"
-# [ -n "$(pgrep strawberry)" ] && Control="strawberry"
-
 # saves covers here
 Cover=/tmp/cover.png
 # if cover not found in metadata use this instead
@@ -194,6 +170,7 @@ Options:
   --stop	stop song
   --shuffle	shuffle playlist
   --loop	loop None Playlist Track
+  --json    returns all values in json format
   title		shows title of current song
   album		shows album of current song
   artist	shows artist of current song
@@ -216,6 +193,41 @@ Options:
 # │ │├─┘ │ ││ ││││└─┐
 # └─┘┴   ┴ ┴└─┘┘└┘└─┘
 
+get_player_info() {
+    local player_info={
+
+    add_key_value() {
+      local key=$1
+      local value=$2
+      local sanitized_value
+      sanitized_value=$(eval "$value" 2>/dev/null || echo "N/A")
+      # Remove quotes from the sanitized value
+      sanitized_value=$(echo "$sanitized_value" | tr -d "'\"")
+      # Check if the sanitized value is empty or contains only whitespace
+      if [ -z "$(echo "$sanitized_value" | tr -d '[:space:]')" ]; then
+        sanitized_value="N/A"
+      fi
+      player_info+="\"$key\":\"$sanitized_value\","
+  }
+    add_key_value title title
+    add_key_value artist artist
+    add_key_value album album
+    add_key_value status status
+    add_key_value position position
+    add_key_value length length
+    add_key_value playlist playlist
+    add_key_value cover cover
+    add_key_value statusicon statusicon
+    add_key_value shufflecolor shufflecolor
+    add_key_value loopicon loopicon
+    add_key_value loopcolor loopcolor
+
+    player_info=${player_info%,}  # Remove trailing comma
+    player_info+=}
+
+    echo "$player_info"
+}
+
 	case $1 in
 	--next) playerctl --player=$Control next ;;
 	--previous) playerctl --player=$Control previous ;;
@@ -223,6 +235,7 @@ Options:
 	--stop) playerctl --player=$Control stop ;;
 	--shuffle) playerctl --player=$Control shuffle toggle ;;
 	--loop) loopcheck ;;
+    --json) get_player_info;;
 	title) title ;;
 	artist) artist ;;
 	album) album ;;

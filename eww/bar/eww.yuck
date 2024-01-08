@@ -8,7 +8,7 @@
 (defpoll battery :interval "30s"
 	`/home/$USER/.config/eww/Scripts/battery.py`)
 
-(deflisten nvidia `$HOME/.scripts/nvidia_mon_poly.sh`)
+(deflisten nvidia `../scripts/nvidia_mon_poly.sh`)
 ;; System
 (defpoll used_per :interval "1m" `eww get EWW_DISK |jq .'["/"]'.used_perc`)
 (defpoll memory :interval "5s"
@@ -16,7 +16,7 @@
 (defpoll cpu :interval "5s"
     "$HOME/.config/eww/scripts/cpu")
 (defpoll temp :initial 30 :interval "10s" `sensors | rg temp1 | rg -o "\\d+.\\d+" | head -1`)
-(defpoll oxidized_weather :initial "..." :interval "1m" `$HOME/.local/bin/weather_app --polybar`)
+(defpoll oxidized_weather :initial "..." :interval "1m" `$HOME/.local/bin/weather_app --bar`)
 (deflisten workspaces0 "hyprland-workspaces `hyprctl monitors -j | jq -r \".[0].name\"`")
 
 (defpoll quote :interval "24h" "$HOME/.config/eww/scripts/quotes --quote-and-quotee")
@@ -168,7 +168,7 @@
 
 
 (defwidget clock []
-  ( box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false" :halign "end"
+  ( box :orientation "h" :space-evenly "false" :hexpand "false" :vexpand "false" :halign "center"
     (label :class "time" :text time :valign "center" :halign "start" )
     (button
       :onclick "bash $HOME/.config/eww/scripts/launch_dashboard"
@@ -232,7 +232,7 @@
 )
 (defwidget functions []
     (box :class "function-container" :orientation "v" :space-evenly "true" :halign "center"
-      (box :class "function-box" :orientation "h" :space-evenly "false" :hexpand "true" :vexpand "false" :spacing 5
+      (box :class "function-box" :orientation "h" :space-evenly "false" :hexpand "true" :vexpand "false" :spacing 10
             (button :class "idle"
                 :onclick "firefox https://search.nixos.org/packages"
                 :onmiddleclick "firefox https://search.nixos.org/options"

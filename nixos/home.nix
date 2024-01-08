@@ -7,11 +7,11 @@
 #  ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 #                                                                                                              
 let 
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixpkgs.url = "nixpkgs/nixos-unstable";
+    # home-manager = {
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   	themes = pkgs.callPackage  ./configs/themes.nix {};
 in
 {
@@ -146,6 +146,7 @@ in
         variant = "mocha";
       };
     };
+
     iconTheme = {
       name = "candy-icons";
       package = themes.candy-icons;

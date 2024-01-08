@@ -58,14 +58,15 @@ in
   #   '';
   #   wantedBy = [ "multi-user.target" ]; # starts after login
   # };
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball { 
-      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-      sha256 = "0i9fbyshnbwvdh49zxl195rngkpgah3y1wamknqbk85xrxw5h6rq";
-      }) {
-      inherit pkgs;
-    };
-  };
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   nur = import (builtins.fetchTarball { 
+  #     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+  #     sha256 = "0i9fbyshnbwvdh49zxl195rngkpgah3y1wamknqbk85xrxw5h6rq";
+  #     }) {
+  #     inherit pkgs;
+  #   };
+  # };
+
   security.sudo = {
     enable = true;
     extraRules = [{
@@ -201,7 +202,7 @@ in
       gcc
       wget
       git
-      home-manager
+      # home-manager
       traceroute
       python311
       obs-studio

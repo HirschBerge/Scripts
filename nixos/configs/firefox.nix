@@ -1,4 +1,4 @@
-{pkgs, lib, ... }:
+{ inputs, pkgs, config, ... }:
 {
   programs.firefox = {
     enable = true;
@@ -16,8 +16,7 @@
         PasswordManagerEnabled = false;
       };
       isDefault = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        darkreader
+      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         lastpass-password-manager
         ublock-origin
         sponsorblock

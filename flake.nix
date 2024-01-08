@@ -9,6 +9,8 @@
   outputs = inputs@{ nixpkgs, home-manager, ... }: 
     let 
       system = "x86_64-linux";
+      firefox-addons = { url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"; inputs.nixpkgs.follows = "nixpkgs"; };
+
       pkgs = import nixpkgs {
         inherit system;
 
@@ -20,6 +22,10 @@
     {
     nixosConfigurations = {
       yoitsu = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit system;
+          inherit inputs;
+        };
         system = "x86_64-linux";
         modules = [
           ./nixos/configuration.nix
@@ -28,7 +34,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.hirschy = import ./nixos/home.nix;
-
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+            };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }

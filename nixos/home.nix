@@ -10,6 +10,9 @@
   lib,
   config,
   pkgs,
+  username,
+  hostname,
+  stateVersion,
   ...
 }: 
 let 
@@ -45,9 +48,9 @@ in
     };
   };
 	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
-	home.username = "hirschy";
-	home.homeDirectory = "/home/hirschy";
-	home.stateVersion = "23.05";
+	home.username = "${username}";
+	home.homeDirectory = "/home/${username}";
+	home.stateVersion = stateVersion;
 	programs.home-manager.enable = true;
 	home.packages = with pkgs; [
 #   ██████╗██╗     ██╗    ████████╗ ██████╗  ██████╗ ██╗     ███████╗

@@ -8,7 +8,15 @@
 #  ██║ ╚████║██║██╔╝ ██╗╚██████╔╝███████║
 #  ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 #                                        
-{ inputs,outputs,config,lib, pkgs, ... }:
+{ inputs,
+  outputs,
+  config,
+  lib,
+  pkgs,
+  hostname,
+  username,
+  stateVersion,
+  ... }:
 let
   themes = pkgs.callPackage  ./configs/themes.nix {};
 
@@ -54,7 +62,7 @@ in
   #   description = "...";
   #   # serviceConfig.PassEnvironment = "DISPLAY";
   #   script = ''
-  #     /run/wrappers/bin/sudo /home/hirschy/.local/bin/xremap --watch /home/hirschy/my-dotfiles/xremap_config.yml
+  #     /run/wrappers/bin/sudo /home/${username}/.local/bin/xremap --watch /home/${username}/my-dotfiles/xremap_config.yml
   #   '';
   #   wantedBy = [ "multi-user.target" ]; # starts after login
   # };
@@ -141,14 +149,14 @@ in
           options = [ "NOPASSWD" ];
         }
       #   {
-      #     command = "/home/hirschy/.local/bin/xremap";
+      #     command = "/home/${username}/.local/bin/xremap";
       #     options = [ "NOPASSWD" ];
       #   }
       ];
       groups = [ "wheel" ];
     }];
   };
-  networking.hostName = "hyprtest"; # Define your hostname.
+  networking.hostName = "${hostname}"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -214,10 +222,10 @@ in
   # services.xserver.libinput.enable = true;
   programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.hirschy = {
+  users.users.${username} = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    description = "Hirschy";
+    description = "${username}";
     extraGroups = [ "networkmanager" "wheel" "keyd" ];
     packages = with pkgs; [
       firefox
@@ -311,8 +319,8 @@ in
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "* * * * *         hirschy    date >> /home/hirschy/.cache/test.log"
-      "*/30 * * * *      hirschy    /home/hirschy/.scripts/.venv/bin/python3 /home/hirschy/.scripts/manga_update.py"
+      "* * * * *         ${username}    date >> /home/${username}/.cache/test.log"
+      "*/30 * * * *      ${username}    /home/${username}/.scripts/.venv/bin/python3 /home/${username}/.scripts/manga_update.py"
     ];
   };
   # List services that you want to enable:
@@ -332,6 +340,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = stateVersion; # Did you read the comment?
   # environment.etc."current-packages".text = formatted;
 }

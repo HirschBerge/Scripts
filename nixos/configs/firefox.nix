@@ -1,9 +1,9 @@
-{ inputs, pkgs, system, config, ... }:
+{ inputs, pkgs, system, username, config, ... }:
 {
   programs.firefox = {
     enable = true;
-    profiles.hirschy = {
-      name = "Hirschy";
+    profiles.username = {
+      name = "${username}";
       settings = {
         CaptivePortal = false;
         DisableFirefoxStudies = true;
@@ -16,7 +16,7 @@
         PasswordManagerEnabled = false;
       };
       isDefault = true;
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         lastpass-password-manager
         ublock-origin
         sponsorblock

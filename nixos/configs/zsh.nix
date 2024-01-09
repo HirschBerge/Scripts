@@ -1,4 +1,7 @@
-{config, pkgs, ...}:
+{ config,
+  pkgs,
+  username,
+  ...}:
 {
 	programs.zsh = {
         enable = true;    
@@ -23,9 +26,9 @@
             zstyle ':completion:*' menu select # select completions with arrow keys
             zstyle ':completion:*' group-name \'\' # group results by category
             zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
-	    # source /home/hirschy/.scripts/.venv/bin/activate
-	    #source /home/hirschy/.local/bin/.venv/bin/activate
-            export PATH=$PATH:/home/hirschy/.local/bin:/home/hirschy/.cargo/bin:/home/hirschy/.spicetify
+	    # source /home/${username}/.scripts/.venv/bin/activate
+	    #source /home/${username}/.local/bin/.venv/bin/activate
+            export PATH=$PATH:/home/${username}/.local/bin:/home/${username}/.cargo/bin:/home/${username}/.spicetify
             export NIX_PAGER=cat
             export PROMPT_EOL_MARK=" "
             [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh

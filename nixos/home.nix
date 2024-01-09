@@ -22,19 +22,6 @@ let
 in
 {
   # You can import other home-manager modules here
-  # nixpkgs = {
-  #   # You can add overlays here
-  #   overlays = [
-  #
-  #   ];
-  #   # Configure your nixpkgs instance
-  #   config = {
-  #     # Disable if you don't want unfree packages
-  #     allowUnfree = true;
-  #     # Workaround for https://github.com/nix-community/home-manager/issues/2942
-  #     allowUnfreePredicate = _: true;
-  #   };
-  # };
 	imports = [ 
     ./configs/firefox.nix
     ./configs/zsh.nix 
@@ -44,6 +31,19 @@ in
     ./configs/wlogout.nix
     # ./configs/nixvim.nix
     ];
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
 	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
 	home.username = "hirschy";
 	home.homeDirectory = "/home/hirschy";

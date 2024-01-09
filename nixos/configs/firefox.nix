@@ -1,9 +1,5 @@
 { inputs, pkgs, system, config, ... }:
 {
-nixpkgs.config = {
-  allowUnfree = true;
-  allowUnfreePredicate = true;
-};
   programs.firefox = {
     enable = true;
     profiles.hirschy = {
@@ -21,14 +17,14 @@ nixpkgs.config = {
       };
       isDefault = true;
       extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        lastpass-password-manager
+        ublock-origin
+        sponsorblock
+        enhancer-for-youtube
+        return-youtube-dislikes
+        behind-the-overlay-revival
+        betterttv
         nighttab
-      #   lastpass-password-manager
-      #   ublock-origin
-      #   sponsorblock
-      #   enhancer-for-youtube
-      #   return-youtube-dislikes
-      #   behind-the-overlay-revival
-      #   betterttv
       ];
       search = {
         engines = {

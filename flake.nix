@@ -7,42 +7,39 @@
     firefox-addons = { 
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs"; 
-      # allowUnfree = true;
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-    in
-    {
+
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    username = "hirschy";
+    hostname = "yoitsu";
+  in {
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       yoitsu = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit system;
-          inherit inputs;
-        };
-        # system = "x86_64-linux";
-        modules = [
-          ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.hirschy = import ./nixos/home.nix;
-              extraSpecialArgs = {
-                inherit inputs system; 
-              };
-            };
-          }
-        ];
+        specialArgs = {inherit inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/configuration.nix];
+      };
+    };
+
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    homeConfigurations = {
+      "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+        # pkgs = nixpkgs.legacyPackages.x86_64-linux { system = "x86_64-linux"; config.allowUnfree = true; };
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        # > Our main home-manager configuration file <
+        modules = [./nixos/home.nix];
       };
     };
   };

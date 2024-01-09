@@ -227,7 +227,7 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  # nixpkgs.allowUnfreePredicate = _: true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.overlays = [
@@ -243,7 +243,7 @@ in
       gcc
       wget
       git
-      # home-manager
+      home-manager
       traceroute
       python311
       obs-studio

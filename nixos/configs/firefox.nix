@@ -1,5 +1,9 @@
 { inputs, pkgs, system, config, ... }:
 {
+nixpkgs.config = {
+  allowUnfree = true;
+  allowUnfreePredicate = true;
+};
   programs.firefox = {
     enable = true;
     profiles.hirschy = {
@@ -16,16 +20,16 @@
         PasswordManagerEnabled = false;
       };
       isDefault = true;
-      # extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        nighttab
       #   lastpass-password-manager
       #   ublock-origin
       #   sponsorblock
       #   enhancer-for-youtube
       #   return-youtube-dislikes
-      #   nighttab
       #   behind-the-overlay-revival
       #   betterttv
-      # ];
+      ];
       search = {
         engines = {
           "Nix Packages" = {

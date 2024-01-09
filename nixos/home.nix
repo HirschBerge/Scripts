@@ -1,4 +1,3 @@
-{inputs, outputs, lib, config, pkgs, ...}:
 #  ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ 
 #  ██║  ██║██╔═══██╗████╗ ████║██╔════╝    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝██╔══██╗
 #  ███████║██║   ██║██╔████╔██║█████╗      ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██████╔╝
@@ -6,6 +5,13 @@
 #  ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║
 #  ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 #                                                                                                              
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: 
 let 
     # nixpkgs.url = "nixpkgs/nixos-unstable";
     # home-manager = {
@@ -15,6 +21,20 @@ let
   	themes = pkgs.callPackage  ./configs/themes.nix {};
 in
 {
+  # You can import other home-manager modules here
+  # nixpkgs = {
+  #   # You can add overlays here
+  #   overlays = [
+  #
+  #   ];
+  #   # Configure your nixpkgs instance
+  #   config = {
+  #     # Disable if you don't want unfree packages
+  #     allowUnfree = true;
+  #     # Workaround for https://github.com/nix-community/home-manager/issues/2942
+  #     allowUnfreePredicate = _: true;
+  #   };
+  # };
 	imports = [ 
     ./configs/firefox.nix
     ./configs/zsh.nix 
@@ -133,6 +153,10 @@ in
 		wineWowPackages.full
         yuzu-mainline
 	];
+  # Enable home-manager and git
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
   gtk = {
 	enable = true;
 		# theme.package = pkgs.sweet;
@@ -161,6 +185,9 @@ in
       size = 12;
     };
   };
+    nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
 		[General]
 		theme=Sweet-Dark

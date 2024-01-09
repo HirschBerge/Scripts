@@ -21,7 +21,10 @@
       overlays = [
         inputs.nur.overlay
       ];
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
     };
     username = "hirschy";
     hostname = "hyprtest";

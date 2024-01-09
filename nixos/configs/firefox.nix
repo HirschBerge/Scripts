@@ -2,7 +2,7 @@
 {
   programs.firefox = {
     enable = true;
-    profiles.username = {
+    profiles.${username} = {
       name = "${username}";
       settings = {
         CaptivePortal = false;

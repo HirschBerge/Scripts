@@ -36,16 +36,16 @@ in
     ];
   nixpkgs = {
     # You can add overlays here
-    overlays = [
-
-    ];
+  #   overlays = [
+  #
+  #   ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-    };
+      # allowUnfreePredicate = _: true;
+      };
   };
 	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
 	home.username = "${username}";

@@ -263,7 +263,7 @@ in
       lm_sensors
       ffmpeg
       pciutils
-      themes.abstractguts-themes
+      themes.abstractguts-theme
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -31,7 +31,7 @@ in
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
         ./8bitdo.nix
-        ./wayland.nix
+        ../common/wayland.nix
         ./configs/gaming.nix 
     ];
   systemd = {

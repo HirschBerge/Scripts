@@ -21,7 +21,7 @@ let
     #   url = "github:nix-community/home-manager";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-  	themes = pkgs.callPackage  ../common/configs/themes.nix {};
+  	themes = pkgs.callPackage ../common/configs/themes.nix {};
 in
 {
   # You can import other home-manager modules here

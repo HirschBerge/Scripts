@@ -246,6 +246,8 @@ in
     })
   ];
   environment.systemPackages = with pkgs; [
+      jetbrains-mono
+      noto-fonts-color-emoji
       kitty
       neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       gcc

@@ -114,7 +114,7 @@ in
    services.xserver.displayManager.sddm = {
     enable = true;
     enableHidpi = true;
-    theme = "abstractguts-theme";
+    theme = "abstractguts-themes";
    };
 
   # Configure keymap in X11
@@ -186,7 +186,8 @@ in
       lm_sensors
       ffmpeg
       pciutils
-      themes.abstractguts-theme
+      themes.abstractguts-themes
+      noto-fonts-color-emoji
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

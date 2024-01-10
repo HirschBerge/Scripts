@@ -44,7 +44,7 @@
       ${l_hostname} = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs username self stateVersion l_hostname;};
         # > Our main nixos configuration file <
-        modules = [./nixos/desktop/configuration.nix];
+        modules = [./nixos/laptop/configuration.nix];
       };
     };
 
@@ -58,7 +58,7 @@
       };
        "${username}@${l_hostname}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
-        modules = [./nixos/desktop/home.nix];
+        modules = [./nixos/laptop/home.nix];
         extraSpecialArgs = {inherit username self l_hostname stateVersion inputs;};
       };
     };

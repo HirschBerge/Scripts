@@ -5,7 +5,8 @@ BCyan='\033[1;36m'
 NoColor="\033[0m"
 BGreen='\033[1;32m'
 dots="$(dirname "$(readlink -f "$0")")"
-for i in "$dots/$fixed"/*/; 
+device="$(echo -en "laptop\ndesktop" | fzf --prompt "What are you currently using?")"
+for i in "$dots/$device/$fixed"/*/; 
 do 
     fixed=$(basename "$i")
     if [ "$fixed" == "nixos" ]
@@ -17,15 +18,15 @@ do
       [ "$fixed" == "mozilla" ]
     then
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.$fixed ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
-      rsync -rah --progress -i "$HOME/.$fixed/" "$dots/$fixed" >/dev/null
+      rsync -rah --progress -i "$HOME/.$fixed/" "$dots/$device/$fixed" >/dev/null
     elif
       [ "$fixed" == "rtorrent" ]
     then
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.$fixed.rc ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
-      rsync -rah --progress -i "$HOME/.rtorrent.rc" "$dots/$fixed/" >/dev/null
+      rsync -rah --progress -i "$HOME/.rtorrent.rc" "$dots/$device/$fixed/" >/dev/null
     else
       printf "${BGreen}[+] ${BYellow}Copying ${BPurple}$HOME/.config/$fixed ${BYellow}to ${BCyan}$dots/$fixed${NoColor}\n"
-      rsync -rah --progress -i "$HOME/.config/$fixed/" "$dots/$fixed/" >/dev/null
+      rsync -rah --progress -i "$HOME/.config/$fixed/" "$dots/$device/$fixed/" >/dev/null
     fi
 done
 

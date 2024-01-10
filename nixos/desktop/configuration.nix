@@ -18,7 +18,7 @@
   stateVersion,
   ... }:
 let
-  themes = pkgs.callPackage  ./configs/themes.nix {};
+  themes = pkgs.callPackage  ../common/configs/themes.nix {};
 
   # For outputting list of packages.
   packages = builtins.map (p: "${p.name}") config.environment.systemPackages;

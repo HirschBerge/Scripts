@@ -61,6 +61,7 @@ in
 #   ╚═════╝╚══════╝╚═╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
 #   
 		btop
+        fira-code
         brightnessctl
 		starship
 		fzf

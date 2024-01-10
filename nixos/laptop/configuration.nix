@@ -13,7 +13,7 @@
   config,
   lib,
   pkgs,
-  hostname,
+  l_hostname,
   username,
   stateVersion,
   ... }:
@@ -82,7 +82,7 @@ in
       groups = [ "wheel" ];
     }];
   };
-  networking.hostName = "shirahebi"; # Define your hostname.
+  networking.hostName = "${l_hostname}"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

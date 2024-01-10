@@ -245,10 +245,11 @@
             rd="rmdir";
             reboot="reboot";
             ref="shortcuts >/dev/null; source ~/.config/shortcutrc";
-            removeurl="find /mnt/NAS/Anime -type f -name \"*url*\" -exec rm -f {} \; -print";
+            # removeurl="find /mnt/NAS/Anime -type f -name \"*url*\" -exec rm -f {} \; -print";
             renames="~/.scripts/rename";
             restartpipewire="systemctl --user restart wireplumber pipewire pipewire-pulse";
             # rm="rm -iv";
+            rebuild="nix flake update; home-manager --flake ~/my-dotfiles#hirschy@yoitsu switch -b backup && sleep 1; sudo nixos-rebuild switch --flake ~/my-dotfiles#yoitsu";
             rmv="rsync -rahvz --info=progress2 --remove-source-files";
             rscp="rsync -rah --info=progress2 --ignore-existing";
             run-help="man";

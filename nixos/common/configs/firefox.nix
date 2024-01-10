@@ -17,6 +17,7 @@
       };
       isDefault = true;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        darkreader
         lastpass-password-manager
         ublock-origin
         sponsorblock

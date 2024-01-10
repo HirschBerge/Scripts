@@ -36,7 +36,7 @@
       yoitsu = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs username self stateVersion hostname;};
         # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix];
+        modules = [./nixos/desktop/configuration.nix];
       };
     };
 
@@ -46,7 +46,7 @@
       "${username}@yoitsu" = home-manager.lib.homeManagerConfiguration {
         # pkgs = nixpkgs.legacyPackages.x86_64-linux { system = "x86_64-linux"; config.allowUnfree = true; };
         inherit pkgs;# > Our main home-manager configuration file <
-        modules = [./nixos/home.nix];
+        modules = [./nixos/desktop/home.nix];
         extraSpecialArgs = {inherit username self stateVersion inputs;};
       };
     };

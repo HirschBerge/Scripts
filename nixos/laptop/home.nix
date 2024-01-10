@@ -1,26 +1,65 @@
-{config, pkgs, ...}:
+#  ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ 
+#  ██║  ██║██╔═══██╗████╗ ████║██╔════╝    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝██╔══██╗
+#  ███████║██║   ██║██╔████╔██║█████╗      ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██████╔╝
+#  ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝      ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██╔══██╗
+#  ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║
+#  ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
+#                                                                                                              
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  username,
+  hostname,
+  stateVersion,
+  ...
+}: 
 let 
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  	themes = pkgs.callPackage  ./configs/themes.nix {};
+    # nixpkgs.url = "nixpkgs/nixos-unstable";
+    # home-manager = {
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+  	themes = pkgs.callPackage ../common/configs/themes.nix {};
 in
 {
+  # You can import other home-manager modules here
 	imports = [ 
-    ./configs/firefox.nix 
+    ../common/configs/firefox.nix
     ./configs/zsh.nix 
     ./configs/hypr.nix 
-    ./configs/kitty.nix
-    ./configs/starship.nix 
-    ./configs/wlogout.nix
+    ../common/configs/kitty.nix 
+    ../common/configs/starship.nix 
+    ../common/configs/wlogout.nix
+    # ../common/configs/nixvim.nix
     ];
-	home.username = "hirschy";
-	home.homeDirectory = "/home/hirschy";
-	home.stateVersion = "23.05";
+  nixpkgs = {
+    # You can add overlays here
+  #   overlays = [
+  #
+  #   ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      # allowUnfreePredicate = _: true;
+      };
+  };
+	# imports = [./configs/zsh.nix ./configs/i3.nix ./configs/kitty.nix ./configs/sxhkd.nix ./configs/polybar.nix ./configs/starship.nix ]; #X Orgd
+	home.username = "${username}";
+	home.homeDirectory = "/home/${username}";
+	home.stateVersion = stateVersion;
 	programs.home-manager.enable = true;
 	home.packages = with pkgs; [
+#   ██████╗██╗     ██╗    ████████╗ ██████╗  ██████╗ ██╗     ███████╗
+#  ██╔════╝██║     ██║    ╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██╔════╝
+#  ██║     ██║     ██║       ██║   ██║   ██║██║   ██║██║     ███████╗
+#  ██║     ██║     ██║       ██║   ██║   ██║██║   ██║██║     ╚════██║
+#  ╚██████╗███████╗██║       ██║   ╚██████╔╝╚██████╔╝███████╗███████║
+#   ╚═════╝╚══════╝╚═╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
+#   
 		btop
         brightnessctl
 		starship
@@ -32,7 +71,6 @@ in
         lazygit
 		xfce.thunar
 		xfce.tumbler
-		eza
 		nerdfonts
 		eww-wayland
 		unzip
@@ -123,6 +161,18 @@ in
 		enable = true;
 		enableZshIntegration = true;
 	};
+  programs.eza = {
+    enable = true;
+    enableAliases = true;
+    git = true;
+    icons = true;
+    extraOptions = [
+    "--group-directories-first"
+    "--header"
+    "-o"
+    "--no-permissions"
+    ];
+  };
 	# programs.chromium = {
 	# 	enable = true;
 	# 	extensions = [

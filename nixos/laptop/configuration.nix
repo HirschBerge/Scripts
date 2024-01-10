@@ -1,21 +1,36 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+#  ███╗   ██╗██╗██╗  ██╗ ██████╗ ███████╗
+#  ████╗  ██║██║╚██╗██╔╝██╔═══██╗██╔════╝
+#  ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║███████╗
+#  ██║╚██╗██║██║ ██╔██╗ ██║   ██║╚════██║
+#  ██║ ╚████║██║██╔╝ ██╗╚██████╔╝███████║
+#  ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+#                                        
+{ inputs,
+  outputs,
+  config,
+  lib,
+  pkgs,
+  hostname,
+  username,
+  stateVersion,
+  ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  themes = pkgs.callPackage ./configs/themes.nix {};
+  themes = pkgs.callPackage  ../common/configs/themes.nix {};
+
+  # For outputting list of packages.
+  # packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+  # sortedUnique = builtins.sort builtins.lessThan (lib.unique packages);
+  # formatted = builtins.concatStringsSep "\n" sortedUnique;
 in
 
 {
   imports =
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
-        <home-manager/nixos>
-        ./8bitdo.nix
-        ./wayland.nix
-        # ./xorg.nix
+        ../common/wayland.nix
     ];
   # Bootloader.
   boot.loader = {

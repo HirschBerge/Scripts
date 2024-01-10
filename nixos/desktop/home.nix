@@ -80,7 +80,6 @@ in
 		ranger
 		axel
         youtube-music
-		eza 
 		playerctl
         pywal
         sass

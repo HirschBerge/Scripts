@@ -29,14 +29,20 @@
       };
     };
     username = "hirschy";
-    hostname = "hyprtest";
+    hostname = "yoitsu";
+    l_hostname = "shirahebi";
     system = "x86_64-linux";
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      yoitsu = nixpkgs.lib.nixosSystem {
+      ${hostname} = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs username self stateVersion hostname;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/desktop/configuration.nix];
+      };
+      ${l_hostname} = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs username self stateVersion l_hostname;};
         # > Our main nixos configuration file <
         modules = [./nixos/desktop/configuration.nix];
       };
@@ -45,8 +51,12 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "${username}@yoitsu" = home-manager.lib.homeManagerConfiguration {
-        # pkgs = nixpkgs.legacyPackages.x86_64-linux { system = "x86_64-linux"; config.allowUnfree = true; };
+      "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;# > Our main home-manager configuration file <
+        modules = [./nixos/desktop/home.nix];
+        extraSpecialArgs = {inherit username self stateVersion inputs;};
+      };
+       "${username}@${l_hostname}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
         modules = [./nixos/desktop/home.nix];
         extraSpecialArgs = {inherit username self stateVersion inputs;};

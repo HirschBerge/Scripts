@@ -21,9 +21,9 @@ let
   themes = pkgs.callPackage  ../common/configs/themes.nix {};
 
   # For outputting list of packages.
-  packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
-  sortedUnique = builtins.sort builtins.lessThan (lib.unique packages);
-  formatted = builtins.concatStringsSep "\n" sortedUnique;
+  # packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+  # sortedUnique = builtins.sort builtins.lessThan (lib.unique packages);
+  # formatted = builtins.concatStringsSep "\n" sortedUnique;
 in
 
 {

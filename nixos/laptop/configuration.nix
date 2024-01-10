@@ -43,9 +43,6 @@ in
       inherit pkgs;
     };
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
   security.sudo = {
     enable = true;
     extraRules = [{
@@ -150,10 +147,10 @@ in
 
   programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.hirschy = {
+  users.users.${username} = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    description = "Hirschy";
+    description = "${username}";
     extraGroups = [ "networkmanager" "wheel" "keyd" ];
     packages = with pkgs; [
       firefox
@@ -249,9 +246,9 @@ in
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "* * * * *         hirschy    date >> /home/hirschy/.cache/test.log"
-      # "*/30 * * * *      hirschy    /home/hirschy/.scripts/.venv/bin/python3 /home/hirschy/.scripts/manga_update.py"
-      "*/5 * * * *      hirschy     /home/hirschy/.scripts/bat_notify.sh"
+      "* * * * *         ${username}    date >> /home/${username}/.cache/test.log"
+      # "*/30 * * * *      ${username}    /home/${username}/.scripts/.venv/bin/python3 /home/${username}/.scripts/manga_update.py"
+      "*/5 * * * *      ${username}     /home/${username}/.scripts/bat_notify.sh"
     ];
   };
   # List services that you want to enable:

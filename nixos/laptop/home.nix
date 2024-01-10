@@ -146,6 +146,9 @@ in
 		[General]
 		theme=Sweet-Dark
 	'';
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   home.sessionVariables = {
     # QT_STYLE_OVERRIDE = "kvantum";
     GTK_USE_PORTAL = 1;

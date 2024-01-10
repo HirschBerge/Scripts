@@ -59,7 +59,7 @@
        "${username}@${l_hostname}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
         modules = [./nixos/desktop/home.nix];
-        extraSpecialArgs = {inherit username self stateVersion inputs;};
+        extraSpecialArgs = {inherit username self l_hostname stateVersion inputs;};
       };
     };
   };

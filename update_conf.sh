@@ -5,7 +5,7 @@ BCyan='\033[1;36m'
 NoColor="\033[0m"
 BGreen='\033[1;32m'
 dots="$(dirname "$(readlink -f "$0")")"
-device="$(echo -en "laptop\ndesktop" | fzf --prompt "What are you currently using?")"
+device="$(echo -en "desktop\nlaptop" | fzf --prompt "What are you currently using?")"
 for i in "$dots/$device/$fixed"/*/; 
 do 
     fixed=$(basename "$i")

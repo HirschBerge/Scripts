@@ -21,18 +21,18 @@ let
     #   url = "github:nix-community/home-manager";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-  	themes = pkgs.callPackage  ./configs/themes.nix {};
+  	themes = pkgs.callPackage  ../common/configs/themes.nix {};
 in
 {
   # You can import other home-manager modules here
 	imports = [ 
-    ./configs/firefox.nix
+    ../common/configs/firefox.nix
     ./configs/zsh.nix 
     ./configs/hypr.nix 
-    ./configs/kitty.nix 
-    ./configs/starship.nix 
-    ./configs/wlogout.nix
-    # ./configs/nixvim.nix
+    ../common/configs/kitty.nix 
+    ../common/configs/starship.nix 
+    ../common/configs/wlogout.nix
+    # ../common/configs/nixvim.nix
     ];
   nixpkgs = {
     # You can add overlays here

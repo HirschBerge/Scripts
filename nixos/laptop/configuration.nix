@@ -187,8 +187,6 @@ in
       ffmpeg
       pciutils
       themes.abstractguts-themes
-      noto-fonts-color-emoji
-      jetbrains-mono
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

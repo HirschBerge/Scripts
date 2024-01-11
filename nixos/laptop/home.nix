@@ -61,6 +61,8 @@ in
 #   ╚═════╝╚══════╝╚═╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
 #   
 		btop
+        noto-fonts-color-emoji
+        jetbrains-mono
         fira-code
         brightnessctl
 		starship

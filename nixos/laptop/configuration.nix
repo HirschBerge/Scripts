@@ -203,6 +203,14 @@ in
   # };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
   services.keyd = {
     enable = true;
     keyboards = {

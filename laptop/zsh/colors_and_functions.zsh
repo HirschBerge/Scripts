@@ -208,17 +208,17 @@
             dotfileBUp(){
                 for j in zsh-syntax-highlighting/ zsh-git-prompt/ zsh-autosuggestions/ powerlevel10k/ .config/ .zsh_history .fonts.conf
                 do
-                    yes | cp -r /home/$USER/$j /home/$USER/my-dotfiles/$j
+                    yes | cp -r /home/$USER/$j /home/$USER/.dotfiles/$j
                 done
             #   for i in  zsh-syntax-highlighting/ zsh-git-prompt/ zsh-autosuggestions/ powerlevel10k/
             #   do
-            #       mkdir /home/$USER/my-dotfiles/testy$i/
-            #       mv /home/$USER/my-dotfiles/$i /home/$USER/my-dotfiles/testy$i
-            #       mv /home/$USER/my-dotfiles/testy$i /home/$USER/my-dotfiles/$i
+            #       mkdir /home/$USER/.dotfiles/testy$i/
+            #       mv /home/$USER/.dotfiles/$i /home/$USER/.dotfiles/testy$i
+            #       mv /home/$USER/.dotfiles/testy$i /home/$USER/.dotfiles/$i
             #   done
-                mkdir /home/$USER/my-dotfiles/config/
-                yes|mv /home/$USER/my-dotfiles/.config/ /home/$USER/my-dotfiles/config
-                git add ~/my-dotfiles/*
+                mkdir /home/$USER/.dotfiles/config/
+                yes|mv /home/$USER/.dotfiles/.config/ /home/$USER/.dotfiles/config
+                git add ~/.dotfiles/*
                 dotfileCommit
             }
 

@@ -145,10 +145,10 @@
             }
             upgrade (){
               rm $HOME/.mozilla/firefox/hirschy/search.json.mozlz4.backup
-              nix flake update $HOME/my-dotfiles
-              home-manager --flake $HOME/my-dotfiles#$USER@yoitsu switch -b backup
+              nix flake update $HOME/.dotfiles
+              home-manager --flake $HOME/.dotfiles#$USER@yoitsu switch -b backup
               sleep 1
-              sudo nixos-rebuild switch --flake $HOME/my-dotfiles#yoitsu
+              sudo nixos-rebuild switch --flake $HOME/.dotfiles#yoitsu
               aplay $HOME/.config/swaync/notification.wav &
               response=$(timeout 10 notify-send -A "Okay\!" "Rebuild Complete\!" "All built uppppp\!" -A "Reboot")
               case "$response" in
@@ -162,9 +162,9 @@
             rebuild (){
               rm $HOME/.mozilla/firefox/hirschy/search.json.mozlz4.backup
               # nix flake update
-              home-manager --flake $HOME/my-dotfiles#$USER@yoitsu switch -b backup
+              home-manager --flake $HOME/.dotfiles#$USER@yoitsu switch -b backup
               sleep 1
-              sudo nixos-rebuild switch --flake $HOME/my-dotfiles#yoitsu
+              sudo nixos-rebuild switch --flake $HOME/.dotfiles#yoitsu
               aplay $HOME/.config/swaync/notification.wav &
               response=$(timeout 10 notify-send -A "Okay\!" "Rebuild Complete\!" "All built uppppp\!" -A "Reboot")
               case "$response" in
@@ -215,17 +215,17 @@
             dotfileBUp(){
                 for j in zsh-syntax-highlighting/ zsh-git-prompt/ zsh-autosuggestions/ powerlevel10k/ .config/ .zsh_history .fonts.conf
                 do
-                    yes | cp -r /home/$USER/$j /home/$USER/my-dotfiles/$j
+                    yes | cp -r /home/$USER/$j /home/$USER/.dotfiles/$j
                 done
             #   for i in  zsh-syntax-highlighting/ zsh-git-prompt/ zsh-autosuggestions/ powerlevel10k/
             #   do
-            #       mkdir /home/$USER/my-dotfiles/testy$i/
-            #       mv /home/$USER/my-dotfiles/$i /home/$USER/my-dotfiles/testy$i
-            #       mv /home/$USER/my-dotfiles/testy$i /home/$USER/my-dotfiles/$i
+            #       mkdir /home/$USER/.dotfiles/testy$i/
+            #       mv /home/$USER/.dotfiles/$i /home/$USER/.dotfiles/testy$i
+            #       mv /home/$USER/.dotfiles/testy$i /home/$USER/.dotfiles/$i
             #   done
-                mkdir /home/$USER/my-dotfiles/config/
-                yes|mv /home/$USER/my-dotfiles/.config/ /home/$USER/my-dotfiles/config
-                git add ~/my-dotfiles/*
+                mkdir /home/$USER/.dotfiles/config/
+                yes|mv /home/$USER/.dotfiles/.config/ /home/$USER/.dotfiles/config
+                git add ~/.dotfiles/*
                 dotfileCommit
             }
 

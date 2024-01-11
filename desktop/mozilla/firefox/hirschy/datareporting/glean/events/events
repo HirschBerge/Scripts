@@ -1,2 +1,2 @@
-{"timestamp":138187,"category":"fog.validation","name":"validate_early_event"}
-{"timestamp":138845,"category":"webcompatreporting","name":"reason_dropdown","extra":{"setting":"disabled"}}
+{"timestamp":73527205,"category":"serp","name":"impression","extra":{"is_shopping_page":"false","shopping_tab_displayed":"false","is_private":"false","impression_id":"090c8b94-32f7-4177-bb3d-ba5551919f74","partner_code":"firefox-b-d","tagged":"true","provider":"google","source":"urlbar"}}
+{"timestamp":73534964,"category":"serp","name":"abandonment","extra":{"impression_id":"090c8b94-32f7-4177-bb3d-ba5551919f74","reason":"navigation"}}

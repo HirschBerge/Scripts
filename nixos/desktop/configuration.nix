@@ -59,22 +59,14 @@ in
     efi.canTouchEfiVariables = true;
     timeout = 1;
   };
-  # systemd.services.remaps = {
-  #   description = "...";
-  #   # serviceConfig.PassEnvironment = "DISPLAY";
-  #   script = ''
-  #     /run/wrappers/bin/sudo /home/${username}/.local/bin/xremap --watch /home/${username}/.dotfiles/xremap_config.yml
-  #   '';
-  #   wantedBy = [ "multi-user.target" ]; # starts after login
-  # };
-  # nixpkgs.config.packageOverrides = pkgs: {
-  #   nur = import (builtins.fetchTarball { 
-  #     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-  #     sha256 = "0i9fbyshnbwvdh49zxl195rngkpgah3y1wamknqbk85xrxw5h6rq";
-  #     }) {
-  #     inherit pkgs;
-  #   };
-  # };
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
   programs.firefox.policies = ''
     {"policies": {
     "ExtensionSettings": {

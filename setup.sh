@@ -9,62 +9,67 @@ Blue='\033[0;34m'         # Blue
 Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
+#
+# TARGET="$HOME/.config/"
+# printf "${Green}What would you like your username to be? ${NoColor}"
+# read username
+# script_dir="$(dirname "$(readlink -f "$0")")"
+# find "$script_dir/nixos/" -type f -exec sed -i "s/hirschy/$username/g" {} +
+#
+# exit 1
+#
+# [[ -d "$TARGET" ]] && printf "${Green}[+]${Blue} Configs folder exists. Propigating...${NoColor}\n" || mkdir $TARGET
+# sleep 1
+# printf "${Green}[+] ${Blue}Copying program config files to ${Yellow}~/.config${NoColor}\n"
+# rsync -rahi --exclude ".git/" --exclude "nixos/" --exclude ".mozilla" --exclude rtorrent --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $script_dir/ $TARGET >/dev/null
+# rsync -rahi "$script_dir/.mozilla ~/"
+# printf "${Green}[+] ${Blue}Copying NixOS files to ${Purple}/etc/nixos${NoColor}\n"
+# sleep 1
+# TARGET="/etc/nixos/"
+# rsync -rahi "$script_dir/nixos/" $TARGET >/dev/null
+# printf "${Green}[+] ${Blue}Copying Mozilla files to ${Purple}~/.mozilla${NoColor}\n"
+# sleep 1
+# TARGET="$HOME/.mozilla"
+# rsync -rahi "$script_dir/mozilla/" "$TARGET"
+# printf "${Green}[+] ${Blue}Copying .rtorrent.rc to ${Purple}~/${NoColor}\n"
+# sleep 1
+# TARGET="$HOME/"
+# rsync -rahi "$script_dir/rtorrent/.rtorrent.rc" "$TARGET"
+#
 
-TARGET="$HOME/.config/"
-printf "${Green}What would you like your username to be? ${NoColor}"
-read username
-script_dir="$(dirname "$(readlink -f "$0")")"
-find "$script_dir/nixos/" -type f -exec sed -i "s/hirschy/$username/g" {} +
 
-exit 1
 
-[[ -d "$TARGET" ]] && printf "${Green}[+]${Blue} Configs folder exists. Propigating...${NoColor}\n" || mkdir $TARGET
-sleep 1
-printf "${Green}[+] ${Blue}Copying program config files to ${Yellow}~/.config${NoColor}\n"
-rsync -rahi --exclude ".git/" --exclude "nixos/" --exclude ".mozilla" --exclude rtorrent --exclude "bin" --exclude "setup.sh" --exclude "update_conf.sh" $script_dir/ $TARGET >/dev/null
-rsync -rahi "$script_dir/.mozilla ~/"
-printf "${Green}[+] ${Blue}Copying NixOS files to ${Purple}/etc/nixos${NoColor}\n"
-sleep 1
-TARGET="/etc/nixos/"
-rsync -rahi "$script_dir/nixos/" $TARGET >/dev/null
-printf "${Green}[+] ${Blue}Copying Mozilla files to ${Purple}~/.mozilla${NoColor}\n"
-sleep 1
-TARGET="$HOME/.mozilla"
-rsync -rahi "$script_dir/mozilla/" "$TARGET"
-printf "${Green}[+] ${Blue}Copying .rtorrent.rc to ${Purple}~/${NoColor}\n"
-sleep 1
-TARGET="$HOME/"
-rsync -rahi "$script_dir/rtorrent/.rtorrent.rc" "$TARGET"
 
-results=""
 
-# Search for "ELDEN RING" in ~/.local/share and append the results
-results+="$(find ~/.local/share -type d -name 'ELDEN RING')"
-
-# Search for "ELDEN RING" in /mnt and append the results
-results+="$(find /mnt/storage/ -type d -name 'ELDEN RING')"
-rsync ./er-patcher "$results/"
-while true; do
-    printf "${Green}[+]${Blue} Please choose upstream:\n${Green}NixOS Stable: 1${NoColor} \n${Yellow}NixOS Unstable:2${NoColor}"
-    read user_input
-    if [ "$user_input" == "1" ]; then
-        echo "Applying NixOS Stable"
-        printf "${Green}[+] ${Blue}Allow Home-Manager${NoColor}\n"
-        sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
-        sudo nix-channel --update
-        # Place your code for option 1 here
-        break
-    elif [ "$user_input" == "2" ]; then
-        printf "${Green}[+] ${Blue}Enabling NixOS Unstable${NoColor}\n"
-        sudo nix-channel --add https://nixos.org/channels/nixos-unstable
-        printf "${Green}[+] ${Blue}Allow Home-Manager${NoColor}\n"
-        sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-        sudo nix-channel --update
-        break
-    else
-        echo "Invalid input. Please enter 1 or 2."
-    fi
-done
+# results=""
+#
+# # Search for "ELDEN RING" in ~/.local/share and append the results
+# results+="$(find ~/.local/share -type d -name 'ELDEN RING')"
+#
+# # Search for "ELDEN RING" in /mnt and append the results
+# results+="$(find /mnt/storage/ -type d -name 'ELDEN RING')"
+# rsync ./er-patcher "$results/"
+# while true; do
+#     printf "${Green}[+]${Blue} Please choose upstream:\n${Green}NixOS Stable: 1${NoColor} \n${Yellow}NixOS Unstable:2${NoColor}"
+#     read user_input
+#     if [ "$user_input" == "1" ]; then
+#         echo "Applying NixOS Stable"
+#         printf "${Green}[+] ${Blue}Allow Home-Manager${NoColor}\n"
+#         sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
+#         sudo nix-channel --update
+#         # Place your code for option 1 here
+#         break
+#     elif [ "$user_input" == "2" ]; then
+#         printf "${Green}[+] ${Blue}Enabling NixOS Unstable${NoColor}\n"
+#         sudo nix-channel --add https://nixos.org/channels/nixos-unstable
+#         printf "${Green}[+] ${Blue}Allow Home-Manager${NoColor}\n"
+#         sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+#         sudo nix-channel --update
+#         break
+#     else
+#         echo "Invalid input. Please enter 1 or 2."
+#     fi
+# done
 
 
 printf "${Green}Complete!${NoColor}\n"
@@ -101,6 +106,9 @@ first_main() {
   mkdir -p "${USER_FONT_DIR}"
   unzip -qo "${temp_dir}/${FIRST_FONT_NAME}.zip" -d "${USER_FONT_DIR}/${FIRST_FONT_NAME}"
   rm -r "${temp_dir}"
+  readonly temp_dir2=$(mktemp -d)
+  curl -fLsS -o  "${temp_dir2}/JetBrainsMono.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip"
+  unzip -qo "${temp_dir2}/JetBrainsMono.zip" -d "${USER_FONT_DIR}/JetBrainsMonoNerdFonts" 
 }
 
 

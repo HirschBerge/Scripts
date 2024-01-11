@@ -63,7 +63,7 @@ in
   #   description = "...";
   #   # serviceConfig.PassEnvironment = "DISPLAY";
   #   script = ''
-  #     /run/wrappers/bin/sudo /home/${username}/.local/bin/xremap --watch /home/${username}/my-dotfiles/xremap_config.yml
+  #     /run/wrappers/bin/sudo /home/${username}/.local/bin/xremap --watch /home/${username}/.dotfiles/xremap_config.yml
   #   '';
   #   wantedBy = [ "multi-user.target" ]; # starts after login
   # };

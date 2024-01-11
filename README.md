@@ -53,7 +53,7 @@ Clone this repository and run the setup script.
 
 ```bash
 git clone https://github.com/HirschBerge/Public-dots.git
-cd my-dotfiles
+cd .dotfiles
 git switch flakes
 chmod +x setup.sh
 # It will ask you a few questions. 

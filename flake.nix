@@ -29,20 +29,21 @@
       };
     };
     username = "hirschy";
-    hostname = "yoitsu";
-    l_hostname = "shirahebi";
+    desktop = "yoitsu";
+    laptop = "shirahebi";
     system = "x86_64-linux";
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      ${hostname} = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs username self stateVersion hostname;};
+      ${desktop} = nixpkgs.lib.nixosSystem {
+        specialArgs = let 
+        hostname = "yoitsu"; in {inherit inputs username self stateVersion hostname;};
         # > Our main nixos configuration file <
         modules = [./nixos/desktop/configuration.nix];
       };
-      ${l_hostname} = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs username self stateVersion l_hostname;};
+      ${laptop} = nixpkgs.lib.nixosSystem {
+        specialArgs = let hostname = "shirahebi"; in {inherit inputs username self stateVersion hostname;};
         # > Our main nixos configuration file <
         modules = [./nixos/laptop/configuration.nix];
       };
@@ -51,15 +52,15 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+      "${username}@${desktop}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
         modules = [./nixos/desktop/home.nix];
         extraSpecialArgs = {inherit username self stateVersion inputs;};
       };
-       "${username}@${l_hostname}" = home-manager.lib.homeManagerConfiguration {
+       "${username}@${laptop}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
         modules = [./nixos/laptop/home.nix];
-        extraSpecialArgs = {inherit username self l_hostname stateVersion inputs;};
+        extraSpecialArgs = {inherit username self stateVersion inputs;};
       };
     };
   };

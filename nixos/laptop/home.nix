@@ -11,7 +11,6 @@
   config,
   pkgs,
   username,
-  l_hostname,
   stateVersion,
   ...
 }: 

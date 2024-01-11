@@ -1,4 +1,7 @@
 { pkgs, config, ... }:
+let
+  	custom-font = pkgs.callPackage ./fonts-deriviation.nix {};
+in
 {
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
@@ -8,8 +11,6 @@
     noto-fonts-emoji
     fira-code
     fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
+    custom-font.dank-mono
   ];
 }

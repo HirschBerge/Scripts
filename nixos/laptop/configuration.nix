@@ -31,6 +31,7 @@ in
     [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
         ../common/wayland.nix
+        ../common/configs/fonts.nix
     ];
   # Bootloader.
   boot.loader = {

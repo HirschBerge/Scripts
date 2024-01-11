@@ -32,7 +32,8 @@ in
         ./hardware-configuration.nix
         ./8bitdo.nix
         ../common/wayland.nix
-        ./configs/gaming.nix 
+        ./configs/gaming.nix
+        ../common/configs/fonts.nix
     ];
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -246,8 +247,7 @@ in
     })
   ];
   environment.systemPackages = with pkgs; [
-      jetbrains-mono
-      noto-fonts-color-emoji
+      # jetbrains-mono
       kitty
       neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       gcc

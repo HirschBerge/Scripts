@@ -138,7 +138,7 @@ blurls = dashboard
     source = ./scripts;
     recursive = true;
   };
-  home.file."${config.xdg.configHome}/hypr/binds.conf".text = /* bash  */ ''
+  home.file."${config.xdg.configHome}/hypr/binds.conf".text = /* hyprlang  */ ''
 $mainMod = SUPER
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 

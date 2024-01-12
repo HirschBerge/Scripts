@@ -64,6 +64,7 @@ in
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "@wheel" ];
     };
     gc = {
       automatic = true;
@@ -243,9 +244,10 @@ in
     })
   ];
   environment.systemPackages = with pkgs; [
-      # jetbrains-mono
+      # Development probably should make it's own....
       kitty
       neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      helix
       gcc
       wget
       git

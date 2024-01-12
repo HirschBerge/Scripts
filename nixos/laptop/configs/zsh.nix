@@ -1,4 +1,8 @@
 {config, pkgs, ...}:
+    
+let
+    editor = "${pkgs.helix}/bin/hx";
+in
 {
   programs.nushell = { 
       enable = true;
@@ -99,25 +103,25 @@
             "rustinit" = "nix flake init --template github:HirschBerge/dev-templates#rust";
             awg="animewget";
             bat="bat --paging=never";
-            bd = "nvim ~/.config/directories";
-            bf="nvim ~/.config/files";
-            bw="nvim ~/.config/bookmarks";
+            bd = "${pkgs.helix}/bin/hx ~/.config/directories";
+            bf="${pkgs.helix}/bin/hx ~/.config/files";
+            bw="${pkgs.helix}/bin/hx ~/.config/bookmarks";
             c="clear";
             cat="bat --paging=never";
             ccat="highlight --out-format=ansi";
             cf="cd ~/.config && eza -a";
-            cfa="nvim ~/.config/aliasrc";
-            cfb="nvim ~/.config/i3blocks/config";
-            cfd="nvim ~/.Xdefaults";
-            cfi="nvim ~/.config/i3/config";
-            cfk="nvim ~/.config/sxhkd/sxhkdrc";
-            cfm="nvim ~/.config/mutt/muttrc";
-            cfmb="nvim ~/.config/ncmpcpp/bindings";
-            cfmc="nvim ~/.config/ncmpcpp/config";
-            cfn="nvim ~/.config/newsboat/config";
-            cfu="nvim ~/.config/newsboat/urls";
-            cfv="nvim ~/.config/nvim/init.vim";
-            cfz="nvim /.zshrc";
+            cfa="${pkgs.helix}/bin/hx ~/.config/aliasrc";
+            cfb="${pkgs.helix}/bin/hx ~/.config/i3blocks/config";
+            cfd="${pkgs.helix}/bin/hx ~/.Xdefaults";
+            cfi="${pkgs.helix}/bin/hx ~/.config/i3/config";
+            cfk="${pkgs.helix}/bin/hx ~/.config/sxhkd/sxhkdrc";
+            cfm="${pkgs.helix}/bin/hx ~/.config/mutt/muttrc";
+            cfmb="${pkgs.helix}/bin/hx ~/.config/ncmpcpp/bindings";
+            cfmc="${pkgs.helix}/bin/hx ~/.config/ncmpcpp/config";
+            cfn="${pkgs.helix}/bin/hx ~/.config/newsboat/config";
+            cfu="${pkgs.helix}/bin/hx ~/.config/newsboat/urls";
+            cfv="${pkgs.helix}/bin/hx ~/.config/nvim/init.vim";
+            cfz="${pkgs.helix}/bin/hx /.zshrc";
             traceroute="grc traceroute";
             cp="rsync -rah --info=progress2";
             d="cd ~/Documents && eza -a";
@@ -127,7 +131,7 @@
             dloads="cd ~/Downloads";
             dtop="cd ~/Desktop && eza --group-directories-first -l";
             du="~/.scripts/dudu.sh";
-            e="nvim";
+            e="${pkgs.helix}/bin/hx";
             egrep="grep -E --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
             etrash="sudo rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*";
             f="";
@@ -252,7 +256,7 @@
             l="lazygit";
             lsblk="clear && lsblk";
             m="cd ~/Music && eza -a";
-            magit="nvim -c MagitOnly";
+            magit="${pkgs.helix}/bin/hx -c MagitOnly";
             manga="eza --group-directories-first -lah --icons=always /mnt/NAS/Manga";
             md="mkdir -p";
             mp3convert="sh ~/.scripts/mp3convert";
@@ -303,10 +307,10 @@
             speedtest="speedtest-cli";
             ssh="kitty +kitten ssh";
             tree="eza -lah --tree --icons=always";
-            v="nvim";
+            v="echo -en \"I Bet you mean hx, RIGHT?\"; sleep 0.5;${pkgs.helix}/bin/hx";
             vi="vim";
-            vim="nvim";
-            vimdiff="nvim -d";
+            vim="${pkgs.helix}/bin/hx";
+            vimdiff="${pkgs.helix}/bin/hx -d";
             vv="cd ~/Videos && eza -a";
             weath="less -S ~/.local/share/weatherreport";
             web="~/.scripts/yt";

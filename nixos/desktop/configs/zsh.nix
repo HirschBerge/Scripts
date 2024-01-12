@@ -2,6 +2,9 @@
   pkgs,
   username,
   ...}:
+let
+    editor = "${pkgs.helix}/bin/hx";
+in
 {
     programs.nushell = { 
       enable = true;
@@ -100,26 +103,26 @@
             "rustinit" = "nix flake init --template github:HirschBerge/dev-templates#rust";
             awg="animewget";
             bat="bat --paging=never";
-            bd = "nvim ~/.config/directories";
-            bf="nvim ~/.config/files";
-            bw="nvim ~/.config/bookmarks";
+            bd = "${editor} ~/.config/directories";
+            bf="${editor} ~/.config/files";
+            bw="${editor} ~/.config/bookmarks";
             filesys="${pkgs.duf}/bin/duf";
             c="clear";
             cat="bat --paging=never";
             ccat="highlight --out-format=ansi";
             cf="cd ~/.config && eza --no-quotes -a";
-            cfa="nvim ~/.config/aliasrc";
-            cfb="nvim ~/.config/i3blocks/config";
-            cfd="nvim ~/.Xdefaults";
-            cfi="nvim ~/.config/i3/config";
-            cfk="nvim ~/.config/sxhkd/sxhkdrc";
-            cfm="nvim ~/.config/mutt/muttrc";
-            cfmb="nvim ~/.config/ncmpcpp/bindings";
-            cfmc="nvim ~/.config/ncmpcpp/config";
-            cfn="nvim ~/.config/newsboat/config";
-            cfu="nvim ~/.config/newsboat/urls";
-            cfv="nvim ~/.config/nvim/init.vim";
-            cfz="nvim /.zshrc";
+            cfa="${editor} ~/.config/aliasrc";
+            cfb="${editor} ~/.config/i3blocks/config";
+            cfd="${editor} ~/.Xdefaults";
+            cfi="${editor} ~/.config/i3/config";
+            cfk="${editor} ~/.config/sxhkd/sxhkdrc";
+            cfm="${editor} ~/.config/mutt/muttrc";
+            cfmb="${editor} ~/.config/ncmpcpp/bindings";
+            cfmc="${editor} ~/.config/ncmpcpp/config";
+            cfn="${editor} ~/.config/newsboat/config";
+            cfu="${editor} ~/.config/newsboat/urls";
+            cfv="${editor} ~/.config/${editor}/init.vim";
+            cfz="${editor} /.zshrc";
             traceroute="grc traceroute";
             cp="rsync -rah --info=progress2";
             d="cd ~/Documents && eza --no-quotes -a";
@@ -129,7 +132,7 @@
             dloads="cd ~/Downloads";
             dtop="cd ~/Desktop && eza --no-quotes --group-directories-first -l";
             du="~/.scripts/dudu.sh";
-            e="nvim";
+            e="${editor}";
             egrep="grep -E --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}";
             etrash="sudo rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*";
             f="";
@@ -255,7 +258,7 @@
             move_ani="cd \"$(fd -td . /mnt/NAS/Anime |fzf)\"";
             lsblk="clear && lsblk";
             m="cd ~/Music && eza --no-quotes -a";
-            magit="nvim -c MagitOnly";
+            magit="${editor} -c MagitOnly";
             manga="eza --no-quotes --group-directories-first -lah --icons /mnt/NAS/Manga";
             md="mkdir -p";
             mp3convert="sh ~/.scripts/mp3convert";
@@ -306,10 +309,10 @@
             speedtest="speedtest-cli";
             ssh="kitty +kitten ssh";
             tree="eza --no-quotes -lah --tree --icons";
-            v="nvim";
+            v="echo -en \"You meant hx, right?\"; sleep 2;${editor}";
             vi="vim";
-            vim="nvim";
-            vimdiff="nvim -d";
+            vim="${editor}";
+            vimdiff="${editor} -d";
             vv="cd ~/Videos && eza --no-quotes -a";
             weath="less -S ~/.local/share/weatherreport";
             web="~/.scripts/yt";

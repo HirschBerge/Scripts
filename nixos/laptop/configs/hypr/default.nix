@@ -63,6 +63,7 @@ decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
     # blur_ignore_opacity = true
     rounding = 10
+    fullscreen_opacity 1.0
     blur {
       enabled = true
       size = 12
@@ -229,5 +230,33 @@ exec-once = /etc/profiles/per-user/hirschy/bin/firefox
 exec-once = /etc/profiles/per-user/hirschy/bin/discord
 # exec-once = ~/.config/hypr/scripts/sleep.sh &
 exec = eww open bar &
+  '';
+  home.file."${config.xdg.configHome}/hypr/window_rules.conf".text = /* bash  */ ''
+# Example windowrule v1
+windowrule = float, ^(pavucontrol)$
+windowrule = opacity 0.8 0.7, obsidian
+windowrule = opacity 0.8 0.7, firefox-browser
+windowrule = opacity 0.8 0.7, firefox
+windowrule = opacity 0.8 0.7, thunar 
+windowrulev2 = size 842 465, class:thunar
+windowrulev2 = float, class:^(thunar)$
+windowrulev2 = opacity 0.8 0.7, class:discord
+windowrulev2 = opacity 1.0 1.0, title:^(.*YouTube.*)$
+windowrulev2 = fullscreen,class:^(.*steam_app.*)$
+windowrulev2 = float,class:^(.*steam_app.*)$
+windowrulev2 = opacity 0.8 0.7, class:^.*kitty.*$
+# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+# App Workspace Bindings
+windowrule = workspace 1, ^(.*firefox.*)$
+windowrulev2 = workspace 3, class:^(.*steam_app.*)$
+windowrule = workspace 8, ^(.*mpv.*)$
+windowrule = workspace 7, ^(.*discord.*)$
+windowrulev2 = workspace 6, class:^(.*YouTube Music.*)$# Example windowrule v2
+# XwaylandVideoBridge
+windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
+windowrulev2 = noanim,class:^(xwaylandvideobridge)$
+windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
+windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
   '';
 }

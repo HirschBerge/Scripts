@@ -27,7 +27,7 @@ in
 	imports = [ 
     ../common/configs/firefox.nix
     ./configs/zsh.nix 
-    ./configs/hypr.nix 
+    ./configs/hypr/default.nix 
     ../common/configs/kitty.nix 
     ../common/configs/starship.nix 
     ../common/configs/wlogout.nix
@@ -233,7 +233,7 @@ in
           }
           {
             timeout = 180;
-            command = "${pkgs.systemctl}/bin/systemctl hibernate"
+            command = "${pkgs.systemd}/bin/systemctl hibernate";
           }
         ];
       events = [

@@ -61,7 +61,10 @@ in
     timeout = 1;
   };
   nix = {
-    settings.auto-optimise-store = true;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
     gc = {
       automatic = true;
       dates = "weekly";
@@ -261,7 +264,6 @@ in
       themes.abstractguts-themes
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # XDG portal
   xdg.portal = {
     enable = true;

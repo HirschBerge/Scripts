@@ -190,8 +190,6 @@ in
       themes.abstractguts-themes
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # XDG portal
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # Some programs need SUID wrappers, can be configured further or are
@@ -204,7 +202,10 @@ in
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   nix = {
-    settings.auto-optimise-store = true;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
     gc = {
       automatic = true;
       dates = "weekly";

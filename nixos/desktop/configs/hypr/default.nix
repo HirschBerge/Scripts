@@ -266,6 +266,7 @@ windowrule = workspace 9, ^(.*mpv.*)$
 windowrule = workspace 7, ^(.*discord.*)$
 windowrulev2 = workspace 6, class:^(.*YouTube Music.*)$
 # XWaylandBridge
+windowrulev2 = opacity 0.8 0.7, class:^.*kitty.*$
 windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
 windowrulev2 = noanim,class:^(xwaylandvideobridge)$
 windowrulev2 = nofocus,class:^(xwaylandvideobridge)$

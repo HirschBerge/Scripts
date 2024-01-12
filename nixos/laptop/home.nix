@@ -78,7 +78,7 @@ in
 		unzip
         rnnoise-plugin
 		sxiv
-        swaynotificationcenter# dunst# mako
+        swaynotificationcenter # dunst# mako
         swaylock-effects
         swayidle
         wlogout

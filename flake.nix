@@ -2,6 +2,7 @@
   description = "My Favorite NixOS flake!";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    hyprland.url = "github:hyprwm/Hyprland";
     home-manager = {
          url = "github:nix-community/home-manager";
          inputs.nixpkgs.follows = "nixpkgs";
@@ -38,12 +39,12 @@
     nixosConfigurations = {
       ${desktop} = nixpkgs.lib.nixosSystem {
         specialArgs = let 
-        hostname = "yoitsu"; in {inherit inputs username self stateVersion hostname;};
+        hostname = "yoitsu"; in {inherit inputs username self system stateVersion hostname;};
         # > Our main nixos configuration file <
         modules = [./nixos/desktop/configuration.nix];
       };
       ${laptop} = nixpkgs.lib.nixosSystem {
-        specialArgs = let hostname = "shirahebi"; in {inherit inputs username self stateVersion hostname;};
+        specialArgs = let hostname = "shirahebi"; in {inherit inputs username self system stateVersion hostname;};
         # > Our main nixos configuration file <
         modules = [./nixos/laptop/configuration.nix];
       };
@@ -55,12 +56,12 @@
       "${username}@${desktop}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
         modules = [./nixos/desktop/home.nix];
-        extraSpecialArgs = {inherit username self stateVersion inputs;};
+        extraSpecialArgs = {inherit username self system stateVersion inputs;};
       };
        "${username}@${laptop}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
         modules = [./nixos/laptop/home.nix];
-        extraSpecialArgs = {inherit username self stateVersion inputs;};
+        extraSpecialArgs = {inherit username self system stateVersion inputs;};
       };
     };
   };

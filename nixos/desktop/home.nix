@@ -287,7 +287,7 @@ in
         }
         {
           event = "after-resume";
-          command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms";
+          command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/hyprctl dispatch dpms";
         }
       ];
     };

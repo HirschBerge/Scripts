@@ -15,6 +15,7 @@
   pkgs,
   hostname,
   username,
+  system,
   stateVersion,
   ... }:
 let
@@ -262,8 +263,12 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # XDG portal
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk];
+    config.common.default = "*";
+    # configPackages = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;

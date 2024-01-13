@@ -41,12 +41,12 @@
         specialArgs = let 
         hostname = "yoitsu"; in {inherit inputs username self system stateVersion hostname;};
         # > Our main nixos configuration file <
-        modules = [./nixos/desktop/configuration.nix];
+        modules = [./nixos/${desktop}/configuration.nix];
       };
       ${laptop} = nixpkgs.lib.nixosSystem {
         specialArgs = let hostname = "shirahebi"; in {inherit inputs username self system stateVersion hostname;};
         # > Our main nixos configuration file <
-        modules = [./nixos/laptop/configuration.nix];
+        modules = [./nixos/${laptop}/configuration.nix];
       };
     };
 
@@ -55,13 +55,13 @@
     homeConfigurations = {
       "${username}@${desktop}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
-        modules = [./nixos/desktop/home.nix];
-        extraSpecialArgs = {inherit username self system stateVersion inputs;};
+        modules = [./nixos/${desktop}/home.nix];
+        extraSpecialArgs = let hostname = desktop; in {inherit username hostname self system stateVersion inputs;};
       };
        "${username}@${laptop}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;# > Our main home-manager configuration file <
-        modules = [./nixos/laptop/home.nix];
-        extraSpecialArgs = {inherit username self system stateVersion inputs;};
+        modules = [./nixos/${laptop}/home.nix];
+        extraSpecialArgs = let hostname = laptop; in {inherit username hostname self system stateVersion inputs;};
       };
     };
   };

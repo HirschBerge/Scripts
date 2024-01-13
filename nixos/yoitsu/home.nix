@@ -27,7 +27,7 @@ in
   # You can import other home-manager modules here
 	imports = [ 
     ../common/configs/firefox.nix
-    ./configs/deploy_dots.nix
+    ../common/configs/deploy_dots.nix
     ./configs/zsh.nix 
     ./configs/hypr/default.nix 
     ../common/configs/kitty.nix 
